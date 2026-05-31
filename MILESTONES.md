@@ -51,4 +51,4 @@
 - `python validate.py --compare` passed, and all five experiments still clear the 20 dB MSE-gain quality gate with reproduced gains of 30.16, 36.73, 42.85, 41.14, and 39.69 dB.
 
 ## Stop Justification
-- Final verification confirms milestone `secondary_claims`: the workspace reproduces the dynamic-range and bit-depth robustness claims on the scoped synthetic low-bit HDR benchmark, with method-agnostic evaluation and no privileged public fold-count metadata.
+- Completed at milestone `secondary_claims`.
