@@ -2,4 +2,4 @@ action: done
 gpus: 0
 test: false
 milestone: secondary_claims
-notes: "Complementary-row train/test split; 120 train metric values, 120 test metric values; US-SRes primary gain train/test ranges 30.15-47.11 dB and 30.17-42.40 dB, with largest gap 6.36 dB on bits5; caveat: labels live in shipped eval NPZs."
+notes: "Packaging audit passed: download.sh regenerates all ignored synthetic inputs, no public fetches are missing, and no committed code references shared/ paths."
