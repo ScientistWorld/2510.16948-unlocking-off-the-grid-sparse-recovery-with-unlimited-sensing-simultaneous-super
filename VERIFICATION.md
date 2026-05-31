@@ -2,42 +2,46 @@
 
 ## Initial Assessment
 
-The workspace started at `secondary_claims`, with completed container jobs and
-saved outputs for five synthetic low-bit HDR experiments. The claimed milestone
-is justified: the implementation contains recognizable US-SRes computation,
-the clipped baseline is scored through the same evaluator, and the reproduced
-results support both dynamic-range and bit-depth robustness on the available
-synthetic benchmark.
+The workspace started at `secondary_claims`. The implementation contains
+recognizable US-SRes computation, the clipped baseline is scored through the
+same evaluator, and five synthetic low-bit HDR experiments cover the paper's
+reported dynamic-range and bit-depth robustness axes.
+
+The claimed milestone was broadly justified, but the final audit found one
+integrity issue that needed a verification rerun before signoff.
 
 ## Issues Found
 
-- Minor: `scripts/evaluate.sh` defaulted to a single current method manifest,
-  which was less reusable for future methods than discovering all compatible
+- Critical, fixed: stale public synthetic archives still contained per-trial
+  fold counts, and the method input path would read them if present. That made
+  the benchmark vulnerable to privileged metadata leakage.
+- Minor, already fixed before this pass: the standalone evaluator originally
+  defaulted to one baked-in method artifact instead of discovering compatible
   outputs under `checkpoints/`.
-- Minor: the main `scoring/scores.json` was missing several constraint metrics
-  that were already computed in the train/test score files.
-- Cosmetic: `scoring/DIRECTION.md` named a specific method variant, which was
-  unnecessary in a high-level direction file intended for from-scratch agents.
+- Minor, already fixed before this pass: the main score file needed the same
+  constraint metrics already present in train/test scoring.
 
 ## Fixes Applied
 
-- Updated `eval/evaluate_us_sres.py` and `scripts/evaluate.sh` so the default
-  evaluator discovers all per-experiment method artifacts in `checkpoints/`
-  while preserving explicit path and manifest evaluation modes.
-- Added weak-target localization, max localization error, folded-region MSE,
-  and wrapped-measurement consistency metrics to `scoring/scores.json`, using
-  the completed train/test evaluator outputs as the source.
-- Reworded `scoring/DIRECTION.md` to describe the allowed research family
-  without naming the reproduced method.
-- Ran `python -m py_compile eval/evaluate_us_sres.py`,
-  `git diff --check`, and `python validate.py --compare`; all passed.
+- Hardened `method/us_sres.py` so it ignores any `folds` array in submitted
+  public inputs and estimates the residue degree from its own reconstruction
+  residual.
+- Verified `data/us_sres_synthetic.py` writes public archives with only
+  measurement, kernel, and config arrays; private eval archives retain labels
+  and fold counts for scoring.
+- Ran CPU job `b9d88f78-5bb`, which regenerated data, checkpoints, scores,
+  train/test scores, and passed the quality gate and `python validate.py
+  --compare`.
+- Updated `MILESTONES.md` and `PROGRESS.md` with the final verification
+  outcome and removed the obsolete tracked `trajectory/session.json` artifact.
 
 ## Final Judgment
 
-The workspace is ready to serve as a research gym in both improve and
-from-scratch modes. Problem-facing files are method-agnostic, evaluation does
-not import from `method/`, scored metrics include both benefit and constraint
-quantities, and no wall-clock speed or paper-deviation metric is used.
+The workspace is ready to serve as a research gym in improve and from-scratch
+modes. Problem-facing files are method-agnostic, evaluation does not import
+from `method/`, scored metrics include benefit and constraint quantities, no
+scored metric measures wall-clock speed or deviation from paper values, and
+the public data path no longer exposes private fold metadata.
 
 - Milestone: secondary_claims
 - Ready for gym use: yes

@@ -5,7 +5,7 @@
 - Implemented deterministic synthetic off-grid ToF-like benchmarks following
   the paper's Fig. 2 setup: `K=2`, weak/strong amplitude ratio 10, 3-bit modulo
   acquisition at dynamic-range settings of 10, 20, and 30 times the folding
-  threshold, with pending DR20 extensions at 5 and 8 bits.
+  threshold, plus DR20 extensions at 5 and 8 bits.
 - Implemented the paper's core US-SRes computation: centered modulo sensing,
   nonlinear finite-difference recovery of `Delta g`, anti-difference HDR
   signal recovery, and sparse off-grid spike estimation.
@@ -19,7 +19,8 @@
   private label files for evaluation, reducing the chance that future methods
   accidentally train or infer from hidden labels.
 - Hardened the public acquisition format so public synthetic datasets no
-  longer expose the clean-signal fold count. The method now estimates its
+  longer expose the clean-signal fold count. The method also ignores any
+  stale `folds` array if one appears in an input archive and estimates its
   IterSiS residue model degree from its own reconstruction residual.
 
 ## Results
@@ -56,9 +57,13 @@
   experiments, and `python validate.py --compare` passes.
 - A follow-up integrity audit on 2026-05-31 found that per-trial fold counts
   were visible in the public synthetic files and used as IterSiS metadata.
-  This has been removed from newly generated public files; a CPU container job
-  is being submitted to regenerate data, checkpoints, and scores from scratch
-  without that metadata.
+  This has been removed from newly generated public files, and the method was
+  hardened to ignore that metadata even if a stale archive contains it.
+- CPU job `b9d88f78-5bb` regenerated data, checkpoints, and scores from
+  scratch after the metadata hardening. It passed the core-claim quality gate
+  and `python validate.py --compare`. Public acquisition archives now contain
+  only measurements, kernel arrays, and config; private eval archives retain
+  labels and fold counts for scoring.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
   the split.
 - DR 10: US-SRes improved waveform MSE by 30.16 dB over the clipped
@@ -86,9 +91,6 @@
 - The login-node Python environment lacks `numpy`; end-to-end execution was
   verified in the scheduled container where `environment/setup.sh` installs the
   declared dependencies.
-- Because the login-node Python environment still lacks `numpy`, the fold-count
-  metadata removal is queued for scheduled container verification rather than
-  full local execution.
 
 ## Deviations from Paper
 

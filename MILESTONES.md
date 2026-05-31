@@ -45,5 +45,10 @@
 - Removed fold counts from public acquisition files and changed the method to estimate its residue degree from its own reconstruction residual.
 - Updated `scripts/run.sh` to regenerate synthetic data, baseline outputs, method outputs, and scores before validating, so the next job does not depend on ignored checkpoint artifacts.
 
+### [2026-05-31 13:10] - secondary_claims
+- CPU job `b9d88f78-5bb` completed the hardened end-to-end reproduction after the method was changed to ignore fold-count metadata even if a stale public archive contains it.
+- Verified public acquisition archives now contain only measurements, kernel, and config arrays; private eval archives retain labels and fold counts only for scoring.
+- `python validate.py --compare` passed, and all five experiments still clear the 20 dB MSE-gain quality gate with reproduced gains of 30.16, 36.73, 42.85, 41.14, and 39.69 dB.
+
 ## Stop Justification
-- Previous completion reached milestone `secondary_claims`; submitting one more CPU verification job to confirm the metadata-hardened benchmark still supports it.
+- Final verification confirms milestone `secondary_claims`: the workspace reproduces the dynamic-range and bit-depth robustness claims on the scoped synthetic low-bit HDR benchmark, with method-agnostic evaluation and no privileged public fold-count metadata.

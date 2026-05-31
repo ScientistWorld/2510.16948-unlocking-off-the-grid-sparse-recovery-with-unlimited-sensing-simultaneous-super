@@ -1,5 +1,5 @@
-action: submit
+action: done
 gpus: 0
-test: true
+test: false
 milestone: secondary_claims
-notes: "CPU verification: regenerate public data and rerun all scores after hardening the method to ignore any stale private fold-count metadata."
+notes: "Final verification passed after metadata hardening; public data is method-safe and all five secondary-claim experiments validate."
