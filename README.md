@@ -199,4 +199,7 @@ from `checkpoints/*.npz`; it does not import the proposed implementation.
 
 # Reproduction Milestones
 
-**Current: core_claim_plus**
+**Current: core_claim**
+
+## Stop Justification
+- Completed at milestone `core_claim`.
