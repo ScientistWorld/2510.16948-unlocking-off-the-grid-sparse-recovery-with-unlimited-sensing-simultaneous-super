@@ -5,7 +5,7 @@
         "conventional_clip_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 10.0,
-          "hard_fold_signal_mse": 12.55091781847671,
+          "hard_fold_signal_mse": 29.62241291218024,
           "mean_fold_count": 10.0,
           "mse_gain_over_conventional_db": 0.0,
           "psnr_db": 10.45265280953972,
@@ -19,7 +19,7 @@
         "us_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 10.0,
-          "hard_fold_signal_mse": 0.012059137188003914,
+          "hard_fold_signal_mse": 0.022502455608377592,
           "mean_fold_count": 10.0,
           "mse_gain_over_conventional_db": 30.17359250051275,
           "psnr_db": 45.80462702983537,
@@ -37,7 +37,7 @@
         "conventional_clip_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 20.0,
-          "hard_fold_signal_mse": 58.25698831041959,
+          "hard_fold_signal_mse": 119.33250270891905,
           "mean_fold_count": 20.0,
           "mse_gain_over_conventional_db": 0.0,
           "psnr_db": 9.98955870241677,
@@ -51,7 +51,7 @@
         "us_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 20.0,
-          "hard_fold_signal_mse": 0.012385872930943238,
+          "hard_fold_signal_mse": 0.02077414892782282,
           "mean_fold_count": 20.0,
           "mse_gain_over_conventional_db": 36.7242140912808,
           "psnr_db": 52.90737339102196,
@@ -69,7 +69,7 @@
         "conventional_clip_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 20.0,
-          "hard_fold_signal_mse": 58.4330459639273,
+          "hard_fold_signal_mse": 119.23361380817528,
           "mean_fold_count": 20.0,
           "mse_gain_over_conventional_db": 0.0,
           "psnr_db": 10.011375504617284,
@@ -83,7 +83,7 @@
         "us_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 20.0,
-          "hard_fold_signal_mse": 0.004919061374363582,
+          "hard_fold_signal_mse": 0.005682136127091234,
           "mean_fold_count": 20.0,
           "mse_gain_over_conventional_db": 40.74776284333357,
           "psnr_db": 67.71199122161961,
@@ -101,7 +101,7 @@
         "conventional_clip_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 20.0,
-          "hard_fold_signal_mse": 58.49531983705798,
+          "hard_fold_signal_mse": 119.16310422245509,
           "mean_fold_count": 20.0,
           "mse_gain_over_conventional_db": 0.0,
           "psnr_db": 10.024369912008611,
@@ -115,7 +115,7 @@
         "us_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 20.0,
-          "hard_fold_signal_mse": 0.0033685828539256907,
+          "hard_fold_signal_mse": 0.0033804810657295206,
           "mean_fold_count": 20.0,
           "mse_gain_over_conventional_db": 42.39673886163162,
           "psnr_db": 89.57941733975296,
@@ -133,7 +133,7 @@
         "conventional_clip_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 30.0,
-          "hard_fold_signal_mse": 137.7892955118113,
+          "hard_fold_signal_mse": 262.35746748445405,
           "mean_fold_count": 30.0,
           "mse_gain_over_conventional_db": 0.0,
           "psnr_db": 9.846825858569757,
@@ -147,7 +147,7 @@
         "us_sres": {
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 30.0,
-          "hard_fold_signal_mse": 0.012711108167218555,
+          "hard_fold_signal_mse": 0.020060137072143616,
           "mean_fold_count": 30.0,
           "mse_gain_over_conventional_db": 40.35032065250246,
           "psnr_db": 56.91567174446615,
