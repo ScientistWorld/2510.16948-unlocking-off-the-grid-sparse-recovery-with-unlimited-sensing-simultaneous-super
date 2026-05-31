@@ -15,14 +15,16 @@ How success is measured. Describe only the metrics, targets, and evaluation proc
 <!-- How should evaluation be run? What data split, what conditions? Any important details about how to compare fairly (e.g., fixed seeds, specific test sets, averaging over runs). -->
 # Evaluation
 
-`scripts/evaluate.sh` reads a benchmark dataset and saved method outputs, then
-writes `scoring/scores.json`.
+`scripts/evaluate.sh` reads the benchmark datasets and saved method outputs,
+then writes `scoring/scores.json`. The compact reproduction evaluates three
+low-bit HDR settings with dynamic range `10`, `20`, and `30` times the folding
+threshold.
 
 Primary metric:
 
 - `mse_gain_over_conventional_db`: reconstruction MSE improvement over the
   conventional clipped-ADC sparse recovery baseline. The paper reports at
-  least 30 dB gain in the comparable Fig. 2 low-bit HDR setting.
+  least 30 dB gain across the comparable Fig. 2 low-bit HDR settings.
 
 Additional benefit metrics:
 

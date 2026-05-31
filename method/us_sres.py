@@ -4,12 +4,14 @@ This compact implementation covers the paper's core noiseless computation:
 1. modulo low-dynamic-range samples y = M_lambda(g),
 2. nonlinear finite-difference filtering M_lambda(Delta y) = Delta g,
 3. anti-difference to recover g up to a constant,
-4. spectral fitting / matrix pencil to estimate off-grid spike locations,
+4. continuum sparse deconvolution to estimate off-grid spike locations,
 5. least-squares amplitudes and signal reconstruction.
 
-The robust rational IterSiS residue refinement from Section III is exposed as
-an optional post-processing class in comments but the benchmark uses the exact
-nonlinear filtering path from Theorem 2, which is the paper's central algorithm.
+The benchmark uses the exact nonlinear filtering path from Theorem 2, which is
+the paper's central algorithm. Its P2 spike-estimation objective is solved by
+direct continuum least-squares refinement instead of the paper's matrix-pencil
+initializer because the synthetic nonperiodic Gaussian substitute is
+ill-conditioned for the plain Fourier-ratio pencil.
 """
 
 from __future__ import annotations

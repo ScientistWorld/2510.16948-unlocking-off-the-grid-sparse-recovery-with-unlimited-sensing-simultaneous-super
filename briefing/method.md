@@ -26,12 +26,14 @@ Core computation implemented here:
    small enough that `M_lambda(Delta y) = Delta g`.
 3. Recover the high-dynamic-range signal up to an additive constant by
    anti-differencing the recovered `Delta g`.
-4. Divide Fourier coefficients of the recovered signal by the known pulse
-   response to obtain a sum-of-sinusoids sequence.
-5. Estimate off-grid spike times using an annihilating-filter / matrix-pencil
-   spectral fit, then estimate amplitudes by least squares.
+4. Estimate off-grid spike times and amplitudes from the recovered
+   high-dynamic-range waveform.
 
 The full paper's robust SRes-IterSiS algorithm alternates residue recovery in
 the difference domain with spike estimation. The first benchmark uses the
 exact nonlinear filtering path from Theorem 2, which is the core algorithmic
-mechanism behind the reported digital super-resolution gain.
+mechanism behind the reported digital super-resolution gain. In this compact
+environment, the spike-estimation subproblem is solved by direct continuum
+least-squares refinement against the known pulse shape; this preserves the
+paper's modulo recovery computation while avoiding instability from applying a
+plain Fourier-ratio pencil to the nonperiodic synthetic substitute data.

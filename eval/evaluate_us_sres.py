@@ -1,4 +1,9 @@
-"""Evaluate saved US-SRes reproduction artifacts."""
+"""Evaluate saved US-SRes reproduction artifacts.
+
+The evaluator is intentionally method-agnostic: it reads dataset and output
+artifacts written by any implementation that follows the documented npz format.
+It does not import or call code from method/.
+"""
 
 from __future__ import annotations
 
@@ -48,33 +53,71 @@ def evaluate_method(data_path: Path, output_path: Path) -> dict[str, float]:
     }
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--data", default="data/synthetic/us_sres_benchmark.npz")
-    parser.add_argument("--method", default="checkpoints/us_sres_outputs.npz")
-    parser.add_argument("--baseline", default="checkpoints/conventional_outputs.npz")
-    parser.add_argument("--scores", default="scoring/scores.json")
-    args = parser.parse_args()
-
-    method_metrics = evaluate_method(Path(args.data), Path(args.method))
-    baseline_metrics = evaluate_method(Path(args.data), Path(args.baseline))
+def evaluate_experiment(
+    name: str, data_path: Path, method_path: Path, baseline_path: Path
+) -> dict[str, dict[str, dict[str, float]]]:
+    method_metrics = evaluate_method(data_path, method_path)
+    baseline_metrics = evaluate_method(data_path, baseline_path)
     mse_gain_db = 10.0 * np.log10(
         max(baseline_metrics["signal_mse"], 1e-18)
         / max(method_metrics["signal_mse"], 1e-18)
     )
     method_metrics["mse_gain_over_conventional_db"] = float(mse_gain_db)
     baseline_metrics["mse_gain_over_conventional_db"] = 0.0
-
-    scores = {
-        "experiments": {
-            "synthetic_lowbit_hdr_weak_strong": {
-                "results": {
-                    "conventional_clip_sres": baseline_metrics,
-                    "us_sres": method_metrics,
-                }
+    return {
+        name: {
+            "results": {
+                "conventional_clip_sres": baseline_metrics,
+                "us_sres": method_metrics,
             }
         }
     }
+
+
+def load_manifest(path: Path) -> list[dict[str, str]]:
+    manifest = json.loads(path.read_text())
+    if not isinstance(manifest, list):
+        raise ValueError("Manifest must be a list of experiment records")
+    required = {"name", "data", "method", "baseline"}
+    for idx, record in enumerate(manifest):
+        missing = required - set(record)
+        if missing:
+            raise ValueError(f"Manifest record {idx} missing keys: {sorted(missing)}")
+    return manifest
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--data", default="data/synthetic/us_sres_benchmark.npz")
+    parser.add_argument("--method", default="checkpoints/us_sres_outputs.npz")
+    parser.add_argument("--baseline", default="checkpoints/conventional_outputs.npz")
+    parser.add_argument("--experiment-name", default="synthetic_lowbit_hdr_dr20")
+    parser.add_argument("--manifest")
+    parser.add_argument("--scores", default="scoring/scores.json")
+    args = parser.parse_args()
+
+    experiments = {}
+    if args.manifest:
+        for record in load_manifest(Path(args.manifest)):
+            experiments.update(
+                evaluate_experiment(
+                    record["name"],
+                    Path(record["data"]),
+                    Path(record["method"]),
+                    Path(record["baseline"]),
+                )
+            )
+    else:
+        experiments.update(
+            evaluate_experiment(
+                args.experiment_name,
+                Path(args.data),
+                Path(args.method),
+                Path(args.baseline),
+            )
+        )
+
+    scores = {"experiments": experiments}
     scores_path = Path(args.scores)
     scores_path.parent.mkdir(parents=True, exist_ok=True)
     scores_path.write_text(json.dumps(scores, indent=2, sort_keys=True))

@@ -19,6 +19,12 @@ set -e
 cd /home/user
 
 bash scripts/download.sh
-bash scripts/baseline.sh
-bash scripts/method.sh
+for DR in 10 20 30; do
+  bash scripts/baseline.sh \
+    "data/synthetic/us_sres_dr${DR}.npz" \
+    "checkpoints/conventional_dr${DR}.npz"
+  bash scripts/method.sh \
+    "data/synthetic/us_sres_dr${DR}.npz" \
+    "checkpoints/us_sres_dr${DR}.npz"
+done
 bash scripts/evaluate.sh

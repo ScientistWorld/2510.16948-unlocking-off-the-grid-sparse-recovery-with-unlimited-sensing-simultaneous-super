@@ -25,13 +25,45 @@ set -e
 cd /home/user
 
 mkdir -p scoring
+mkdir -p tmp
 
-DATA_PATH="${1:-data/synthetic/us_sres_benchmark.npz}"
-METHOD_OUTPUT="${2:-checkpoints/us_sres_outputs.npz}"
-BASELINE_OUTPUT="${3:-checkpoints/conventional_outputs.npz}"
+if [ "$#" -ge 3 ]; then
+  DATA_PATH="$1"
+  METHOD_OUTPUT="$2"
+  BASELINE_OUTPUT="$3"
+  EXPERIMENT_NAME="${4:-synthetic_lowbit_hdr_dr20}"
+  python -m eval.evaluate_us_sres \
+    --data "$DATA_PATH" \
+    --method "$METHOD_OUTPUT" \
+    --baseline "$BASELINE_OUTPUT" \
+    --experiment-name "$EXPERIMENT_NAME" \
+    --scores scoring/scores.json
+  exit 0
+fi
+
+cat > tmp/us_sres_eval_manifest.json <<'JSON'
+[
+  {
+    "name": "synthetic_lowbit_hdr_dr10",
+    "data": "data/synthetic/us_sres_dr10.npz",
+    "method": "checkpoints/us_sres_dr10.npz",
+    "baseline": "checkpoints/conventional_dr10.npz"
+  },
+  {
+    "name": "synthetic_lowbit_hdr_dr20",
+    "data": "data/synthetic/us_sres_dr20.npz",
+    "method": "checkpoints/us_sres_dr20.npz",
+    "baseline": "checkpoints/conventional_dr20.npz"
+  },
+  {
+    "name": "synthetic_lowbit_hdr_dr30",
+    "data": "data/synthetic/us_sres_dr30.npz",
+    "method": "checkpoints/us_sres_dr30.npz",
+    "baseline": "checkpoints/conventional_dr30.npz"
+  }
+]
+JSON
 
 python -m eval.evaluate_us_sres \
-  --data "$DATA_PATH" \
-  --method "$METHOD_OUTPUT" \
-  --baseline "$BASELINE_OUTPUT" \
+  --manifest tmp/us_sres_eval_manifest.json \
   --scores scoring/scores.json

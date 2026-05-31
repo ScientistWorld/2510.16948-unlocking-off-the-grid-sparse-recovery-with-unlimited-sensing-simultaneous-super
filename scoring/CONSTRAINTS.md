@@ -78,14 +78,15 @@ ONLY WRITE ABOUT WHAT TO RESTRICT. NEVER WRITE ABOUT WHAT REMAINS OPEN.
 -->
 # Constraints
 
-Future methods must evaluate on the same saved dataset unless they add a new
-named experiment. For the main experiment, hold fixed:
+Future methods must evaluate on the same saved datasets unless they add a new
+named experiment. For the three standard experiments, hold fixed:
 
 - `K=2` off-grid spikes.
 - `N=501` samples.
-- Gaussian pulse width from `data/synthetic/us_sres_benchmark.npz`.
+- Gaussian pulse width from the corresponding `data/synthetic/us_sres_dr*.npz`.
 - 3-bit quantization.
-- Dynamic range of 20 times the folding threshold.
+- The experiment-specific dynamic range (`10`, `20`, or `30` times the folding
+  threshold).
 - Weak/strong amplitude ratio of 10.
 
 Do not improve scores by increasing bit depth, reducing dynamic range, using

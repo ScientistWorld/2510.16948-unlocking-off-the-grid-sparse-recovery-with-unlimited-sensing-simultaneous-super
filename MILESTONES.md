@@ -1,14 +1,13 @@
 # Reproduction Milestones
 
-**Current: method_runs**
+**Current: none**
 
 ## Progress Log
 
-### [2026-05-31 00:00] - method_runs
-- Implemented modulo low-bit acquisition, nonlinear finite-difference HDR
-  recovery, and off-grid sparse spike estimation.
-- Local smoke test ran end to end on the synthetic weak/strong benchmark and
-  produced `scoring/scores.json`; official compute job is being submitted for
-  milestone confirmation.
+### [2026-05-31 00:00] - none
+- Continuing from a previous workspace and re-auditing integrity.
+- Found a real modulo finite-difference implementation, but also found that
+  the previous scoring reference mixed paper-reported targets with local
+  invented metrics; fixing this before restoring a milestone.
 
 ## Stop Justification

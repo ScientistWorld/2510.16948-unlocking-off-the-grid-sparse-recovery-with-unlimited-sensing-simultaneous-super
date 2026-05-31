@@ -4,5 +4,5 @@
 action: submit
 gpus: 0
 test: true
-milestone: method_runs
-notes: "CPU smoke job: generate synthetic US-SRes benchmark, run clipped baseline and modulo method, evaluate scores, and validate package."
+milestone: none
+notes: "CPU smoke job: generate three DR synthetic US-SRes benchmarks, run clipped baseline and modulo method, evaluate scores, and validate package."

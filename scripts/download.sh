@@ -20,8 +20,19 @@ set -e
 cd /home/user
 
 mkdir -p data/synthetic
-python -m data.us_sres_synthetic \
-  --output data/synthetic/us_sres_benchmark.npz \
-  --trials 64 \
-  --bits 3 \
-  --dynamic-range-x 20
+for DR in 10 20 30; do
+  OUT="data/synthetic/us_sres_dr${DR}.npz"
+  if [ ! -e "$OUT" ]; then
+    python -m data.us_sres_synthetic \
+      --output "$OUT" \
+      --trials 64 \
+      --bits 3 \
+      --dynamic-range-x "$DR" \
+      --seed "$((16948 + DR))"
+  fi
+done
+
+# Compatibility path for scripts that evaluate the paper's middle DR setting.
+if [ ! -e data/synthetic/us_sres_benchmark.npz ]; then
+  cp data/synthetic/us_sres_dr20.npz data/synthetic/us_sres_benchmark.npz
+fi
