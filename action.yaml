@@ -1,5 +1,5 @@
-action: done
+action: submit
 gpus: 0
-test: false
+test: true
 milestone: secondary_claims
-notes: "Packaging audit passed: download.sh regenerates all ignored synthetic inputs, no public fetches are missing, and no committed code references shared/ paths."
+notes: "CPU verification job: regenerate scores.json with the expanded evaluator metrics, run train/test scoring, quality gate, and validate.py --compare."
