@@ -1,0 +1,76 @@
+{
+  "experiments": {
+    "synthetic_lowbit_hdr_dr10": {
+      "results": {
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 10.0,
+          "mean_fold_count": 10.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 10.457014879501155,
+          "quant_bits": 3.0,
+          "signal_mse": 12.546434923977907,
+          "time_mae_samples": 25.409100781151764
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 10.0,
+          "mean_fold_count": 10.0,
+          "mse_gain_over_conventional_db": 30.16006824520534,
+          "psnr_db": 45.77219761095571,
+          "quant_bits": 3.0,
+          "signal_mse": 0.012092428100356531,
+          "time_mae_samples": 2.0811415038381558
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr20": {
+      "results": {
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 9.995851769292592,
+          "quant_bits": 3.0,
+          "signal_mse": 58.29237833049402,
+          "time_mae_samples": 40.800523116463665
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 36.725981634840366,
+          "psnr_db": 52.905413423441914,
+          "quant_bits": 3.0,
+          "signal_mse": 0.012388354128309928,
+          "time_mae_samples": 0.9731206635763281
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr30": {
+      "results": {
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 30.0,
+          "mean_fold_count": 30.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 9.847364045991032,
+          "quant_bits": 3.0,
+          "signal_mse": 137.7767018121985,
+          "time_mae_samples": 74.95019484612641
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 30.0,
+          "mean_fold_count": 30.0,
+          "mse_gain_over_conventional_db": 39.69405340225429,
+          "psnr_db": 56.8374504347191,
+          "quant_bits": 3.0,
+          "signal_mse": 0.01478326778780654,
+          "time_mae_samples": 0.6209393073816674
+        }
+      }
+    }
+  }
+}
