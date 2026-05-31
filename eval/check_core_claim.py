@@ -14,13 +14,19 @@ from pathlib import Path
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scores", default="scoring/scores.json")
+    parser.add_argument("--reference", default="scoring/reference.json")
     parser.add_argument("--min-gain-db", type=float, default=20.0)
     args = parser.parse_args()
 
     scores = json.loads(Path(args.scores).read_text())
+    reference = json.loads(Path(args.reference).read_text())
     failures = []
-    for name, experiment in scores.get("experiments", {}).items():
-        result = experiment.get("results", {}).get("us_sres", {})
+    scored_experiments = scores.get("experiments", {})
+    for name in reference.get("experiments", {}):
+        if name not in scored_experiments:
+            failures.append((name, None))
+            continue
+        result = scored_experiments[name].get("results", {}).get("us_sres", {})
         gain = result.get("mse_gain_over_conventional_db")
         if gain is None or gain < args.min_gain_db:
             failures.append((name, gain))

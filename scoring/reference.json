@@ -2,7 +2,7 @@
   "experiments": {
     "synthetic_lowbit_hdr_dr10": {
       "description": "Low-bit weak/strong off-grid spike recovery at 10x dynamic range, matching the Fig. 2 regime with K=2, amplitude ratio 10, N=501, and 3-bit modulo sensing. The paper reports at least 30 dB MSE gain over conventional sampling across these dynamic-range and bit-depth settings.",
-      "weight": 0.34,
+      "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
@@ -53,7 +53,7 @@
     },
     "synthetic_lowbit_hdr_dr20": {
       "description": "Low-bit weak/strong off-grid spike recovery at 20x dynamic range, matching the Fig. 2 regime with K=2, amplitude ratio 10, N=501, and 3-bit modulo sensing.",
-      "weight": 0.33,
+      "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
@@ -104,7 +104,7 @@
     },
     "synthetic_lowbit_hdr_dr30": {
       "description": "Low-bit weak/strong off-grid spike recovery at 30x dynamic range, matching the Fig. 2 regime with K=2, amplitude ratio 10, N=501, and 3-bit modulo sensing.",
-      "weight": 0.33,
+      "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
@@ -149,6 +149,108 @@
           "mse_gain_over_conventional_db": 30.0,
           "dynamic_range_x": 30.0,
           "quant_bits": 3.0,
+          "amplitude_ratio": 10.0
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr20_bits5": {
+      "description": "Low-bit weak/strong off-grid spike recovery at 20x dynamic range with 5-bit modulo sensing, adding bit-depth coverage from the Fig. 2 regime. The paper reports at least 30 dB MSE gain over conventional sampling across dynamic-range and bit-depth settings.",
+      "weight": 0.2,
+      "primary_metric": "mse_gain_over_conventional_db",
+      "metrics": {
+        "mse_gain_over_conventional_db": {
+          "higher_is_better": true,
+          "coefficient": 1.0
+        },
+        "psnr_db": {
+          "higher_is_better": true,
+          "coefficient": 0.5
+        },
+        "time_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.5
+        },
+        "signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.2
+        },
+        "dynamic_range_x": {
+          "higher_is_better": true,
+          "coefficient": 0.25
+        },
+        "quant_bits": {
+          "higher_is_better": false,
+          "coefficient": -0.25
+        },
+        "amplitude_ratio": {
+          "higher_is_better": true,
+          "coefficient": 0.1
+        },
+        "mean_fold_count": {
+          "higher_is_better": true,
+          "coefficient": 0.1
+        }
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "type": "baseline"
+        },
+        "us_sres": {
+          "type": "proposed",
+          "mse_gain_over_conventional_db": 30.0,
+          "dynamic_range_x": 20.0,
+          "quant_bits": 5.0,
+          "amplitude_ratio": 10.0
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr20_bits8": {
+      "description": "Low-bit weak/strong off-grid spike recovery at 20x dynamic range with 8-bit modulo sensing, adding bit-depth coverage from the Fig. 2 regime. The paper reports at least 30 dB MSE gain over conventional sampling across dynamic-range and bit-depth settings.",
+      "weight": 0.2,
+      "primary_metric": "mse_gain_over_conventional_db",
+      "metrics": {
+        "mse_gain_over_conventional_db": {
+          "higher_is_better": true,
+          "coefficient": 1.0
+        },
+        "psnr_db": {
+          "higher_is_better": true,
+          "coefficient": 0.5
+        },
+        "time_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.5
+        },
+        "signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.2
+        },
+        "dynamic_range_x": {
+          "higher_is_better": true,
+          "coefficient": 0.25
+        },
+        "quant_bits": {
+          "higher_is_better": false,
+          "coefficient": -0.25
+        },
+        "amplitude_ratio": {
+          "higher_is_better": true,
+          "coefficient": 0.1
+        },
+        "mean_fold_count": {
+          "higher_is_better": true,
+          "coefficient": 0.1
+        }
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "type": "baseline"
+        },
+        "us_sres": {
+          "type": "proposed",
+          "mse_gain_over_conventional_db": 30.0,
+          "dynamic_range_x": 20.0,
+          "quant_bits": 8.0,
           "amplitude_ratio": 10.0
         }
       }

@@ -27,4 +27,12 @@ for DR in 10 20 30; do
     "data/synthetic/us_sres_dr${DR}.npz" \
     "checkpoints/us_sres_dr${DR}.npz"
 done
+for BITS in 5 8; do
+  bash scripts/baseline.sh \
+    "data/synthetic/us_sres_dr20_bits${BITS}.npz" \
+    "checkpoints/conventional_dr20_bits${BITS}.npz"
+  bash scripts/method.sh \
+    "data/synthetic/us_sres_dr20_bits${BITS}.npz" \
+    "checkpoints/us_sres_dr20_bits${BITS}.npz"
+done
 bash scripts/evaluate.sh

@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim**
+**Current: core_claim_plus**
 
 ## Progress Log
 
@@ -20,5 +20,10 @@
 - Fixed the method to keep rational `P/Q` residue recovery as a Section III candidate and accept it only when the resulting signal has lower sparse-model residual than the finite-difference recovery path.
 - Added a job quality gate requiring at least 20 dB MSE gain for every scored dynamic-range setting before a reproduction job can pass silently.
 
+### [2026-05-31 12:21] - core_claim_plus
+- CPU job `1d35c7b1-6b0` verified the repaired adaptive IterSiS path end to end.
+- Restored 30.16/36.73/39.69 dB MSE gains over the clipped baseline at DR10/DR20/DR30 with 3-bit sensing.
+- Expanded the planned benchmark with DR20 5-bit and 8-bit experiments to cover an additional Fig. 2 axis before attempting a higher milestone.
+
 ## Stop Justification
-- Not stopped; submitting a CPU reproduction job to verify the repaired adaptive IterSiS path end to end.
+- Not stopped; submitting a CPU reproduction job to verify the expanded dynamic-range and bit-depth matrix.

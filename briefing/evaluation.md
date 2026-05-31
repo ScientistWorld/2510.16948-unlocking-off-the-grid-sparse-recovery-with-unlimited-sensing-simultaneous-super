@@ -3,8 +3,9 @@
 `scripts/evaluate.sh` reads private evaluation datasets and saved method
 outputs, then writes `scoring/scores.json`. Method scripts consume the matching
 public acquisition files, which omit `clean`, `taus`, and `amplitudes`. The
-compact reproduction evaluates three low-bit HDR settings with dynamic range
-`10`, `20`, and `30` times the folding threshold.
+compact reproduction evaluates three 3-bit HDR settings with dynamic range
+`10`, `20`, and `30` times the folding threshold, plus 5-bit and 8-bit
+settings at the middle dynamic range.
 
 Primary metric:
 
@@ -21,7 +22,8 @@ Additional benefit metrics:
 
 Constraint metrics:
 
-- `quant_bits`: ADC bit budget. Improvements must not rely on increasing it.
+- `quant_bits`: ADC bit budget fixed by each named experiment. Improvements
+  must not rely on increasing it within an experiment.
 - `dynamic_range_x`: input dynamic range in multiples of the folding threshold.
 - `amplitude_ratio`: weak/strong mixture severity.
 - `mean_fold_count`: average number of modulo folds in the generated signals.

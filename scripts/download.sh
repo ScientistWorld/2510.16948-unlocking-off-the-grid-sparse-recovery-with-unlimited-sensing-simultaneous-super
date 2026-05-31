@@ -33,6 +33,19 @@ for DR in 10 20 30; do
       --seed "$((16948 + DR))"
   fi
 done
+for BITS in 5 8; do
+  EVAL_OUT="data/synthetic/eval_us_sres_dr20_bits${BITS}.npz"
+  PUBLIC_OUT="data/synthetic/us_sres_dr20_bits${BITS}.npz"
+  if [ ! -e "$EVAL_OUT" ] || [ ! -e "$PUBLIC_OUT" ]; then
+    python -m data.us_sres_synthetic \
+      --output "$EVAL_OUT" \
+      --public-output "$PUBLIC_OUT" \
+      --trials 64 \
+      --bits "$BITS" \
+      --dynamic-range-x 20 \
+      --seed "$((16948 + 20 + BITS))"
+  fi
+done
 
 # Compatibility path for scripts that evaluate the paper's middle DR setting.
 if [ ! -e data/synthetic/us_sres_benchmark.npz ]; then

@@ -3,15 +3,15 @@
 Future methods must evaluate on the same saved datasets unless they add a new
 named experiment. Standard method scripts consume public files named
 `data/synthetic/us_sres_dr*.npz`; evaluation uses corresponding private label
-files named `data/synthetic/eval_us_sres_dr*.npz`. For the three standard
-experiments, hold fixed:
+files named `data/synthetic/eval_us_sres_dr*.npz`. For each standard
+experiment, hold fixed:
 
 - `K=2` off-grid spikes.
 - `N=501` samples.
-- Gaussian pulse width from the corresponding `data/synthetic/us_sres_dr*.npz`.
-- 3-bit quantization.
+- Gaussian pulse width from the corresponding public acquisition file.
+- The experiment-specific quantization budget (`3`, `5`, or `8` bits).
 - The experiment-specific dynamic range (`10`, `20`, or `30` times the folding
-  threshold).
+  threshold; the 5-bit and 8-bit extensions use `20`).
 - Weak/strong amplitude ratio of 10.
 
 Do not improve scores by increasing bit depth, reducing dynamic range, using
@@ -22,7 +22,7 @@ setting and write the documented output artifact format.
 ## Compliance Checklist
 
 - [ ] Uses the provided `data/synthetic/us_sres_dr*.npz` datasets for standard
-      experiments.
+      experiments, including any `_bits*` variants named in the manifest.
 - [ ] Does not read `clean`, `taus`, or `amplitudes` from the dataset while
       producing method outputs.
 - [ ] Does not increase `quant_bits` or reduce `dynamic_range_x`.

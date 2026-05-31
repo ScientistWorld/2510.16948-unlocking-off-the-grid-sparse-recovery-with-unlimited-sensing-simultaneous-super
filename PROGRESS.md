@@ -4,8 +4,8 @@
 
 - Implemented deterministic synthetic off-grid ToF-like benchmarks following
   the paper's Fig. 2 setup: `K=2`, weak/strong amplitude ratio 10, 3-bit modulo
-  acquisition, and dynamic-range settings of 10, 20, and 30 times the folding
-  threshold.
+  acquisition at dynamic-range settings of 10, 20, and 30 times the folding
+  threshold, with pending DR20 extensions at 5 and 8 bits.
 - Implemented the paper's core US-SRes computation: centered modulo sensing,
   nonlinear finite-difference recovery of `Delta g`, anti-difference HDR
   signal recovery, and sparse off-grid spike estimation.
@@ -29,8 +29,14 @@
 - The method now treats the rational `P/Q` residue update as an IterSiS
   candidate and accepts it only if the candidate improves the sparse
   reconstruction residual over the finite-difference theorem path.
-- `scripts/run.sh` now includes a quality gate requiring at least 20 dB MSE
-  gain over the clipped baseline in every scored dynamic-range setting.
+- `scripts/run.sh` now includes a quality gate requiring every reference
+  experiment to appear in `scores.json` and clear at least 20 dB MSE gain over
+  the clipped baseline.
+- CPU job `1d35c7b1-6b0` verified the repaired adaptive IterSiS path and
+  passed the 20 dB quality gate. The regenerated scores restored 30.16 dB,
+  36.73 dB, and 39.69 dB MSE gains at DR10, DR20, and DR30 with 3-bit sensing.
+- The next reproduction job expands the benchmark with DR20 5-bit and 8-bit
+  settings to cover a bit-depth axis from the paper's Fig. 2 regime.
 - Official CPU container job `9db3b291-cd4` completed successfully after the
   public/private dataset split and passed `python validate.py --compare`.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
@@ -47,10 +53,9 @@
 
 ## Remaining
 
-- Verify the repaired adaptive IterSiS/P2 spectral path in the container and
-  compare its scores against the existing core-claim results.
-- Add bit-depth sweeps for broader coverage of Fig. 2 after the upgraded method
-  is confirmed stable.
+- Verify the expanded DR20 5-bit and 8-bit settings in the container.
+- Add more bit-depth or dynamic-range combinations if the expanded sweep is
+  stable and remaining budget justifies it.
 - Extend the compact residue refinement toward the full hardware-calibrated
   robust IterSiS implementation if additional evidence is needed.
 - Reproduce hardware ToF experiments if the undistributed tensors become
@@ -70,8 +75,8 @@
 - Data: the paper evaluates on hardware-acquired ToF tensors that are not
   distributed with the manuscript. This workspace substitutes deterministic
   synthetic weak/strong filtered spike signals following the paper's Fig. 2
-  parameters (`K=2`, `N=501`, amplitude ratio 10, low-bit quantization, and
-  dynamic ranges 10/20/30).
+  parameters (`K=2`, `N=501`, amplitude ratio 10, low-bit quantization,
+  dynamic ranges 10/20/30, and additional DR20 bit-depth settings).
 - Spike-estimation solver: the paper's robust implementation uses spectral
   fitting/matrix pencil after residue recovery. The continuation adds this as
   the P2 initializer, but keeps a continuum least-squares fallback because the
