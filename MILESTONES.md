@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim_plus**
+**Current: secondary_claims**
 
 ## Progress Log
 
@@ -25,5 +25,10 @@
 - Restored 30.16/36.73/39.69 dB MSE gains over the clipped baseline at DR10/DR20/DR30 with 3-bit sensing.
 - Expanded the planned benchmark with DR20 5-bit and 8-bit experiments to cover an additional Fig. 2 axis before attempting a higher milestone.
 
+### [2026-05-31 12:28] - secondary_claims
+- CPU job `b3e73f92-59e` verified the expanded five-experiment benchmark end to end.
+- Reproduced Fig. 2's dynamic-range robustness claim at DR10/DR20/DR30 and its bit-depth robustness claim at DR20 with 3/5/8-bit sensing.
+- The expanded scores all clear the quality gate: 30.16, 36.73, 39.69, 42.85, and 41.14 dB MSE gain over the clipped baseline.
+
 ## Stop Justification
-- Not stopped; submitting a CPU reproduction job to verify the expanded dynamic-range and bit-depth matrix.
+- Stopping at `secondary_claims`: the reusable gym covers the paper's numerical Fig. 2 claims on a deterministic synthetic substitute, while undistributed ToF hardware tensors prevent honest reproduction of the remaining imaging figures and tables.

@@ -35,8 +35,9 @@
 - CPU job `1d35c7b1-6b0` verified the repaired adaptive IterSiS path and
   passed the 20 dB quality gate. The regenerated scores restored 30.16 dB,
   36.73 dB, and 39.69 dB MSE gains at DR10, DR20, and DR30 with 3-bit sensing.
-- The next reproduction job expands the benchmark with DR20 5-bit and 8-bit
-  settings to cover a bit-depth axis from the paper's Fig. 2 regime.
+- CPU job `b3e73f92-59e` verified the expanded benchmark with DR20 5-bit and
+  8-bit settings. The added settings achieved 42.85 dB and 41.14 dB MSE gain
+  over the clipped baseline, respectively.
 - Official CPU container job `9db3b291-cd4` completed successfully after the
   public/private dataset split and passed `python validate.py --compare`.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
@@ -53,9 +54,6 @@
 
 ## Remaining
 
-- Verify the expanded DR20 5-bit and 8-bit settings in the container.
-- Add more bit-depth or dynamic-range combinations if the expanded sweep is
-  stable and remaining budget justifies it.
 - Extend the compact residue refinement toward the full hardware-calibrated
   robust IterSiS implementation if additional evidence is needed.
 - Reproduce hardware ToF experiments if the undistributed tensors become
