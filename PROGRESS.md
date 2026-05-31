@@ -17,8 +17,10 @@
 
 ## Results
 
-- Official CPU container job `8a2d4851-d38` completed successfully and passed
-  `python validate.py --compare`.
+- Official CPU container job `9db3b291-cd4` completed successfully after the
+  public/private dataset split and passed `python validate.py --compare`.
+- Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
+  the split.
 - DR 10: US-SRes improved waveform MSE by 30.16 dB over the clipped
   conventional baseline, with 45.77 dB PSNR and 2.08 sample time MAE.
 - DR 20: US-SRes improved waveform MSE by 36.73 dB over the clipped
@@ -61,4 +63,4 @@
   recovery, which are the paper's central computational steps, are unchanged.
 - Algorithm scope: the full robust SRes-IterSiS rational residue-recovery loop
   from Section III is not implemented, so the claimed milestone is limited to
-  `core_claim`.
+  `core_claim_plus`.

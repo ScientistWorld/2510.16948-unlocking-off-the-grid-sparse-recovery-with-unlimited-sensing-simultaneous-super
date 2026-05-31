@@ -1,8 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: submit
+action: done
 gpus: 0
 test: true
-milestone: core_claim
-notes: "CPU test job to regenerate public/private synthetic datasets, rerun baseline and US-SRes method, evaluate with private labels, and validate scores."
+milestone: core_claim_plus
+notes: "Verified scoped US-SRes reproduction after the public/private split: baseline and method ran on DR 10/20/30, evaluation used private labels, and validate.py --compare passed. Full robust SRes-IterSiS and hardware secondary claims remain unreproduced."
