@@ -15,5 +15,10 @@
 - Added a compact Section III-style residue-sieving path: rational `P/Q` weighted least-squares fold-residue recovery, `2 lambda Z` residue quantization, and P2 matrix-pencil spectral initialization with continuous least-squares refinement.
 - Submitting a CPU job to regenerate method outputs and scores with the upgraded algorithm before claiming a higher milestone.
 
+### [2026-05-31 12:14] - core_claim
+- CPU job `5ad9d555-3dc` completed, but the forced IterSiS residue update degraded DR20/DR30 below the clipped baseline, so it does not support a milestone increase.
+- Fixed the method to keep rational `P/Q` residue recovery as a Section III candidate and accept it only when the resulting signal has lower sparse-model residual than the finite-difference recovery path.
+- Added a job quality gate requiring at least 20 dB MSE gain for every scored dynamic-range setting before a reproduction job can pass silently.
+
 ## Stop Justification
-- Not stopped; submitting a CPU reproduction job to verify the packaged environment end to end.
+- Not stopped; submitting a CPU reproduction job to verify the repaired adaptive IterSiS path end to end.

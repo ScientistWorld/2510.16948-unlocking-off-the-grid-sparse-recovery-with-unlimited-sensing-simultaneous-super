@@ -21,7 +21,6 @@ from pathlib import Path
 import numpy as np
 
 from data.spectral_utils import (
-    fit_amplitudes_and_offset,
     matrix_pencil_spikes,
     refine_spikes_from_initial,
     sparse_deconvolution_continuum,
@@ -202,30 +201,51 @@ def recover_trial_itersis(
     """Compact SRes-IterSiS loop for Section III P1/P2 recovery."""
 
     dy = finite_difference(y, 1)
-    g_tilde = recover_signal_from_modulo(y, lambda_value, diff_order=1)
+    base_signal = recover_signal_from_modulo(y, lambda_value, diff_order=1)
     taus, amps, offset, reconstruction, solver = spectral_spike_estimation(
-        g_tilde, k, sigma, period, max_freq
+        base_signal, k, sigma, period, max_freq
     )
-
-    epsilon_seed = finite_difference(reconstruction, 1) - dy
-    epsilon = quantize_residue(epsilon_seed, lambda_value)
-    for _ in range(outer_iters):
-        epsilon = rational_residue_recovery(epsilon_seed, fold_count, lambda_value)
-        g_tilde = anti_difference(dy + epsilon, 1, y.size)
-        taus, amps, offset, reconstruction, solver = spectral_spike_estimation(
-            g_tilde, k, sigma, period, max_freq
-        )
-        epsilon_seed = finite_difference(reconstruction, 1) - dy
-
-    return {
-        "signal_recovered_up_to_offset": g_tilde,
-        "fold_residue": epsilon,
+    best_score = float(np.mean((base_signal - reconstruction) ** 2))
+    best_result = {
+        "signal_recovered_up_to_offset": base_signal,
+        "fold_residue": finite_difference(base_signal, 1) - dy,
         "taus": taus,
         "amplitudes": amps,
         "offset": offset,
         "reconstruction": reconstruction,
-        "p2_solver": solver,
+        "p2_solver": f"{solver}+finite_difference",
     }
+
+    epsilon_seed = finite_difference(reconstruction, 1) - dy
+    for _ in range(outer_iters):
+        residue_candidates = {
+            "lattice_seed": quantize_residue(epsilon_seed, lambda_value),
+            "rational_pq": rational_residue_recovery(
+                epsilon_seed, fold_count, lambda_value
+            ),
+        }
+        next_seed = epsilon_seed
+        for residue_solver, epsilon in residue_candidates.items():
+            candidate_signal = anti_difference(dy + epsilon, 1, y.size)
+            taus, amps, offset, reconstruction, solver = spectral_spike_estimation(
+                candidate_signal, k, sigma, period, max_freq
+            )
+            score = float(np.mean((candidate_signal - reconstruction) ** 2))
+            if score < best_score:
+                best_score = score
+                next_seed = finite_difference(reconstruction, 1) - dy
+                best_result = {
+                    "signal_recovered_up_to_offset": candidate_signal,
+                    "fold_residue": epsilon,
+                    "taus": taus,
+                    "amplitudes": amps,
+                    "offset": offset,
+                    "reconstruction": reconstruction,
+                    "p2_solver": f"{solver}+itersis_{residue_solver}",
+                }
+        epsilon_seed = next_seed
+
+    return best_result
 
 
 def recover_trial(

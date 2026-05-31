@@ -22,9 +22,15 @@
 ## Results
 
 - Local validation on 2026-05-31 passed with `python validate.py --compare`.
-- The upgraded IterSiS-style method has passed syntax and structural
-  validation locally; numerical results are pending the next CPU container job
-  because the login-node Python environment lacks NumPy.
+- CPU job `5ad9d555-3dc` showed that always applying the compact rational
+  residue update was unstable on the quantized synthetic benchmark: DR10 gained
+  only 4.66 dB, while DR20 and DR30 were worse than the clipped baseline. That
+  result is treated as a failed extension, not as a reproduced claim.
+- The method now treats the rational `P/Q` residue update as an IterSiS
+  candidate and accepts it only if the candidate improves the sparse
+  reconstruction residual over the finite-difference theorem path.
+- `scripts/run.sh` now includes a quality gate requiring at least 20 dB MSE
+  gain over the clipped baseline in every scored dynamic-range setting.
 - Official CPU container job `9db3b291-cd4` completed successfully after the
   public/private dataset split and passed `python validate.py --compare`.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
@@ -41,7 +47,7 @@
 
 ## Remaining
 
-- Verify the upgraded compact IterSiS/P2 spectral path in the container and
+- Verify the repaired adaptive IterSiS/P2 spectral path in the container and
   compare its scores against the existing core-claim results.
 - Add bit-depth sweeps for broader coverage of Fig. 2 after the upgraded method
   is confirmed stable.

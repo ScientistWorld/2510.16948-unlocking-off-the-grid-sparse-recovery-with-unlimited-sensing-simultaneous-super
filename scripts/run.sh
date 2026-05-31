@@ -15,3 +15,4 @@ cd /home/user
 
 bash scripts/reproduce.sh
 python validate.py --compare
+python -m eval.check_core_claim --min-gain-db 20.0
