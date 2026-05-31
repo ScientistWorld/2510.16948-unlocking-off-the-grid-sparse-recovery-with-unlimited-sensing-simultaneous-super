@@ -1,8 +1,6 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: submit
-gpus: 0
-test: true
-milestone: none
-notes: "CPU smoke job: generate three DR synthetic US-SRes benchmarks, run clipped baseline and modulo method, evaluate scores, and validate package."
+action: done
+milestone: core_claim_plus
+notes: "Reproduced the core US-SRes modulo recovery claim across DR 10/20/30 synthetic Fig. 2-style settings; job 8a2d4851-d38 passed validate.py --compare."

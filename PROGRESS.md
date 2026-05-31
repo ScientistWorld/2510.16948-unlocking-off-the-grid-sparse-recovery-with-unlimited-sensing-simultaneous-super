@@ -14,28 +14,34 @@
 
 ## Results
 
-- Local smoke test before expanding the benchmark reached the paper's core
-  qualitative claim on the 20x synthetic benchmark: US-SRes improved waveform
-  MSE by 36.7 dB over the clipped conventional baseline and recovered spike
-  locations with about 0.92 sample mean absolute error.
+- Official CPU container job `8a2d4851-d38` completed successfully and passed
+  `python validate.py --compare`.
+- DR 10: US-SRes improved waveform MSE by 30.16 dB over the clipped
+  conventional baseline, with 45.77 dB PSNR and 2.08 sample time MAE.
+- DR 20: US-SRes improved waveform MSE by 36.73 dB over the clipped
+  conventional baseline, with 52.91 dB PSNR and 0.97 sample time MAE.
+- DR 30: US-SRes improved waveform MSE by 39.69 dB over the clipped
+  conventional baseline, with 56.84 dB PSNR and 0.62 sample time MAE.
 - Paper reference for comparable low-bit HDR recovery: Fig. 2 reports at least
   30 dB MSE gain across dynamic range and quantization settings; Table I
   reports about 40 dB PSNR in 3-bit ToF cases.
 
 ## Remaining
 
-- Submit the packaged three-setting reproduction as a compute job and record
-  official job results in `scoring/scores.json`.
-- Add bit-depth sweeps for milestones above `core_claim_plus`.
+- Add bit-depth sweeps for broader coverage of Fig. 2.
+- Implement the full robust rational IterSiS residue refinement and
+  matrix-pencil spike initializer for closer coverage of Section III.
+- Reproduce hardware ToF experiments if the undistributed tensors become
+  available.
 
 ## Issues
 
 - The paper's hardware ToF tensors are not included with the manuscript, so the
   first benchmark uses a synthetic substitute preserving the signal model and
   low-bit HDR regime.
-- The login-node Python environment lacks `numpy`, so end-to-end execution is
-  being verified in the scheduled container where `environment/setup.sh`
-  installs the declared dependencies.
+- The login-node Python environment lacks `numpy`; end-to-end execution was
+  verified in the scheduled container where `environment/setup.sh` installs the
+  declared dependencies.
 
 ## Deviations from Paper
 
