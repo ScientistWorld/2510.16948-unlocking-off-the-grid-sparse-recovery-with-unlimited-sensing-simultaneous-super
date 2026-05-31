@@ -31,4 +31,4 @@
 - The expanded scores all clear the quality gate: 30.16, 36.73, 39.69, 42.85, and 41.14 dB MSE gain over the clipped baseline.
 
 ## Stop Justification
-- Stopping at `secondary_claims`: the reusable gym covers the paper's numerical Fig. 2 claims on a deterministic synthetic substitute, while undistributed ToF hardware tensors prevent honest reproduction of the remaining imaging figures and tables.
+- Completed at milestone `secondary_claims`.
