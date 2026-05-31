@@ -38,7 +38,7 @@
         "hard_fold_signal_mse": {
           "higher_is_better": false,
           "coefficient": -0.25,
-          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
         },
         "wrapped_measurement_mae": {
           "higher_is_better": false,
@@ -117,7 +117,7 @@
         "hard_fold_signal_mse": {
           "higher_is_better": false,
           "coefficient": -0.25,
-          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
         },
         "wrapped_measurement_mae": {
           "higher_is_better": false,
@@ -196,7 +196,7 @@
         "hard_fold_signal_mse": {
           "higher_is_better": false,
           "coefficient": -0.25,
-          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
         },
         "wrapped_measurement_mae": {
           "higher_is_better": false,
@@ -275,7 +275,7 @@
         "hard_fold_signal_mse": {
           "higher_is_better": false,
           "coefficient": -0.25,
-          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
         },
         "wrapped_measurement_mae": {
           "higher_is_better": false,
@@ -354,7 +354,7 @@
         "hard_fold_signal_mse": {
           "higher_is_better": false,
           "coefficient": -0.25,
-          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
         },
         "wrapped_measurement_mae": {
           "higher_is_better": false,

@@ -2,4 +2,4 @@ action: submit
 gpus: 0
 test: false
 milestone: secondary_claims
-notes: "Run evaluate_train.sh and evaluate_test.sh against saved final checkpoint artifacts; populate split scores."
+notes: "Rerun split scores after repairing hard_fold_signal_mse to score folded sample positions instead of duplicating signal_mse."

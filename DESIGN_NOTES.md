@@ -14,7 +14,7 @@ Changed:
 - Added method-dependent triangulation metrics to both `eval/train/` and `eval/test/`:
   - `weak_tau_mae_samples` to expose weak-reflection localization failures that average timing error can hide.
   - `tau_max_error_samples` to penalize recovering only one of the two spikes.
-  - `hard_fold_signal_mse` to score reconstruction on the higher-fold half of each slice.
+  - `hard_fold_signal_mse` to score reconstruction on sample positions whose clean signal actually exceeds the modulo range.
   - `wrapped_measurement_mae` to check that reconstructions remain consistent with the modulo sensor observations.
 - Added a top-level `slice` marker to split score artifacts (`train` or `test`) so copy-paste mistakes are easier to detect.
 - Updated `scoring/reference.json` so every metric has `higher_is_better`, `coefficient`, and `description`.
@@ -22,6 +22,6 @@ Changed:
 
 Runtime concerns for the next runner iteration:
 
-- I could not run Python/Numpy validation on this login node because NumPy is not installed locally. The runner should verify that the new metrics produce finite values for all five experiments.
+- First split run completed on job `b8dddec4-31b`. It produced finite train/test scores for all five experiments, but also showed that the original `hard_fold_signal_mse` was identical to `signal_mse` because fold counts are constant within each generated dynamic-range setting. I changed that metric to evaluate only folded sample positions and resubmitted.
 - The train/test split still uses complementary rows from the same saved evaluation datasets. That keeps difficulty calibrated and lightweight, but if label files are visible to a future agent, the split is weaker than a truly private held-out dataset.
 - `wrapped_measurement_mae` depends on `modulo_samples` and `lambda_value` being present in every evaluation NPZ. The dataset generator writes both, but the runner should confirm existing artifacts match that contract.

@@ -136,8 +136,13 @@ def evaluate_method(data_path: Path, output_path: Path) -> dict[str, float]:
     max_tau_error = float(np.mean(np.max(tau_error, axis=1)))
     signal_psnr = psnr(clean, reconstruction)
     signal_mse = float(np.mean((clean - reconstruction) ** 2))
-    high_fold = folds >= np.median(folds)
-    hard_fold_mse = float(np.mean((clean[high_fold] - reconstruction[high_fold]) ** 2))
+    folded_samples = np.abs(clean) > float(config["lambda_value"])
+    if np.any(folded_samples):
+        hard_fold_mse = float(
+            np.mean((clean[folded_samples] - reconstruction[folded_samples]) ** 2)
+        )
+    else:
+        hard_fold_mse = signal_mse
     wrapped = modulo(reconstruction, float(config["lambda_value"]))
     wrapped_measurement_mae = float(np.mean(np.abs(wrapped - modulo_samples)))
     return {
