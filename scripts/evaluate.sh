@@ -45,19 +45,19 @@ cat > tmp/us_sres_eval_manifest.json <<'JSON'
 [
   {
     "name": "synthetic_lowbit_hdr_dr10",
-    "data": "data/synthetic/us_sres_dr10.npz",
+    "data": "data/synthetic/eval_us_sres_dr10.npz",
     "method": "checkpoints/us_sres_dr10.npz",
     "baseline": "checkpoints/conventional_dr10.npz"
   },
   {
     "name": "synthetic_lowbit_hdr_dr20",
-    "data": "data/synthetic/us_sres_dr20.npz",
+    "data": "data/synthetic/eval_us_sres_dr20.npz",
     "method": "checkpoints/us_sres_dr20.npz",
     "baseline": "checkpoints/conventional_dr20.npz"
   },
   {
     "name": "synthetic_lowbit_hdr_dr30",
-    "data": "data/synthetic/us_sres_dr30.npz",
+    "data": "data/synthetic/eval_us_sres_dr30.npz",
     "method": "checkpoints/us_sres_dr30.npz",
     "baseline": "checkpoints/conventional_dr30.npz"
   }

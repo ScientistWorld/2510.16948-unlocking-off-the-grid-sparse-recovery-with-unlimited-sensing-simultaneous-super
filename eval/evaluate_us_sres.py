@@ -36,6 +36,18 @@ def match_tau_mae(true_taus: np.ndarray, pred_taus: np.ndarray) -> float:
 def evaluate_method(data_path: Path, output_path: Path) -> dict[str, float]:
     data = np.load(data_path, allow_pickle=True)
     output = np.load(output_path, allow_pickle=True)
+    required_labels = {"clean", "taus", "config", "folds"}
+    missing = required_labels - set(data.files)
+    if missing:
+        raise ValueError(
+            f"evaluation data {data_path} is missing label arrays: {sorted(missing)}"
+        )
+    required_output = {"reconstruction", "taus"}
+    missing_output = required_output - set(output.files)
+    if missing_output:
+        raise ValueError(
+            f"method output {output_path} is missing arrays: {sorted(missing_output)}"
+        )
     config = data["config"][0]
     reconstruction = output["reconstruction"]
     clean = data["clean"]

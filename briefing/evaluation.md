@@ -1,9 +1,10 @@
 # Evaluation
 
-`scripts/evaluate.sh` reads the benchmark datasets and saved method outputs,
-then writes `scoring/scores.json`. The compact reproduction evaluates three
-low-bit HDR settings with dynamic range `10`, `20`, and `30` times the folding
-threshold.
+`scripts/evaluate.sh` reads private evaluation datasets and saved method
+outputs, then writes `scoring/scores.json`. Method scripts consume the matching
+public acquisition files, which omit `clean`, `taus`, and `amplitudes`. The
+compact reproduction evaluates three low-bit HDR settings with dynamic range
+`10`, `20`, and `30` times the folding threshold.
 
 Primary metric:
 

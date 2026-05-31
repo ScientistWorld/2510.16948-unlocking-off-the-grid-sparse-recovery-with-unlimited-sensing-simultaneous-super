@@ -11,6 +11,9 @@
   signal recovery, and sparse off-grid spike estimation.
 - Implemented a conventional clipped-ADC sparse recovery baseline and a
   method-agnostic evaluator.
+- Split generated datasets into public acquisition files for methods and
+  private label files for evaluation, reducing the chance that future methods
+  accidentally train or infer from hidden labels.
 
 ## Results
 
@@ -33,8 +36,6 @@
   matrix-pencil spike initializer for closer coverage of Section III.
 - Reproduce hardware ToF experiments if the undistributed tensors become
   available.
-- Strengthen evaluator-side checks so future submitted methods cannot read
-  hidden clean labels while producing outputs.
 
 ## Issues
 

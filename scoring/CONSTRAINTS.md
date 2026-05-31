@@ -1,7 +1,10 @@
 # Scientist Constraints
 
 Future methods must evaluate on the same saved datasets unless they add a new
-named experiment. For the three standard experiments, hold fixed:
+named experiment. Standard method scripts consume public files named
+`data/synthetic/us_sres_dr*.npz`; evaluation uses corresponding private label
+files named `data/synthetic/eval_us_sres_dr*.npz`. For the three standard
+experiments, hold fixed:
 
 - `K=2` off-grid spikes.
 - `N=501` samples.

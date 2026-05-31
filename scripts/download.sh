@@ -21,10 +21,12 @@ cd /home/user
 
 mkdir -p data/synthetic
 for DR in 10 20 30; do
-  OUT="data/synthetic/us_sres_dr${DR}.npz"
-  if [ ! -e "$OUT" ]; then
+  EVAL_OUT="data/synthetic/eval_us_sres_dr${DR}.npz"
+  PUBLIC_OUT="data/synthetic/us_sres_dr${DR}.npz"
+  if [ ! -e "$EVAL_OUT" ] || [ ! -e "$PUBLIC_OUT" ]; then
     python -m data.us_sres_synthetic \
-      --output "$OUT" \
+      --output "$EVAL_OUT" \
+      --public-output "$PUBLIC_OUT" \
       --trials 64 \
       --bits 3 \
       --dynamic-range-x "$DR" \
@@ -35,4 +37,7 @@ done
 # Compatibility path for scripts that evaluate the paper's middle DR setting.
 if [ ! -e data/synthetic/us_sres_benchmark.npz ]; then
   cp data/synthetic/us_sres_dr20.npz data/synthetic/us_sres_benchmark.npz
+fi
+if [ ! -e data/synthetic/eval_us_sres_benchmark.npz ]; then
+  cp data/synthetic/eval_us_sres_dr20.npz data/synthetic/eval_us_sres_benchmark.npz
 fi

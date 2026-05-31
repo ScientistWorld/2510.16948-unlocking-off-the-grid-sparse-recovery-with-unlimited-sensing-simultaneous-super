@@ -108,9 +108,24 @@ def make_dataset(config: SyntheticConfig) -> dict[str, np.ndarray]:
     }
 
 
+def public_view(dataset: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
+    """Return only acquisition-side arrays available to a submitted method."""
+
+    keep = {
+        "modulo_samples",
+        "conventional_samples",
+        "kernel_grid",
+        "kernel",
+        "config",
+        "folds",
+    }
+    return {key: value for key, value in dataset.items() if key in keep}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default="data/synthetic/us_sres_benchmark.npz")
+    parser.add_argument("--public-output")
     parser.add_argument("--trials", type=int, default=64)
     parser.add_argument("--bits", type=int, default=3)
     parser.add_argument("--dynamic-range-x", type=float, default=20.0)
@@ -123,10 +138,16 @@ def main() -> None:
         dynamic_range_x=args.dynamic_range_x,
         seed=args.seed,
     )
+    dataset = make_dataset(config)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(output, **make_dataset(config))
+    np.savez_compressed(output, **dataset)
     print(f"wrote {output}")
+    if args.public_output:
+        public_output = Path(args.public_output)
+        public_output.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(public_output, **public_view(dataset))
+        print(f"wrote {public_output}")
 
 
 if __name__ == "__main__":
