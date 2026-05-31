@@ -1,17 +1,16 @@
 """Modulo off-grid sparse recovery following Guo & Bhandari SRes-IterSiS.
 
-This compact implementation covers the paper's core noiseless computation:
+This compact implementation covers the paper's core Theorem 2 computation:
 1. modulo low-dynamic-range samples y = M_lambda(g),
-2. nonlinear finite-difference filtering M_lambda(Delta y) = Delta g,
+2. nonlinear finite-difference filtering M_lambda(Delta^h y) = Delta^h g,
 3. anti-difference to recover g up to a constant,
 4. continuum sparse deconvolution to estimate off-grid spike locations,
 5. least-squares amplitudes and signal reconstruction.
 
-The benchmark uses the exact nonlinear filtering path from Theorem 2, which is
-the paper's central algorithm. Its P2 spike-estimation objective is solved by
-direct continuum least-squares refinement instead of the paper's matrix-pencil
-initializer because the synthetic nonperiodic Gaussian substitute is
-ill-conditioned for the plain Fourier-ratio pencil.
+The full robust SRes-IterSiS residue-sieving loop from Section III is not
+implemented here. The benchmark targets the central acquisition claim: modulo
+finite-difference recovery can preserve high-dynamic-range information under
+low-bit sensing where a conventional clipped ADC loses it.
 """
 
 from __future__ import annotations
@@ -31,15 +30,37 @@ def modulo(x: np.ndarray, lambda_value: float) -> np.ndarray:
     )
 
 
-def recover_signal_from_modulo(y: np.ndarray, lambda_value: float) -> np.ndarray:
-    """Recover g up to an additive constant by nonlinear difference filtering."""
+def finite_difference(x: np.ndarray, order: int) -> np.ndarray:
+    out = np.asarray(x, dtype=np.float64)
+    for _ in range(order):
+        out = np.diff(out)
+    return out
 
-    delta_y = np.diff(y)
+
+def anti_difference(delta: np.ndarray, order: int, length: int) -> np.ndarray:
+    """Invert an h-th finite difference with zero integration constants."""
+
+    recovered = np.asarray(delta, dtype=np.float64)
+    for _ in range(order):
+        integrated = np.empty(recovered.size + 1, dtype=np.float64)
+        integrated[0] = 0.0
+        integrated[1:] = np.cumsum(recovered)
+        recovered = integrated
+    if recovered.size != length:
+        raise ValueError(f"expected length {length}, got {recovered.size}")
+    return recovered
+
+
+def recover_signal_from_modulo(
+    y: np.ndarray, lambda_value: float, diff_order: int = 1
+) -> np.ndarray:
+    """Recover g up to polynomial integration constants by nonlinear filtering."""
+
+    if diff_order < 1:
+        raise ValueError("diff_order must be at least 1")
+    delta_y = finite_difference(y, diff_order)
     delta_g = modulo(delta_y, lambda_value)
-    g_tilde = np.empty_like(y, dtype=np.float64)
-    g_tilde[0] = 0.0
-    g_tilde[1:] = np.cumsum(delta_g)
-    return g_tilde
+    return anti_difference(delta_g, diff_order, y.size)
 
 
 def recover_trial(
@@ -49,8 +70,9 @@ def recover_trial(
     sigma: float,
     period: float,
     max_freq: int,
+    diff_order: int,
 ) -> dict[str, np.ndarray | float]:
-    g_tilde = recover_signal_from_modulo(y, lambda_value)
+    g_tilde = recover_signal_from_modulo(y, lambda_value, diff_order=diff_order)
     del period, max_freq
     taus, amps, offset, reconstruction = sparse_deconvolution_continuum(
         g_tilde, k, sigma
@@ -64,7 +86,7 @@ def recover_trial(
     }
 
 
-def run_method(input_path: Path, output_path: Path, max_freq: int) -> None:
+def run_method(input_path: Path, output_path: Path, max_freq: int, diff_order: int) -> None:
     data = np.load(input_path, allow_pickle=True)
     config = data["config"][0]
     samples = data["modulo_samples"]
@@ -79,6 +101,7 @@ def run_method(input_path: Path, output_path: Path, max_freq: int) -> None:
             sigma=float(config["sigma"]),
             period=float(config["period"]),
             max_freq=max_freq,
+            diff_order=diff_order,
         )
         all_taus.append(recovered["taus"])
         all_recon.append(recovered["reconstruction"])
@@ -91,9 +114,15 @@ def run_method(input_path: Path, output_path: Path, max_freq: int) -> None:
         taus=np.asarray(all_taus),
         reconstruction=np.asarray(all_recon),
         g_tilde=np.asarray(all_gtilde),
+        diff_order=np.array(diff_order),
         source=str(input_path),
     )
-    metadata = {"input": str(input_path), "output": str(output_path), "max_freq": max_freq}
+    metadata = {
+        "input": str(input_path),
+        "output": str(output_path),
+        "max_freq": max_freq,
+        "diff_order": diff_order,
+    }
     output_path.with_suffix(".json").write_text(json.dumps(metadata, indent=2))
     print(f"wrote {output_path}")
 
@@ -103,8 +132,9 @@ def main() -> None:
     parser.add_argument("--input", default="data/synthetic/us_sres_benchmark.npz")
     parser.add_argument("--output", default="checkpoints/us_sres_outputs.npz")
     parser.add_argument("--max-freq", type=int, default=12)
+    parser.add_argument("--diff-order", type=int, default=1)
     args = parser.parse_args()
-    run_method(Path(args.input), Path(args.output), args.max_freq)
+    run_method(Path(args.input), Path(args.output), args.max_freq, args.diff_order)
 
 
 if __name__ == "__main__":

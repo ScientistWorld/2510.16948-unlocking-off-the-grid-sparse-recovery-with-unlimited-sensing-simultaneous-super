@@ -33,6 +33,8 @@
   matrix-pencil spike initializer for closer coverage of Section III.
 - Reproduce hardware ToF experiments if the undistributed tensors become
   available.
+- Strengthen evaluator-side checks so future submitted methods cannot read
+  hidden clean labels while producing outputs.
 
 ## Issues
 
@@ -56,3 +58,6 @@
   because the nonperiodic Gaussian substitute made the plain Fourier ratio
   ill-conditioned. The modulo sensing and nonlinear finite-difference residue
   recovery, which are the paper's central computational steps, are unchanged.
+- Algorithm scope: the full robust SRes-IterSiS rational residue-recovery loop
+  from Section III is not implemented, so the claimed milestone is limited to
+  `core_claim`.

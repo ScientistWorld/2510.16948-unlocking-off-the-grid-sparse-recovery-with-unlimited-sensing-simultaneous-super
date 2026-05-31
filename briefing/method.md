@@ -29,11 +29,12 @@ Core computation implemented here:
 4. Estimate off-grid spike times and amplitudes from the recovered
    high-dynamic-range waveform.
 
-The full paper's robust SRes-IterSiS algorithm alternates residue recovery in
-the difference domain with spike estimation. The first benchmark uses the
-exact nonlinear filtering path from Theorem 2, which is the core algorithmic
-mechanism behind the reported digital super-resolution gain. In this compact
-environment, the spike-estimation subproblem is solved by direct continuum
-least-squares refinement against the known pulse shape; this preserves the
-paper's modulo recovery computation while avoiding instability from applying a
-plain Fourier-ratio pencil to the nonperiodic synthetic substitute data.
+The full paper's robust SRes-IterSiS algorithm alternates rational-polynomial
+residue recovery in the difference domain with spectral spike estimation. This
+compact environment does not implement that full robust loop. It implements
+the Theorem 2 nonlinear modulo finite-difference path, which is the core
+mechanism behind the digital super-resolution gain, then solves the
+spike-estimation subproblem by direct continuum least-squares refinement
+against the known pulse shape. That scaled reproduction is intended to support
+the central low-bit HDR recovery claim, not the paper's hardware-robust
+secondary claims.
