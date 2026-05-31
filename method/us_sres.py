@@ -292,7 +292,10 @@ def run_method(input_path: Path, output_path: Path, max_freq: int, diff_order: i
     data = np.load(input_path, allow_pickle=True)
     config = data["config"][0]
     samples = data["modulo_samples"]
-    fold_counts = data["folds"] if "folds" in data.files else np.full(samples.shape[0], -1)
+    # Public acquisition files must not provide clean-signal fold counts.
+    # Estimate the residue degree inside the recovery loop instead of trusting
+    # any stale or private metadata that may be present in an input archive.
+    fold_counts = np.full(samples.shape[0], -1)
     all_taus = []
     all_recon = []
     all_gtilde = []
