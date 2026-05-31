@@ -17,6 +17,7 @@
 
 ## Results
 
+- Local validation on 2026-05-31 passed with `python validate.py --compare`.
 - Official CPU container job `9db3b291-cd4` completed successfully after the
   public/private dataset split and passed `python validate.py --compare`.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
