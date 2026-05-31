@@ -41,4 +41,4 @@
 - Filled the main `scores.json` with the same constraint metrics already present in the train/test evaluator outputs and reran `python validate.py --compare` successfully.
 
 ## Stop Justification
-- Final verification complete. The gym is ready for future scientist agents at `secondary_claims`; the key limitation is that the hardware ToF tensors from the paper are unavailable, so the reusable benchmark uses deterministic synthetic low-bit HDR data.
+- Completed at milestone `secondary_claims`.
