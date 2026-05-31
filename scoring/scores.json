@@ -16,11 +16,11 @@
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 10.0,
           "mean_fold_count": 10.0,
-          "mse_gain_over_conventional_db": 4.662009109139954,
-          "psnr_db": 17.827665752469,
+          "mse_gain_over_conventional_db": 30.160068217847655,
+          "psnr_db": 45.77219748736489,
           "quant_bits": 3.0,
-          "signal_mse": 4.288638375662218,
-          "time_mae_samples": 75.03887279384
+          "signal_mse": 0.012092428176530846,
+          "time_mae_samples": 2.0811431477804603
         }
       }
     },
@@ -40,11 +40,11 @@
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 20.0,
           "mean_fold_count": 20.0,
-          "mse_gain_over_conventional_db": -0.731020058674241,
-          "psnr_db": 9.599207256568498,
+          "mse_gain_over_conventional_db": 36.72598163473133,
+          "psnr_db": 52.90541342279021,
           "quant_bits": 3.0,
-          "signal_mse": 68.97850552202642,
-          "time_mae_samples": 39.067192278013465
+          "signal_mse": 0.012388354128620946,
+          "time_mae_samples": 0.9731206590340242
         }
       }
     },
@@ -64,11 +64,11 @@
           "amplitude_ratio": 10.0,
           "dynamic_range_x": 30.0,
           "mean_fold_count": 30.0,
-          "mse_gain_over_conventional_db": -0.4728304262117156,
-          "psnr_db": 9.607017700842274,
+          "mse_gain_over_conventional_db": 39.694053445419996,
+          "psnr_db": 56.837450773718146,
           "quant_bits": 3.0,
-          "signal_mse": 153.6239143374192,
-          "time_mae_samples": 45.44904404631312
+          "signal_mse": 0.014783267640871622,
+          "time_mae_samples": 0.6209386368206611
         }
       }
     }
