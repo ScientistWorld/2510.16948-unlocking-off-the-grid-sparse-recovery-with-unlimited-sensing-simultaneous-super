@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: true
 milestone: core_claim
-notes: "CPU test job: run scripts/reproduce.sh and python validate.py --compare to verify the packaged US-SRes core-claim reproduction end to end."
+notes: "CPU test job: regenerate all DR10/20/30 outputs with the upgraded compact IterSiS/P2 spectral method, then run python validate.py --compare."

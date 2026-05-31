@@ -9,6 +9,10 @@
 - Implemented the paper's core US-SRes computation: centered modulo sensing,
   nonlinear finite-difference recovery of `Delta g`, anti-difference HDR
   signal recovery, and sparse off-grid spike estimation.
+- Added a compact SRes-IterSiS-style refinement for the continuation: rational
+  `P/Q` residue fitting in the differentiated folded domain, fold-residue
+  quantization to `2 lambda Z`, and matrix-pencil spectral initialization for
+  the spike-estimation step.
 - Implemented a conventional clipped-ADC sparse recovery baseline and a
   method-agnostic evaluator.
 - Split generated datasets into public acquisition files for methods and
@@ -18,6 +22,9 @@
 ## Results
 
 - Local validation on 2026-05-31 passed with `python validate.py --compare`.
+- The upgraded IterSiS-style method has passed syntax and structural
+  validation locally; numerical results are pending the next CPU container job
+  because the login-node Python environment lacks NumPy.
 - Official CPU container job `9db3b291-cd4` completed successfully after the
   public/private dataset split and passed `python validate.py --compare`.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
@@ -34,9 +41,12 @@
 
 ## Remaining
 
-- Add bit-depth sweeps for broader coverage of Fig. 2.
-- Implement the full robust rational IterSiS residue refinement and
-  matrix-pencil spike initializer for closer coverage of Section III.
+- Verify the upgraded compact IterSiS/P2 spectral path in the container and
+  compare its scores against the existing core-claim results.
+- Add bit-depth sweeps for broader coverage of Fig. 2 after the upgraded method
+  is confirmed stable.
+- Extend the compact residue refinement toward the full hardware-calibrated
+  robust IterSiS implementation if additional evidence is needed.
 - Reproduce hardware ToF experiments if the undistributed tensors become
   available.
 
@@ -57,11 +67,11 @@
   parameters (`K=2`, `N=501`, amplitude ratio 10, low-bit quantization, and
   dynamic ranges 10/20/30).
 - Spike-estimation solver: the paper's robust implementation uses spectral
-  fitting/matrix pencil after residue recovery. The synthetic benchmark uses a
-  direct continuum sparse-deconvolution refinement for the same P2 objective
-  because the nonperiodic Gaussian substitute made the plain Fourier ratio
-  ill-conditioned. The modulo sensing and nonlinear finite-difference residue
-  recovery, which are the paper's central computational steps, are unchanged.
-- Algorithm scope: the full robust SRes-IterSiS rational residue-recovery loop
-  from Section III is not implemented, so the claimed milestone is limited to
-  `core_claim_plus`.
+  fitting/matrix pencil after residue recovery. The continuation adds this as
+  the P2 initializer, but keeps a continuum least-squares fallback because the
+  nonperiodic Gaussian substitute can make the plain Fourier quotient
+  ill-conditioned.
+- Algorithm scope: the continuation adds a compact rational residue-recovery
+  loop from Section III, but it is still scaled to the synthetic benchmark and
+  lacks the paper's hardware-specific calibration and full initialization
+  sweep.

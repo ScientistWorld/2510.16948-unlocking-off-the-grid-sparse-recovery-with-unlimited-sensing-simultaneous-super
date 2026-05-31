@@ -60,6 +60,36 @@ def fit_amplitudes_and_offset(
     return amplitudes, offset, reconstruction
 
 
+def refine_spikes_from_initial(
+    signal: np.ndarray,
+    initial_taus: np.ndarray,
+    sigma: float,
+) -> tuple[np.ndarray, np.ndarray, float, np.ndarray]:
+    """Refine continuous spike locations from a spectral initializer."""
+
+    k = initial_taus.size
+    n = signal.size
+    t = np.arange(n, dtype=np.float64)
+    amps, offset, _ = fit_amplitudes_and_offset(signal, np.sort(initial_taus), sigma)
+    x0 = np.concatenate([np.sort(initial_taus), amps, [offset]])
+
+    def residual(params: np.ndarray) -> np.ndarray:
+        taus = np.sort(params[:k])
+        amps_param = params[k : 2 * k]
+        offset_param = params[-1]
+        pred = np.full_like(t, offset_param)
+        for amp, tau in zip(amps_param, taus):
+            pred += amp * gaussian_kernel(t - tau, sigma)
+        return pred - signal
+
+    lower = np.concatenate([np.zeros(k), np.full(k + 1, -np.inf)])
+    upper = np.concatenate([np.full(k, n - 1.0), np.full(k + 1, np.inf)])
+    result = least_squares(residual, x0, bounds=(lower, upper), max_nfev=200)
+    taus = np.sort(result.x[:k])
+    amplitudes, offset, reconstruction = fit_amplitudes_and_offset(signal, taus, sigma)
+    return taus, amplitudes, offset, reconstruction
+
+
 def sparse_deconvolution_continuum(
     signal: np.ndarray,
     k: int,
