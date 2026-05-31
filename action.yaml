@@ -1,6 +1,9 @@
-# IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
-# Do NOT sleep, poll, or wait for jobs. The system reads this file
-# only after your turn ends. Sleeping blocks the entire pipeline.
-action: done
+# This iteration writes files only — do NOT submit compute jobs.
+# Once you set action to 'done', STOP immediately.
+# Do NOT sleep, poll, or wait. The system reads this file
+# only after your turn ends.
+action: pending
+gpus: 0
+test: false
 milestone: secondary_claims
-notes: "Reproduced core and secondary Fig. 2 claims on the packaged synthetic US-SRes gym: DR robustness at 10/20/30 and bit-depth robustness at 3/5/8 bits, all passing validation and quality gate."
+notes: ""
