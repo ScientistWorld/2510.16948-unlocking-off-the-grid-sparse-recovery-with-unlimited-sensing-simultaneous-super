@@ -7,35 +7,63 @@
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
-          "coefficient": 1.0
+          "coefficient": 1.0,
+          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
         },
         "psnr_db": {
           "higher_is_better": true,
-          "coefficient": 0.5
+          "coefficient": 0.45,
+          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.5
+          "coefficient": -0.45,
+          "description": "Localization error averaged over both recovered off-grid spike times."
+        },
+        "weak_tau_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.35,
+          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+        },
+        "tau_max_error_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
         },
         "signal_mse": {
           "higher_is_better": false,
-          "coefficient": -0.2
+          "coefficient": -0.2,
+          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
+        },
+        "hard_fold_signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+        },
+        "wrapped_measurement_mae": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
         },
         "dynamic_range_x": {
           "higher_is_better": true,
-          "coefficient": 0.25
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
         },
         "quant_bits": {
           "higher_is_better": false,
-          "coefficient": -0.25
+          "coefficient": -0.05,
+          "description": "Configuration check confirming the low-bit sensing budget is not increased."
         },
         "amplitude_ratio": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
         },
         "mean_fold_count": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the slice contains actual modulo folding events."
         }
       },
       "results": {
@@ -58,35 +86,63 @@
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
-          "coefficient": 1.0
+          "coefficient": 1.0,
+          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
         },
         "psnr_db": {
           "higher_is_better": true,
-          "coefficient": 0.5
+          "coefficient": 0.45,
+          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.5
+          "coefficient": -0.45,
+          "description": "Localization error averaged over both recovered off-grid spike times."
+        },
+        "weak_tau_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.35,
+          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+        },
+        "tau_max_error_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
         },
         "signal_mse": {
           "higher_is_better": false,
-          "coefficient": -0.2
+          "coefficient": -0.2,
+          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
+        },
+        "hard_fold_signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+        },
+        "wrapped_measurement_mae": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
         },
         "dynamic_range_x": {
           "higher_is_better": true,
-          "coefficient": 0.25
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
         },
         "quant_bits": {
           "higher_is_better": false,
-          "coefficient": -0.25
+          "coefficient": -0.05,
+          "description": "Configuration check confirming the low-bit sensing budget is not increased."
         },
         "amplitude_ratio": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
         },
         "mean_fold_count": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the slice contains actual modulo folding events."
         }
       },
       "results": {
@@ -109,35 +165,63 @@
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
-          "coefficient": 1.0
+          "coefficient": 1.0,
+          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
         },
         "psnr_db": {
           "higher_is_better": true,
-          "coefficient": 0.5
+          "coefficient": 0.45,
+          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.5
+          "coefficient": -0.45,
+          "description": "Localization error averaged over both recovered off-grid spike times."
+        },
+        "weak_tau_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.35,
+          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+        },
+        "tau_max_error_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
         },
         "signal_mse": {
           "higher_is_better": false,
-          "coefficient": -0.2
+          "coefficient": -0.2,
+          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
+        },
+        "hard_fold_signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+        },
+        "wrapped_measurement_mae": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
         },
         "dynamic_range_x": {
           "higher_is_better": true,
-          "coefficient": 0.25
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
         },
         "quant_bits": {
           "higher_is_better": false,
-          "coefficient": -0.25
+          "coefficient": -0.05,
+          "description": "Configuration check confirming the low-bit sensing budget is not increased."
         },
         "amplitude_ratio": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
         },
         "mean_fold_count": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the slice contains actual modulo folding events."
         }
       },
       "results": {
@@ -160,35 +244,63 @@
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
-          "coefficient": 1.0
+          "coefficient": 1.0,
+          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
         },
         "psnr_db": {
           "higher_is_better": true,
-          "coefficient": 0.5
+          "coefficient": 0.45,
+          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.5
+          "coefficient": -0.45,
+          "description": "Localization error averaged over both recovered off-grid spike times."
+        },
+        "weak_tau_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.35,
+          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+        },
+        "tau_max_error_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
         },
         "signal_mse": {
           "higher_is_better": false,
-          "coefficient": -0.2
+          "coefficient": -0.2,
+          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
+        },
+        "hard_fold_signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+        },
+        "wrapped_measurement_mae": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
         },
         "dynamic_range_x": {
           "higher_is_better": true,
-          "coefficient": 0.25
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
         },
         "quant_bits": {
           "higher_is_better": false,
-          "coefficient": -0.25
+          "coefficient": -0.05,
+          "description": "Configuration check confirming the low-bit sensing budget is not increased."
         },
         "amplitude_ratio": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
         },
         "mean_fold_count": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the slice contains actual modulo folding events."
         }
       },
       "results": {
@@ -211,35 +323,63 @@
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
-          "coefficient": 1.0
+          "coefficient": 1.0,
+          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
         },
         "psnr_db": {
           "higher_is_better": true,
-          "coefficient": 0.5
+          "coefficient": 0.45,
+          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.5
+          "coefficient": -0.45,
+          "description": "Localization error averaged over both recovered off-grid spike times."
+        },
+        "weak_tau_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.35,
+          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+        },
+        "tau_max_error_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
         },
         "signal_mse": {
           "higher_is_better": false,
-          "coefficient": -0.2
+          "coefficient": -0.2,
+          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
+        },
+        "hard_fold_signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.25,
+          "description": "Waveform MSE on the higher-fold half of the slice, stressing genuinely high-dynamic-range cases."
+        },
+        "wrapped_measurement_mae": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
         },
         "dynamic_range_x": {
           "higher_is_better": true,
-          "coefficient": 0.25
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
         },
         "quant_bits": {
           "higher_is_better": false,
-          "coefficient": -0.25
+          "coefficient": -0.05,
+          "description": "Configuration check confirming the low-bit sensing budget is not increased."
         },
         "amplitude_ratio": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
         },
         "mean_fold_count": {
           "higher_is_better": true,
-          "coefficient": 0.1
+          "coefficient": 0.05,
+          "description": "Configuration check confirming the slice contains actual modulo folding events."
         }
       },
       "results": {

@@ -69,15 +69,21 @@ def psnr(clean: np.ndarray, estimate: np.ndarray) -> float:
     return float(20.0 * np.log10(peak / np.sqrt(max(mse, 1e-18))))
 
 
-def match_tau_mae(true_taus: np.ndarray, pred_taus: np.ndarray) -> float:
+def modulo(x: np.ndarray, lambda_value: float) -> np.ndarray:
+    return 2.0 * lambda_value * (
+        np.mod(x / (2.0 * lambda_value) + 0.5, 1.0) - 0.5
+    )
+
+
+def tau_errors(true_taus: np.ndarray, pred_taus: np.ndarray) -> np.ndarray:
     errors = []
     for truth, pred in zip(true_taus, pred_taus):
         truth = np.sort(truth)
         pred = np.sort(pred)
-        direct = np.mean(np.abs(truth - pred))
-        swapped = np.mean(np.abs(truth - pred[::-1]))
-        errors.append(min(direct, swapped))
-    return float(np.mean(errors))
+        direct = np.abs(truth - pred)
+        swapped = np.abs(truth - pred[::-1])
+        errors.append(direct if np.mean(direct) <= np.mean(swapped) else swapped)
+    return np.asarray(errors, dtype=np.float64)
 
 
 def split_indices(num_trials: int) -> np.ndarray:
@@ -95,7 +101,9 @@ def load_required_npz(path: Path, required: set[str], kind: str) -> np.lib.npyio
 
 def evaluate_method(data_path: Path, output_path: Path) -> dict[str, float]:
     data = load_required_npz(
-        data_path, {"clean", "taus", "config", "folds"}, "evaluation data"
+        data_path,
+        {"clean", "taus", "config", "folds", "modulo_samples"},
+        "evaluation data",
     )
     output = load_required_npz(output_path, {"reconstruction", "taus"}, "method output")
 
@@ -119,15 +127,27 @@ def evaluate_method(data_path: Path, output_path: Path) -> dict[str, float]:
     true_taus = data["taus"][idx]
     pred_taus = output_taus_full[idx]
     folds = data["folds"][idx]
+    modulo_samples = data["modulo_samples"][idx]
     config = data["config"][0]
 
-    tau_mae = match_tau_mae(true_taus, pred_taus)
+    tau_error = tau_errors(true_taus, pred_taus)
+    tau_mae = float(np.mean(tau_error))
+    weak_tau_mae = float(np.mean(tau_error[:, -1]))
+    max_tau_error = float(np.mean(np.max(tau_error, axis=1)))
     signal_psnr = psnr(clean, reconstruction)
     signal_mse = float(np.mean((clean - reconstruction) ** 2))
+    high_fold = folds >= np.median(folds)
+    hard_fold_mse = float(np.mean((clean[high_fold] - reconstruction[high_fold]) ** 2))
+    wrapped = modulo(reconstruction, float(config["lambda_value"]))
+    wrapped_measurement_mae = float(np.mean(np.abs(wrapped - modulo_samples)))
     return {
         "psnr_db": signal_psnr,
         "time_mae_samples": tau_mae,
+        "weak_tau_mae_samples": weak_tau_mae,
+        "tau_max_error_samples": max_tau_error,
         "signal_mse": signal_mse,
+        "hard_fold_signal_mse": hard_fold_mse,
+        "wrapped_measurement_mae": wrapped_measurement_mae,
         "dynamic_range_x": float(config["dynamic_range_x"]),
         "quant_bits": float(config["quant_bits"]),
         "amplitude_ratio": float(config["amplitude_ratio"]),
@@ -245,7 +265,7 @@ def main() -> None:
                 methods = discover_methods(spec, checkpoint_dir)
             experiments.update(evaluate_experiment(spec, methods))
 
-    scores = {"experiments": experiments}
+    scores = {"slice": SLICE_NAME, "experiments": experiments}
     scores_path = Path(args.scores)
     scores_path.parent.mkdir(parents=True, exist_ok=True)
     scores_path.write_text(json.dumps(scores, indent=2, sort_keys=True))
