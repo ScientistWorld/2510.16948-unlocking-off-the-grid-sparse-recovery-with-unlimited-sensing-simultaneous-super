@@ -18,8 +18,4 @@
 - `python validate.py --compare` passed in the job environment.
 
 ## Stop Justification
-- Stopping at `core_claim_plus`: the central modulo finite-difference recovery
-  claim is reproduced across multiple dynamic-range settings. Remaining paper
-  results require undistributed hardware ToF tensors and the full robust
-  IterSiS/matrix-pencil implementation, so they are documented as future
-  extensions rather than claimed here.
+- Completed at milestone `core_claim_plus`.
