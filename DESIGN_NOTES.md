@@ -23,5 +23,6 @@ Changed:
 Runtime concerns for the next runner iteration:
 
 - First split run completed on job `b8dddec4-31b`. It produced finite train/test scores for all five experiments, but also showed that the original `hard_fold_signal_mse` was identical to `signal_mse` because fold counts are constant within each generated dynamic-range setting. I changed that metric to evaluate only folded sample positions and resubmitted.
+- Repair rerun `f69bf008-98a` completed successfully. Both split files now contain finite values for every metric in `scoring/reference.json`; method identifiers match exactly between train and test; `hard_fold_signal_mse` now differs from `signal_mse`; and US-SRes remains well above the conventional baseline on every primary MSE-gain metric.
 - The train/test split still uses complementary rows from the same saved evaluation datasets. That keeps difficulty calibrated and lightweight, but if label files are visible to a future agent, the split is weaker than a truly private held-out dataset.
-- `wrapped_measurement_mae` depends on `modulo_samples` and `lambda_value` being present in every evaluation NPZ. The dataset generator writes both, but the runner should confirm existing artifacts match that contract.
+- `wrapped_measurement_mae` depends on `modulo_samples` and `lambda_value` being present in every evaluation NPZ. The completed split runs confirmed the existing artifacts match that contract.

@@ -1,5 +1,5 @@
-action: submit
+action: done
 gpus: 0
 test: false
 milestone: secondary_claims
-notes: "Rerun split scores after repairing hard_fold_signal_mse to score folded sample positions instead of duplicating signal_mse."
+notes: "Complementary-row train/test split; 120 train metric values, 120 test metric values; US-SRes primary gain train/test ranges 30.15-47.11 dB and 30.17-42.40 dB, with largest gap 6.36 dB on bits5; caveat: labels live in shipped eval NPZs."
