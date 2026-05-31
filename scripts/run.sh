@@ -13,6 +13,5 @@ set -e
 
 cd /home/user
 
-bash scripts/reproduce.sh
-python validate.py --compare
-python -m eval.check_core_claim --min-gain-db 20.0
+bash scripts/evaluate_train.sh
+bash scripts/evaluate_test.sh

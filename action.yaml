@@ -1,9 +1,5 @@
-# This iteration writes files only — do NOT submit compute jobs.
-# Once you set action to 'done', STOP immediately.
-# Do NOT sleep, poll, or wait. The system reads this file
-# only after your turn ends.
-action: done
+action: submit
 gpus: 0
 test: false
 milestone: secondary_claims
-notes: "Improvements: added weak-spike, worst-spike, high-fold, and modulo-consistency metrics to train/test; completed metric metadata; checked split scripts and stubs. Notes: see DESIGN_NOTES.md."
+notes: "Run evaluate_train.sh and evaluate_test.sh against saved final checkpoint artifacts; populate split scores."
