@@ -23,7 +23,7 @@ setting and write the documented output artifact format.
 
 - [ ] Uses the provided `data/synthetic/us_sres_dr*.npz` datasets for standard
       experiments, including any `_bits*` variants named in the manifest.
-- [ ] Does not read `clean`, `taus`, or `amplitudes` from the dataset while
-      producing method outputs.
+- [ ] Does not read `clean`, `taus`, `amplitudes`, or private fold counts from
+      the dataset while producing method outputs.
 - [ ] Does not increase `quant_bits` or reduce `dynamic_range_x`.
 - [ ] Does not modify `eval/` or `scripts/evaluate.sh` to improve scores.

@@ -40,5 +40,10 @@
 - Repaired the standalone evaluator default so it discovers all method outputs under `checkpoints/` instead of scoring only a baked-in method artifact.
 - Filled the main `scores.json` with the same constraint metrics already present in the train/test evaluator outputs and reran `python validate.py --compare` successfully.
 
+### [2026-05-31 13:05] - secondary_claims
+- Integrity audit found that public synthetic datasets exposed per-trial fold counts, which the compact IterSiS path used as privileged metadata.
+- Removed fold counts from public acquisition files and changed the method to estimate its residue degree from its own reconstruction residual.
+- Updated `scripts/run.sh` to regenerate synthetic data, baseline outputs, method outputs, and scores before validating, so the next job does not depend on ignored checkpoint artifacts.
+
 ## Stop Justification
-- Completed at milestone `secondary_claims`.
+- Previous completion reached milestone `secondary_claims`; submitting one more CPU verification job to confirm the metadata-hardened benchmark still supports it.

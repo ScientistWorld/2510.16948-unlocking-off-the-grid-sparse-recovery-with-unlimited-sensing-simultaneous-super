@@ -1,5 +1,5 @@
-action: done
+action: submit
 gpus: 0
-test: false
+test: true
 milestone: secondary_claims
-notes: "Final verification passed; evaluator discovery and full constraint scoring are in place."
+notes: "CPU verification: regenerate synthetic data without public fold-count metadata, rerun baseline and US-SRes outputs from scratch, then validate scores and quality gates."

@@ -18,6 +18,9 @@
 - Split generated datasets into public acquisition files for methods and
   private label files for evaluation, reducing the chance that future methods
   accidentally train or infer from hidden labels.
+- Hardened the public acquisition format so public synthetic datasets no
+  longer expose the clean-signal fold count. The method now estimates its
+  IterSiS residue model degree from its own reconstruction residual.
 
 ## Results
 
@@ -51,6 +54,11 @@
   now discovers all method outputs under `checkpoints/`, `scores.json` contains
   the full benefit and constraint metric surface for the five reproduced
   experiments, and `python validate.py --compare` passes.
+- A follow-up integrity audit on 2026-05-31 found that per-trial fold counts
+  were visible in the public synthetic files and used as IterSiS metadata.
+  This has been removed from newly generated public files; a CPU container job
+  is being submitted to regenerate data, checkpoints, and scores from scratch
+  without that metadata.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
   the split.
 - DR 10: US-SRes improved waveform MSE by 30.16 dB over the clipped
@@ -78,6 +86,9 @@
 - The login-node Python environment lacks `numpy`; end-to-end execution was
   verified in the scheduled container where `environment/setup.sh` installs the
   declared dependencies.
+- Because the login-node Python environment still lacks `numpy`, the fold-count
+  metadata removal is queued for scheduled container verification rather than
+  full local execution.
 
 ## Deviations from Paper
 
@@ -95,3 +106,7 @@
   loop from Section III, but it is still scaled to the synthetic benchmark and
   lacks the paper's hardware-specific calibration and full initialization
   sweep.
+- Algorithm metadata: the paper's Algorithm 1 accepts the number of folds `M`
+  as an input. The benchmark no longer provides the true clean-signal fold
+  count to the submitted method; this reproduction estimates the compact
+  residue degree from the current reconstruction residual instead.

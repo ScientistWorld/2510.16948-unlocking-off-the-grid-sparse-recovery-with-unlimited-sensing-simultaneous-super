@@ -195,7 +195,7 @@ def recover_trial_itersis(
     sigma: float,
     period: float,
     max_freq: int,
-    fold_count: int,
+    fold_count: int | None,
     outer_iters: int = 1,
 ) -> dict[str, np.ndarray | float | str]:
     """Compact SRes-IterSiS loop for Section III P1/P2 recovery."""
@@ -217,6 +217,12 @@ def recover_trial_itersis(
     }
 
     epsilon_seed = finite_difference(reconstruction, 1) - dy
+    if fold_count is None or fold_count <= 0:
+        # Estimate the residue model degree from the current P2 reconstruction
+        # instead of reading the private clean-signal fold count.
+        residue_seed = quantize_residue(epsilon_seed, lambda_value)
+        fold_count = int(np.count_nonzero(np.abs(residue_seed) > lambda_value))
+        fold_count = max(1, min(fold_count, y.size // 6))
     for _ in range(outer_iters):
         residue_candidates = {
             "lattice_seed": quantize_residue(epsilon_seed, lambda_value),
@@ -258,7 +264,7 @@ def recover_trial(
     diff_order: int,
     fold_count: int | None = None,
 ) -> dict[str, np.ndarray | float]:
-    if diff_order == 1 and fold_count is not None:
+    if diff_order == 1:
         return recover_trial_itersis(
             y=y,
             k=k,

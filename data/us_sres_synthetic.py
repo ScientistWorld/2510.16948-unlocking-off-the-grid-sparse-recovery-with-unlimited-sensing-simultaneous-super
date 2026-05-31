@@ -117,7 +117,6 @@ def public_view(dataset: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
         "kernel_grid",
         "kernel",
         "config",
-        "folds",
     }
     return {key: value for key, value in dataset.items() if key in keep}
 
