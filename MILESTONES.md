@@ -35,5 +35,10 @@
 - Added richer constraint metrics to the main reusable evaluator so `scores.json` can report weak-target localization, folded-region MSE, and modulo measurement consistency in addition to the primary MSE-gain metric.
 - Submitting a CPU verification job to regenerate all score files and validate the updated schema.
 
+### [2026-05-31 12:55] - secondary_claims
+- Final verification found the claimed milestone justified: the workspace reproduces the dynamic-range and bit-depth robustness claims on the synthetic low-bit HDR benchmark.
+- Repaired the standalone evaluator default so it discovers all method outputs under `checkpoints/` instead of scoring only a baked-in method artifact.
+- Filled the main `scores.json` with the same constraint metrics already present in the train/test evaluator outputs and reran `python validate.py --compare` successfully.
+
 ## Stop Justification
-- Not stopped: current turn submits a CPU verification job for evaluator cleanup.
+- Final verification complete. The gym is ready for future scientist agents at `secondary_claims`; the key limitation is that the hardware ToF tensors from the paper are unavailable, so the reusable benchmark uses deterministic synthetic low-bit HDR data.

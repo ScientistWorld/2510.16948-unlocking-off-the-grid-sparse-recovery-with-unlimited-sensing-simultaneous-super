@@ -47,9 +47,10 @@
   folded-region, and wrapped-measurement consistency metrics already computed
   by the train/test evaluators, and made explicit-argument scoring infer the
   submitted method name from artifact paths.
-- Submitting a CPU container job to regenerate `scores.json`,
-  `scores_train.json`, and `scores_test.json` with the expanded metric surface
-  and rerun `python validate.py --compare`.
+- Final verification completed on 2026-05-31. The standalone default evaluator
+  now discovers all method outputs under `checkpoints/`, `scores.json` contains
+  the full benefit and constraint metric surface for the five reproduced
+  experiments, and `python validate.py --compare` passes.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
   the split.
 - DR 10: US-SRes improved waveform MSE by 30.16 dB over the clipped
@@ -76,8 +77,7 @@
   low-bit HDR regime.
 - The login-node Python environment lacks `numpy`; end-to-end execution was
   verified in the scheduled container where `environment/setup.sh` installs the
-  declared dependencies. The current evaluator schema update therefore needs a
-  CPU container job for regeneration rather than local execution.
+  declared dependencies.
 
 ## Deviations from Paper
 

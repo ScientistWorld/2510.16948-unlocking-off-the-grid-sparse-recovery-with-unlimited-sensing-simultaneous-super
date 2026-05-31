@@ -1,5 +1,5 @@
-action: submit
+action: done
 gpus: 0
-test: true
+test: false
 milestone: secondary_claims
-notes: "CPU verification job: regenerate scores.json with the expanded evaluator metrics, run train/test scoring, quality gate, and validate.py --compare."
+notes: "Final verification passed; evaluator discovery and full constraint scoring are in place."
