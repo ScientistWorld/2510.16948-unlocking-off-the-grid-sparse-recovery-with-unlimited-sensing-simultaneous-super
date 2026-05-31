@@ -48,6 +48,54 @@
         }
       }
     },
+    "synthetic_lowbit_hdr_dr20_bits5": {
+      "results": {
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 10.012944876088806,
+          "quant_bits": 5.0,
+          "signal_mse": 58.39948407645993,
+          "time_mae_samples": 48.15613299580017
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 42.85386826227303,
+          "psnr_db": 68.03999117899778,
+          "quant_bits": 5.0,
+          "signal_mse": 0.003027068049681754,
+          "time_mae_samples": 0.15511149517352818
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr20_bits8": {
+      "results": {
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 10.024526290899425,
+          "quant_bits": 8.0,
+          "signal_mse": 58.440193308478385,
+          "time_mae_samples": 50.66766359490107
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 41.142414336557415,
+          "psnr_db": 89.17807498814071,
+          "quant_bits": 8.0,
+          "signal_mse": 0.0044923150919685345,
+          "time_mae_samples": 0.01358155515871795
+        }
+      }
+    },
     "synthetic_lowbit_hdr_dr30": {
       "results": {
         "conventional_clip_sres": {
