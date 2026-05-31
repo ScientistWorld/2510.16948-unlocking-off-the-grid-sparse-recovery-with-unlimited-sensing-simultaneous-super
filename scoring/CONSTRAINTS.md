@@ -76,3 +76,17 @@ Example checklist (for the sentiment analysis example above):
 ONLY WRITE ABOUT WHAT TO RESTRICT. NEVER WRITE ABOUT WHAT REMAINS OPEN.
 
 -->
+# Constraints
+
+Future methods must evaluate on the same saved dataset unless they add a new
+named experiment. For the main experiment, hold fixed:
+
+- `K=2` off-grid spikes.
+- `N=501` samples.
+- Gaussian pulse width from `data/synthetic/us_sres_benchmark.npz`.
+- 3-bit quantization.
+- Dynamic range of 20 times the folding threshold.
+- Weak/strong amplitude ratio of 10.
+
+Do not improve scores by increasing bit depth, reducing dynamic range, using
+the clean signal as input, or changing the evaluator.

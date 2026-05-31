@@ -26,5 +26,12 @@ cd /home/user
 
 mkdir -p scoring
 
-# TODO: implement evaluation using code in eval/
-# Must write scoring/scores.json at the end
+DATA_PATH="${1:-data/synthetic/us_sres_benchmark.npz}"
+METHOD_OUTPUT="${2:-checkpoints/us_sres_outputs.npz}"
+BASELINE_OUTPUT="${3:-checkpoints/conventional_outputs.npz}"
+
+python -m eval.evaluate_us_sres \
+  --data "$DATA_PATH" \
+  --method "$METHOD_OUTPUT" \
+  --baseline "$BASELINE_OUTPUT" \
+  --scores scoring/scores.json

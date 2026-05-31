@@ -57,3 +57,13 @@ Delete this comment block and fill in your actual experiments below.
 <!-- This is high-level only. Explain WHAT the experiment is trying to show, NOT HOW the method works. -->
 
 <!-- The experiment headings here should EXACTLY match the experiment-name keys in your scores.json. -->
+# Experiments
+
+## synthetic_lowbit_hdr_weak_strong
+
+This experiment checks whether a method can recover a high-dynamic-range
+two-reflection waveform and its off-grid spike times from 3-bit measurements
+when a conventional ADC clips the strong component. It measures both the
+benefit over a clipped sparse-recovery baseline and the constraints that make
+the problem meaningful: low bit depth, high dynamic range, weak/strong
+amplitude disparity, and nonzero modulo folding.

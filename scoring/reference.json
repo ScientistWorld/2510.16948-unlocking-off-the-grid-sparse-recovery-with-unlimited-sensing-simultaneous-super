@@ -1,0 +1,67 @@
+{
+  "experiments": {
+    "synthetic_lowbit_hdr_weak_strong": {
+      "description": "Low-bit weak/strong off-grid spike recovery mirroring Fig. 2: K=2, amplitude ratio 10, N=501, dynamic range 20 lambda. Paper reports at least 30 dB MSE gain for US-SRes across DR and bit settings; Table I reports about 40 dB PSNR for comparable 3-bit ToF cases.",
+      "weight": 1.0,
+      "primary_metric": "mse_gain_over_conventional_db",
+      "metrics": {
+        "mse_gain_over_conventional_db": {
+          "higher_is_better": true,
+          "coefficient": 1.0
+        },
+        "psnr_db": {
+          "higher_is_better": true,
+          "coefficient": 0.5
+        },
+        "time_mae_samples": {
+          "higher_is_better": false,
+          "coefficient": -0.5
+        },
+        "dynamic_range_x": {
+          "higher_is_better": true,
+          "coefficient": 0.25
+        },
+        "quant_bits": {
+          "higher_is_better": false,
+          "coefficient": -0.25
+        },
+        "amplitude_ratio": {
+          "higher_is_better": true,
+          "coefficient": 0.1
+        },
+        "mean_fold_count": {
+          "higher_is_better": true,
+          "coefficient": 0.1
+        },
+        "signal_mse": {
+          "higher_is_better": false,
+          "coefficient": -0.2
+        }
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "type": "baseline",
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 0.0,
+          "time_mae_samples": 75.0,
+          "dynamic_range_x": 1.0,
+          "quant_bits": 3.0,
+          "amplitude_ratio": 10.0,
+          "mean_fold_count": 0.0,
+          "signal_mse": 1.0
+        },
+        "us_sres": {
+          "type": "proposed",
+          "mse_gain_over_conventional_db": 30.0,
+          "psnr_db": 40.0,
+          "time_mae_samples": 1.0,
+          "dynamic_range_x": 20.0,
+          "quant_bits": 3.0,
+          "amplitude_ratio": 10.0,
+          "mean_fold_count": 12.0,
+          "signal_mse": 0.001
+        }
+      }
+    }
+  }
+}

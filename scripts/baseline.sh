@@ -17,4 +17,7 @@ set -e
 
 cd /home/user
 
-# TODO: run baseline
+DATA_PATH="${1:-data/synthetic/us_sres_benchmark.npz}"
+OUTPUT_PATH="${2:-checkpoints/conventional_outputs.npz}"
+
+python -m baseline.conventional_sres --input "$DATA_PATH" --output "$OUTPUT_PATH"

@@ -1,0 +1,28 @@
+{
+  "experiments": {
+    "synthetic_lowbit_hdr_weak_strong": {
+      "results": {
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 9.999356910974793,
+          "quant_bits": 3.0,
+          "signal_mse": 58.381432171306386,
+          "time_mae_samples": 42.80124538127117
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 36.71078044219442,
+          "psnr_db": 52.915695043804966,
+          "quant_bits": 3.0,
+          "signal_mse": 0.012450784041545324,
+          "time_mae_samples": 0.9198274823284276
+        }
+      }
+    }
+  }
+}

@@ -10,5 +10,7 @@ set -e
 
 cd /home/user
 
-# TODO: run the paper's method
-# TODO: call scripts/evaluate.sh to score
+DATA_PATH="${1:-data/synthetic/us_sres_benchmark.npz}"
+OUTPUT_PATH="${2:-checkpoints/us_sres_outputs.npz}"
+
+python -m method.us_sres --input "$DATA_PATH" --output "$OUTPUT_PATH"

@@ -2,36 +2,48 @@
 
 ## What Works
 
-<!-- What has been successfully reproduced so far. -->
+- Implemented a deterministic synthetic off-grid ToF-like benchmark following
+  the paper's Fig. 2 setup: `K=2`, weak/strong amplitude ratio 10, low-bit
+  modulo acquisition, and dynamic range above the conventional ADC range.
+- Implemented the paper's core US-SRes computation: centered modulo sensing,
+  nonlinear finite-difference recovery of `Delta g`, anti-difference HDR
+  signal recovery, and sparse off-grid spike estimation.
+- Implemented a conventional clipped-ADC sparse recovery baseline and a
+  method-agnostic evaluator.
 
 ## Results
 
-<!-- Reproduced numbers compared to the paper's reported numbers. -->
+- Local smoke test before job submission reached the paper's core qualitative
+  claim on the synthetic benchmark: US-SRes improved waveform MSE by 36.7 dB
+  over the clipped conventional baseline and recovered spike locations with
+  about 0.92 sample mean absolute error.
+- Paper reference for comparable low-bit HDR recovery: Fig. 2 reports at least
+  30 dB MSE gain across dynamic range and quantization settings; Table I
+  reports about 40 dB PSNR in 3-bit ToF cases.
 
 ## Remaining
 
-<!-- What still needs to be done to reach higher milestones. -->
+- Submit the packaged reproduction as a compute job and record official job
+  results in `scoring/scores.json`.
+- Add larger matrices of bit-depth/dynamic-range settings for milestones above
+  `core_claim`.
 
 ## Issues
 
-<!-- Blockers, bugs, or difficulties encountered. -->
+- The paper's hardware ToF tensors are not included with the manuscript, so the
+  first benchmark uses a synthetic substitute preserving the signal model and
+  low-bit HDR regime.
 
 ## Deviations from Paper
 
-<!-- Do not edit this section unless you deviated from the paper's original setup.
-     For each deviation, document: what the paper used, what you substituted, and why.
-
-     ACCEPTABLE deviations (data/resource/scale substitutions — milestones still valid):
-       - Replaced a proprietary dataset with a public one
-       - Used a smaller model of the same architecture
-       - Scaled down training (fewer epochs, smaller batch)
-       - Used a different library for the same algorithm
-
-     UNACCEPTABLE deviations (algorithm substitutions — milestones above 'none' are void):
-       - Replaced the paper's algorithm with a fundamentally different one
-       - Wrote a generic model trained to approximate the method's outputs
-         instead of implementing the method's computational steps
-
-     The test: could someone reading your code identify which algorithm from
-     the paper you implemented? If not, you replaced the method. -->
-
+- Data: the paper evaluates on hardware-acquired ToF tensors that are not
+  distributed with the manuscript. This workspace substitutes deterministic
+  synthetic weak/strong filtered spike signals following the paper's Fig. 2
+  parameters (`K=2`, `N=501`, amplitude ratio 10, low-bit quantization, high
+  dynamic range).
+- Spike-estimation solver: the paper's robust implementation uses spectral
+  fitting/matrix pencil after residue recovery. The synthetic benchmark uses a
+  direct continuum sparse-deconvolution refinement for the same P2 objective
+  because the nonperiodic Gaussian substitute made the plain Fourier ratio
+  ill-conditioned. The modulo sensing and nonlinear finite-difference residue
+  recovery, which are the paper's central computational steps, are unchanged.
