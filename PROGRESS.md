@@ -40,6 +40,16 @@
   over the clipped baseline, respectively.
 - Official CPU container job `9db3b291-cd4` completed successfully after the
   public/private dataset split and passed `python validate.py --compare`.
+- Continuation audit on 2026-05-31 confirmed the implementation is a
+  recognizable US-SRes reproduction rather than a surrogate, while identifying
+  benchmark-hygiene cleanup in the main evaluator. Updated
+  `eval/evaluate_us_sres.py` so `scores.json` includes the same weak-target,
+  folded-region, and wrapped-measurement consistency metrics already computed
+  by the train/test evaluators, and made explicit-argument scoring infer the
+  submitted method name from artifact paths.
+- Submitting a CPU container job to regenerate `scores.json`,
+  `scores_train.json`, and `scores_test.json` with the expanded metric surface
+  and rerun `python validate.py --compare`.
 - Earlier CPU job `8a2d4851-d38` verified the same scoped reproduction before
   the split.
 - DR 10: US-SRes improved waveform MSE by 30.16 dB over the clipped
@@ -66,7 +76,8 @@
   low-bit HDR regime.
 - The login-node Python environment lacks `numpy`; end-to-end execution was
   verified in the scheduled container where `environment/setup.sh` installs the
-  declared dependencies.
+  declared dependencies. The current evaluator schema update therefore needs a
+  CPU container job for regeneration rather than local execution.
 
 ## Deviations from Paper
 

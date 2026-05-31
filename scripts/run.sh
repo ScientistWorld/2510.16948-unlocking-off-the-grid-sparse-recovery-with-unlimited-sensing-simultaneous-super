@@ -13,5 +13,8 @@ set -e
 
 cd /home/user
 
+bash scripts/evaluate.sh
+python -m eval.check_core_claim --scores scoring/scores.json --min-gain-db 20.0
 bash scripts/evaluate_train.sh
 bash scripts/evaluate_test.sh
+python validate.py --compare

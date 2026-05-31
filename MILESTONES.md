@@ -30,5 +30,10 @@
 - Reproduced Fig. 2's dynamic-range robustness claim at DR10/DR20/DR30 and its bit-depth robustness claim at DR20 with 3/5/8-bit sensing.
 - The expanded scores all clear the quality gate: 30.16, 36.73, 39.69, 42.85, and 41.14 dB MSE gain over the clipped baseline.
 
+### [2026-05-31 12:49] - secondary_claims
+- Independent audits confirmed the method implements recognizable US-SRes computations and that eval/data do not import from `method/`.
+- Added richer constraint metrics to the main reusable evaluator so `scores.json` can report weak-target localization, folded-region MSE, and modulo measurement consistency in addition to the primary MSE-gain metric.
+- Submitting a CPU verification job to regenerate all score files and validate the updated schema.
+
 ## Stop Justification
-- Completed at milestone `secondary_claims`.
+- Not stopped: current turn submits a CPU verification job for evaluator cleanup.
