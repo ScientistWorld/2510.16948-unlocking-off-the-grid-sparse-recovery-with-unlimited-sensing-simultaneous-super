@@ -1,19 +1,5 @@
 # Overview
 
-- **Paper ID:** <!-- e.g. 1706.03762 -->
-- **Title:** <!-- e.g. Attention Is All You Need -->
-- **Domain:** <!-- e.g. Computer Vision / Object Detection -->
-- **TL;DR:** <!-- One sentence: what this paper does and why it matters -->
-
-## Short Summary
-
-<!-- 3-5 sentences covering the problem, approach, and main findings -->
-
-## Key Results
-
-<!-- 2-3 bullet points: main findings or numbers in bullet points -->
-# Overview
-
 This paper studies off-grid sparse spike recovery when measurements are both
 coarsely sampled and low-bit quantized. Conventional ADCs clip strong signals
 or bury weak ones under quantization noise. The proposed US-SRes method uses
@@ -21,28 +7,14 @@ modulo sensing to avoid clipping, then recovers the hidden integer residues and
 performs spectral super-resolution to estimate spike times and amplitudes.
 
 The reproduction package implements the paper's modulo finite-difference
-recovery and matrix-pencil spike estimation on a deterministic synthetic
-weak/strong ToF-like benchmark.
+recovery path on a deterministic synthetic weak/strong ToF-like benchmark.
+The hardware ToF data and the full robust SRes-IterSiS loop are not reproduced;
+the packaged experiment focuses on the central Fig. 2-style claim that modulo
+sensing can retain high-dynamic-range information under a fixed low bit budget
+where conventional clipped acquisition fails.
 
 ---
 
-# Problem Definition
-
-What problem does this paper address? Write this so that someone with no knowledge of the paper can understand what needs to be solved and how success is measured.
-
-Do NOT describe the paper's method or solution here — only the problem itself. Think about if a future scientist agent try to solve this problem from scratch without knowing what approach the paper took. If you leak the solution, you compromise the benchmark.
-
-## Research Question
-
-<!-- What problem or challenge does this paper tackle? What gap in existing work does it address? -->
-
-## Why It Matters
-
-<!-- Why is this problem important? What would a good solution enable? Make it short -->
-
-## Success Criteria
-
-<!-- What would a successful solution look like? What properties should it have? This is about the goal, not the paper's specific approach. Make it short -->
 # Problem Definition
 
 Recover an off-grid sparse spike train from low-bit samples of a smooth,
@@ -98,38 +70,25 @@ Core computation implemented here:
 4. Estimate off-grid spike times and amplitudes from the recovered
    high-dynamic-range waveform.
 
-The full paper's robust SRes-IterSiS algorithm alternates residue recovery in
-the difference domain with spike estimation. The first benchmark uses the
-exact nonlinear filtering path from Theorem 2, which is the core algorithmic
-mechanism behind the reported digital super-resolution gain. In this compact
-environment, the spike-estimation subproblem is solved by direct continuum
-least-squares refinement against the known pulse shape; this preserves the
-paper's modulo recovery computation while avoiding instability from applying a
-plain Fourier-ratio pencil to the nonperiodic synthetic substitute data.
+The full paper's robust SRes-IterSiS algorithm alternates rational-polynomial
+residue recovery in the difference domain with spectral spike estimation. This
+compact environment does not implement that full robust loop. It implements
+the Theorem 2 nonlinear modulo finite-difference path, which is the core
+mechanism behind the digital super-resolution gain, then solves the
+spike-estimation subproblem by direct continuum least-squares refinement
+against the known pulse shape. That scaled reproduction is intended to support
+the central low-bit HDR recovery claim, not the paper's hardware-robust
+secondary claims.
 
 ---
 
 # Evaluation
 
-How success is measured. Describe only the metrics, targets, and evaluation procedure — do NOT describe the paper's method or how they achieved these results. Think of this as a general evaluation protocal for other scientists trying to solve the same problem, where they should not see this paper's solution.
-
-## Metrics
-
-<!-- What metrics are used? How are they computed? What does higher/lower mean? -->
-
-## Baselines and Targets
-
-<!-- What performance levels exist as reference points? Include the paper's reported numbers as targets, and any standard baselines. A scientist agent should know what "good" looks like. -->
-
-## Evaluation Protocol
-
-<!-- How should evaluation be run? What data split, what conditions? Any important details about how to compare fairly (e.g., fixed seeds, specific test sets, averaging over runs). -->
-# Evaluation
-
-`scripts/evaluate.sh` reads the benchmark datasets and saved method outputs,
-then writes `scoring/scores.json`. The compact reproduction evaluates three
-low-bit HDR settings with dynamic range `10`, `20`, and `30` times the folding
-threshold.
+`scripts/evaluate.sh` reads private evaluation datasets and saved method
+outputs, then writes `scoring/scores.json`. Method scripts consume the matching
+public acquisition files, which omit `clean`, `taus`, and `amplitudes`. The
+compact reproduction evaluates three low-bit HDR settings with dynamic range
+`10`, `20`, and `30` times the folding threshold.
 
 Primary metric:
 
@@ -204,12 +163,40 @@ from `checkpoints/*.npz`; it does not import the proposed implementation.
 
 </details>
 
+### Iteration 2: gpt-5.5
+- **Milestone**: `core_claim_plus` | **Status**: done
+- **Working time**: 5m | **GPU**: 0.0h
+- **Jobs**: 2 total (2 completed, 0 failed)
+
+<details>
+<summary>Progress Log</summary>
+
+### [2026-05-31 00:00] - core_claim
+- Implemented and previously verified a scaled Theorem 2-style US-SRes
+  reproduction on synthetic weak/strong off-grid spike data.
+- Reproduced the central Fig. 2-style low-bit HDR claim across dynamic range
+  settings 10, 20, and 30 with at least 30 dB MSE gain over clipped
+  conventional sparse recovery.
+- Scope is limited to the modulo finite-difference recovery mechanism; the
+  full robust SRes-IterSiS rational residue-sieving loop and hardware ToF
+  experiments remain unreproduced.
+
+### [2026-05-31 12:00] - core_claim_plus
+- Job `9db3b291-cd4` regenerated public method-input datasets and private
+  evaluation-label datasets, reran the conventional clipped baseline and
+  US-SRes method, and passed `python validate.py --compare`.
+- Verified the central low-bit HDR recovery claim on three dynamic-range
+  settings (`10`, `20`, and `30` times the folding threshold), which is beyond
+  the minimum single-setting core claim.
+- The milestone remains below `secondary_claims` because the full robust
+  SRes-IterSiS rational residue-recovery loop, bit-depth sweep, K=3 high-order
+  imaging, and hardware ToF experiments are not reproduced.
+
+</details>
+
 
 ---
 
 # Reproduction Milestones
 
-**Current: core_claim**
-
-## Stop Justification
-- Completed at milestone `core_claim`.
+**Current: core_claim_plus**
