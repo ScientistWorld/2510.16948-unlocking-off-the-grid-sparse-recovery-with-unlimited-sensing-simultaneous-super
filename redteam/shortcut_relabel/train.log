@@ -1,0 +1,235 @@
+{
+  "experiments": {
+    "synthetic_lowbit_hdr_dr10": {
+      "results": {
+        "audit": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 10.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 10.0,
+          "mse_gain_over_conventional_db": 190.78037023151623,
+          "psnr_db": 199.94588525336735,
+          "quant_bits": 3.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        },
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 10.0,
+          "hard_fold_signal_mse": 29.077630945301124,
+          "mean_fold_count": 10.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 10.463294834819333,
+          "quant_bits": 3.0,
+          "signal_mse": 11.968425565380738,
+          "tau_max_error_samples": 49.61879686162496,
+          "time_mae_samples": 26.070909820963422,
+          "weak_tau_mae_samples": 2.523022780301898,
+          "wrapped_measurement_mae": 0.544999135745392
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 10.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 10.0,
+          "mse_gain_over_conventional_db": 190.78037023151623,
+          "psnr_db": 199.94588525336735,
+          "quant_bits": 3.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr20": {
+      "results": {
+        "audit": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 197.56346885763807,
+          "psnr_db": 206.02577465997996,
+          "quant_bits": 3.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        },
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 118.98107371273628,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 9.990470415716736,
+          "quant_bits": 3.0,
+          "signal_mse": 57.06198637881596,
+          "tau_max_error_samples": 61.3720628071397,
+          "time_mae_samples": 39.78956972579511,
+          "weak_tau_mae_samples": 18.20707664445053,
+          "wrapped_measurement_mae": 0.5668722587496505
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 197.56346885763807,
+          "psnr_db": 206.02577465997996,
+          "quant_bits": 3.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr20_bits5": {
+      "results": {
+        "audit": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 197.6386483978544,
+          "psnr_db": 206.05772724615724,
+          "quant_bits": 5.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        },
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 119.3168739055704,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 10.012482629133626,
+          "quant_bits": 5.0,
+          "signal_mse": 58.058370136419036,
+          "tau_max_error_samples": 69.9057111546991,
+          "time_mae_samples": 48.21388127561429,
+          "weak_tau_mae_samples": 26.522051396529474,
+          "wrapped_measurement_mae": 0.5204873760881621
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 197.6386483978544,
+          "psnr_db": 206.05772724615724,
+          "quant_bits": 5.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr20_bits8": {
+      "results": {
+        "audit": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 197.63177414608467,
+          "psnr_db": 206.05990830329438,
+          "quant_bits": 8.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        },
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 119.67652652420195,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 10.011269952759395,
+          "quant_bits": 8.0,
+          "signal_mse": 57.966544849213555,
+          "tau_max_error_samples": 66.40377150046496,
+          "time_mae_samples": 44.28168991755685,
+          "weak_tau_mae_samples": 22.15960833464872,
+          "wrapped_measurement_mae": 0.5243427606017675
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 20.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 20.0,
+          "mse_gain_over_conventional_db": 197.63177414608467,
+          "psnr_db": 206.05990830329438,
+          "quant_bits": 8.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        }
+      }
+    },
+    "synthetic_lowbit_hdr_dr30": {
+      "results": {
+        "audit": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 30.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 30.0,
+          "mse_gain_over_conventional_db": 201.32569365060806,
+          "psnr_db": 209.55829186900073,
+          "quant_bits": 3.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        },
+        "conventional_clip_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 30.0,
+          "hard_fold_signal_mse": 262.87709741648877,
+          "mean_fold_count": 30.0,
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 9.847986525397056,
+          "quant_bits": 3.0,
+          "signal_mse": 135.69672463831165,
+          "tau_max_error_samples": 93.49583087814172,
+          "time_mae_samples": 70.22158313021389,
+          "weak_tau_mae_samples": 52.095386715484125,
+          "wrapped_measurement_mae": 0.5872605764774909
+        },
+        "us_sres": {
+          "amplitude_ratio": 10.0,
+          "dynamic_range_x": 30.0,
+          "hard_fold_signal_mse": 0.0,
+          "mean_fold_count": 30.0,
+          "mse_gain_over_conventional_db": 201.32569365060806,
+          "psnr_db": 209.55829186900073,
+          "quant_bits": 3.0,
+          "signal_mse": 0.0,
+          "tau_max_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0,
+          "wrapped_measurement_mae": 0.0
+        }
+      }
+    }
+  },
+  "slice": "train"
+}

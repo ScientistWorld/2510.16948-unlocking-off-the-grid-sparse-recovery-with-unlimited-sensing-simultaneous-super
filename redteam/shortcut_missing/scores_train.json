@@ -1,0 +1,34 @@
+{
+  "experiments": {
+    "synthetic_lowbit_hdr_dr10": {
+      "results": {
+        "audit": {},
+        "conventional_clip_sres": {}
+      }
+    },
+    "synthetic_lowbit_hdr_dr20": {
+      "results": {
+        "audit": {},
+        "conventional_clip_sres": {}
+      }
+    },
+    "synthetic_lowbit_hdr_dr20_bits5": {
+      "results": {
+        "audit": {},
+        "conventional_clip_sres": {}
+      }
+    },
+    "synthetic_lowbit_hdr_dr20_bits8": {
+      "results": {
+        "audit": {},
+        "conventional_clip_sres": {}
+      }
+    },
+    "synthetic_lowbit_hdr_dr30": {
+      "results": {
+        "audit": {},
+        "conventional_clip_sres": {}
+      }
+    }
+  }
+}

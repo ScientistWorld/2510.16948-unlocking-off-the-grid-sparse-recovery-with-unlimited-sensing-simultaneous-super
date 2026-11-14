@@ -1,0 +1,8 @@
+{
+  "candidate": "audit",
+  "case": "shortcut_missing",
+  "score_file_written": false,
+  "seconds": 0.8960278569720685,
+  "test_exit": 1,
+  "train_exit": 0
+}

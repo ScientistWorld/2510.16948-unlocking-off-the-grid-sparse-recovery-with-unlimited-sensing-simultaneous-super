@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/user/eval/test/evaluate_us_sres_slice.py", line 281, in <module>
+    main()
+  File "/home/user/eval/test/evaluate_us_sres_slice.py", line 271, in main
+    experiments.update(evaluate_experiment(spec, methods))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/eval/test/evaluate_us_sres_slice.py", line 219, in evaluate_experiment
+    method_metrics = evaluate_method(Path(spec.data), path)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/eval/test/evaluate_us_sres_slice.py", line 114, in evaluate_method
+    raise ValueError(
+ValueError: checkpoints/audit_dr10.npz has 0 reconstruction rows, but data/synthetic/eval_us_sres_dr10.npz has 64 evaluation trials

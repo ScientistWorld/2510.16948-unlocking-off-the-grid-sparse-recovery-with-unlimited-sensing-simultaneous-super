@@ -1,0 +1,8 @@
+{
+  "candidate": "audit",
+  "case": "shortcut_failing_baseline_inflation",
+  "score_file_written": true,
+  "seconds": 1.2595009810174815,
+  "test_exit": 0,
+  "train_exit": 0
+}

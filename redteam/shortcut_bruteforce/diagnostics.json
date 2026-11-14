@@ -1,0 +1,27 @@
+{
+  "dr10": {
+    "coarse_grid_size": 108,
+    "coarse_pairs_per_trial": 5151,
+    "max_clean_first_difference": 0.13338523697137283
+  },
+  "dr20": {
+    "coarse_grid_size": 108,
+    "coarse_pairs_per_trial": 5151,
+    "max_clean_first_difference": 0.26679615993318073
+  },
+  "dr20_bits5": {
+    "coarse_grid_size": 108,
+    "coarse_pairs_per_trial": 5151,
+    "max_clean_first_difference": 0.26682973985042935
+  },
+  "dr20_bits8": {
+    "coarse_grid_size": 108,
+    "coarse_pairs_per_trial": 5151,
+    "max_clean_first_difference": 0.2668026357621063
+  },
+  "dr30": {
+    "coarse_grid_size": 108,
+    "coarse_pairs_per_trial": 5151,
+    "max_clean_first_difference": 0.40023429035975866
+  }
+}

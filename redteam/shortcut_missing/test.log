@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/user/eval/test/evaluate_us_sres_slice.py", line 281, in <module>
+    main()
+  File "/home/user/eval/test/evaluate_us_sres_slice.py", line 271, in main
+    experiments.update(evaluate_experiment(spec, methods))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/eval/test/evaluate_us_sres_slice.py", line 215, in evaluate_experiment
+    raise FileNotFoundError(
+FileNotFoundError: train scores include method 'audit' for synthetic_lowbit_hdr_dr10, but held-out scoring could not find checkpoints/audit_dr10.npz

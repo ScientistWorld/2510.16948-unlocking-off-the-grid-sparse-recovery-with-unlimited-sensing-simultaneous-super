@@ -1,0 +1,8 @@
+{
+  "candidate": "audit",
+  "case": "shortcut_nan",
+  "score_file_written": true,
+  "seconds": 0.9708822899847291,
+  "test_exit": 0,
+  "train_exit": 0
+}

@@ -1,0 +1,359 @@
+{
+  "attempts": {
+    "better_sensor_fit": {
+      "audit_normalized_rank_delta": 0.3941922720909912,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.10003733765911255,
+        "synthetic_lowbit_hdr_dr20": 0.09978478336804233,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.060734156127644975,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.042836429990309524,
+        "synthetic_lowbit_hdr_dr30": 0.09079956494588182
+      },
+      "mean_mse_gain_db": 69.46146732523826,
+      "mean_psnr_db": 78.48880535121573,
+      "mean_signal_mse": 2.6262565448254243e-05,
+      "mean_time_mae_samples": 0.11089615400668781,
+      "mean_wrapped_measurement_mae": 0.06044230111067678
+    },
+    "original_reference": {
+      "audit_normalized_rank_delta": 0.0,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.0,
+        "synthetic_lowbit_hdr_dr20": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.0,
+        "synthetic_lowbit_hdr_dr30": 0.0
+      },
+      "mean_mse_gain_db": 38.078525789852236,
+      "mean_psnr_db": 62.58381614533921,
+      "mean_signal_mse": 0.009088752502890996,
+      "mean_time_mae_samples": 0.7560686801137149,
+      "mean_wrapped_measurement_mae": 0.1544547698640315
+    },
+    "reference_seed_16948": {
+      "audit_normalized_rank_delta": 0.0,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.0,
+        "synthetic_lowbit_hdr_dr20": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.0,
+        "synthetic_lowbit_hdr_dr30": 0.0
+      },
+      "mean_mse_gain_db": 38.078525789852236,
+      "mean_psnr_db": 62.58381614533921,
+      "mean_signal_mse": 0.009088752502890996,
+      "mean_time_mae_samples": 0.7560686801137149,
+      "mean_wrapped_measurement_mae": 0.1544547698640315
+    },
+    "reference_seed_16949": {
+      "audit_normalized_rank_delta": 0.0,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.0,
+        "synthetic_lowbit_hdr_dr20": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.0,
+        "synthetic_lowbit_hdr_dr30": 0.0
+      },
+      "mean_mse_gain_db": 38.078525789852236,
+      "mean_psnr_db": 62.58381614533921,
+      "mean_signal_mse": 0.009088752502890996,
+      "mean_time_mae_samples": 0.7560686801137149,
+      "mean_wrapped_measurement_mae": 0.1544547698640315
+    },
+    "reference_seed_16950": {
+      "audit_normalized_rank_delta": 0.0,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.0,
+        "synthetic_lowbit_hdr_dr20": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.0,
+        "synthetic_lowbit_hdr_dr30": 0.0
+      },
+      "mean_mse_gain_db": 38.078525789852236,
+      "mean_psnr_db": 62.58381614533921,
+      "mean_signal_mse": 0.009088752502890996,
+      "mean_time_mae_samples": 0.7560686801137149,
+      "mean_wrapped_measurement_mae": 0.1544547698640315
+    },
+    "shortcut_baseline_inflation": {
+      "audit_normalized_rank_delta": 3.128806714084794,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.6254496428487746,
+        "synthetic_lowbit_hdr_dr20": 0.6257369701329243,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.6257942584016087,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.6259981567337423,
+        "synthetic_lowbit_hdr_dr30": 0.6258276859677441
+      },
+      "mean_mse_gain_db": 3021.004488509122,
+      "mean_psnr_db": 62.58381614533921,
+      "mean_signal_mse": 0.009088752502890996,
+      "mean_time_mae_samples": 0.7560686801137149,
+      "mean_wrapped_measurement_mae": 0.1544547698640315
+    },
+    "shortcut_bruteforce": {
+      "audit_normalized_rank_delta": 3.813500109812092e-09,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 4.030500700979092e-09,
+        "synthetic_lowbit_hdr_dr20": -1.4345426885872956e-12,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.0,
+        "synthetic_lowbit_hdr_dr30": -2.1556604847841196e-10
+      },
+      "mean_mse_gain_db": 38.078525794123145,
+      "mean_psnr_db": 62.58381616285103,
+      "mean_signal_mse": 0.009088752491153257,
+      "mean_time_mae_samples": 0.7560682498056277,
+      "mean_wrapped_measurement_mae": 0.1544547697325712
+    },
+    "shortcut_config": {
+      "audit_normalized_rank_delta": 0.8500000000000001,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.17,
+        "synthetic_lowbit_hdr_dr20": 0.17,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.17000000000000004,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.17,
+        "synthetic_lowbit_hdr_dr30": 0.17000000000000004
+      },
+      "mean_mse_gain_db": 38.078525789852236,
+      "mean_psnr_db": 62.58381614533921,
+      "mean_signal_mse": 0.009088752502890996,
+      "mean_time_mae_samples": 0.7560686801137149,
+      "mean_wrapped_measurement_mae": 0.1544547698640315
+    },
+    "shortcut_constant": {
+      "audit_normalized_rank_delta": -0.9770814650238957,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": -0.15507059015295072,
+        "synthetic_lowbit_hdr_dr20": -0.1674672785353915,
+        "synthetic_lowbit_hdr_dr20_bits5": -0.22340792179520552,
+        "synthetic_lowbit_hdr_dr20_bits8": -0.2581651846574597,
+        "synthetic_lowbit_hdr_dr30": -0.17297048988288827
+      },
+      "mean_mse_gain_db": -0.698509907941481,
+      "mean_psnr_db": 9.646417476544519,
+      "mean_signal_mse": 73.89982492912591,
+      "mean_time_mae_samples": 22.477579930680346,
+      "mean_wrapped_measurement_mae": 0.34374026366711774
+    },
+    "shortcut_copy_input": {
+      "audit_normalized_rank_delta": -0.22634110649322398,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.002243759836227141,
+        "synthetic_lowbit_hdr_dr20": -0.015295423424881396,
+        "synthetic_lowbit_hdr_dr20_bits5": -0.07499117651748727,
+        "synthetic_lowbit_hdr_dr20_bits8": -0.1167238791943724,
+        "synthetic_lowbit_hdr_dr30": -0.02157438719271007
+      },
+      "mean_mse_gain_db": -0.751896377151344,
+      "mean_psnr_db": 9.494956976756685,
+      "mean_signal_mse": 74.51436586184207,
+      "mean_time_mae_samples": 22.477579930680346,
+      "mean_wrapped_measurement_mae": 0.05286926147704592
+    },
+    "shortcut_failing_baseline_inflation": {
+      "audit_normalized_rank_delta": 2.151725249060898,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.4703790526958238,
+        "synthetic_lowbit_hdr_dr20": 0.45826969159753295,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.4023863366064031,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.36783297207628235,
+        "synthetic_lowbit_hdr_dr30": 0.4528571960848558
+      },
+      "mean_mse_gain_db": 2982.227452811328,
+      "mean_psnr_db": 9.646417476544519,
+      "mean_signal_mse": 73.89982492912591,
+      "mean_time_mae_samples": 22.477579930680346,
+      "mean_wrapped_measurement_mae": 0.34374026366711774
+    },
+    "shortcut_impossible": {
+      "audit_normalized_rank_delta": -7.379579506740118,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": -1.4360929696384672,
+        "synthetic_lowbit_hdr_dr20": -1.4477283770844127,
+        "synthetic_lowbit_hdr_dr20_bits5": -1.501870620546003,
+        "synthetic_lowbit_hdr_dr20_bits8": -1.5404621812732535,
+        "synthetic_lowbit_hdr_dr30": -1.4534253581979821
+      },
+      "mean_mse_gain_db": -102.92592077265063,
+      "mean_psnr_db": 9.646417476544519,
+      "mean_signal_mse": 999990341485.2955,
+      "mean_time_mae_samples": 962.4511640961207,
+      "mean_wrapped_measurement_mae": 0.34374026366711774
+    },
+    "shortcut_labels": {
+      "audit_normalized_rank_delta": 1.3764580684982504,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.3144520606565303,
+        "synthetic_lowbit_hdr_dr20": 0.30472454952968275,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.2516001678631644,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.2046991648316709,
+        "synthetic_lowbit_hdr_dr30": 0.300982125617202
+      },
+      "mean_mse_gain_db": 197.07403728073012,
+      "mean_psnr_db": 205.5669849182961,
+      "mean_signal_mse": 0.0,
+      "mean_time_mae_samples": 0.0,
+      "mean_wrapped_measurement_mae": 0.058443213602163466
+    },
+    "shortcut_relabel": {
+      "audit_normalized_rank_delta": 1.536262195494628,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.36853860934868543,
+        "synthetic_lowbit_hdr_dr20": 0.35350884907674995,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.2610584157756881,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.205690067763841,
+        "synthetic_lowbit_hdr_dr30": 0.34746625352966376
+      },
+      "mean_mse_gain_db": 196.9911285218649,
+      "mean_psnr_db": 205.53278155065186,
+      "mean_signal_mse": 0.0,
+      "mean_time_mae_samples": 0.0,
+      "mean_wrapped_measurement_mae": 0.0
+    },
+    "shortcut_seed_replay": {
+      "audit_normalized_rank_delta": 1.3764580684982504,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": 0.3144520606565303,
+        "synthetic_lowbit_hdr_dr20": 0.30472454952968275,
+        "synthetic_lowbit_hdr_dr20_bits5": 0.2516001678631644,
+        "synthetic_lowbit_hdr_dr20_bits8": 0.2046991648316709,
+        "synthetic_lowbit_hdr_dr30": 0.300982125617202
+      },
+      "mean_mse_gain_db": 197.07403728073012,
+      "mean_psnr_db": 205.5669849182961,
+      "mean_signal_mse": 0.0,
+      "mean_time_mae_samples": 0.0,
+      "mean_wrapped_measurement_mae": 0.058443213602163466
+    },
+    "shortcut_self_report": {
+      "audit_normalized_rank_delta": -0.9770814650238957,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": -0.15507059015295072,
+        "synthetic_lowbit_hdr_dr20": -0.1674672785353915,
+        "synthetic_lowbit_hdr_dr20_bits5": -0.22340792179520552,
+        "synthetic_lowbit_hdr_dr20_bits8": -0.2581651846574597,
+        "synthetic_lowbit_hdr_dr30": -0.17297048988288827
+      },
+      "mean_mse_gain_db": -0.698509907941481,
+      "mean_psnr_db": 9.646417476544519,
+      "mean_signal_mse": 73.89982492912591,
+      "mean_time_mae_samples": 22.477579930680346,
+      "mean_wrapped_measurement_mae": 0.34374026366711774
+    },
+    "weaker_no_unwrap": {
+      "audit_normalized_rank_delta": -1.0446253162427417,
+      "experiment_contributions": {
+        "synthetic_lowbit_hdr_dr10": -0.12158594656245283,
+        "synthetic_lowbit_hdr_dr20": -0.12929340610458245,
+        "synthetic_lowbit_hdr_dr20_bits5": -0.30290002803699845,
+        "synthetic_lowbit_hdr_dr20_bits8": -0.3408898215674788,
+        "synthetic_lowbit_hdr_dr30": -0.14995611397122915
+      },
+      "mean_mse_gain_db": -0.7317090610964505,
+      "mean_psnr_db": 9.524989398273059,
+      "mean_signal_mse": 74.27769747419401,
+      "mean_time_mae_samples": 60.52744723981332,
+      "mean_wrapped_measurement_mae": 0.30196199186549205
+    }
+  },
+  "normalization": "population standard deviation over finite, complete audit attempts including original_reference; future rank scales are unknown",
+  "pool": [
+    "original_reference",
+    "reference_seed_16948",
+    "reference_seed_16949",
+    "reference_seed_16950",
+    "better_sensor_fit",
+    "weaker_no_unwrap",
+    "shortcut_bruteforce",
+    "shortcut_labels",
+    "shortcut_seed_replay",
+    "shortcut_baseline_inflation",
+    "shortcut_failing_baseline_inflation",
+    "shortcut_relabel",
+    "shortcut_config",
+    "shortcut_self_report",
+    "shortcut_copy_input",
+    "shortcut_constant",
+    "shortcut_impossible"
+  ],
+  "scales": {
+    "synthetic_lowbit_hdr_dr10": {
+      "amplitude_ratio": 235294117644.7059,
+      "dynamic_range_x": 235294117644.7059,
+      "hard_fold_signal_mse": 235291529800.4328,
+      "mean_fold_count": 235294117644.7059,
+      "mse_gain_over_conventional_db": 955.7966110674705,
+      "psnr_db": 66.63609652785267,
+      "quant_bits": 0.7058823529411765,
+      "signal_mse": 235292981265.63168,
+      "tau_max_error_samples": 274.93945712914115,
+      "time_mae_samples": 224.64384299576832,
+      "weak_tau_mae_samples": 173.745281208885,
+      "wrapped_measurement_mae": 0.10198976521605709
+    },
+    "synthetic_lowbit_hdr_dr20": {
+      "amplitude_ratio": 235294117644.7059,
+      "dynamic_range_x": 235294117642.35294,
+      "hard_fold_signal_mse": 235289546009.07742,
+      "mean_fold_count": 235294117642.35294,
+      "mse_gain_over_conventional_db": 953.2268867135429,
+      "psnr_db": 68.2425990487633,
+      "quant_bits": 0.7058823529411765,
+      "signal_mse": 235291850182.5507,
+      "tau_max_error_samples": 276.529134364626,
+      "time_mae_samples": 224.99250862881644,
+      "weak_tau_mae_samples": 173.23854446023344,
+      "wrapped_measurement_mae": 0.11012157666281201
+    },
+    "synthetic_lowbit_hdr_dr20_bits5": {
+      "amplitude_ratio": 235294117644.7059,
+      "dynamic_range_x": 235294117642.35294,
+      "hard_fold_signal_mse": 235289552030.84448,
+      "mean_fold_count": 235294117642.35294,
+      "mse_gain_over_conventional_db": 953.1354353943435,
+      "psnr_db": 67.52298822879759,
+      "quant_bits": 1.1764705882352942,
+      "signal_mse": 235291844618.47858,
+      "tau_max_error_samples": 274.8539457347474,
+      "time_mae_samples": 225.00803860289827,
+      "weak_tau_mae_samples": 175.19473693573988,
+      "wrapped_measurement_mae": 0.12292709929606463
+    },
+    "synthetic_lowbit_hdr_dr20_bits8": {
+      "amplitude_ratio": 235294117644.7059,
+      "dynamic_range_x": 235294117642.35294,
+      "hard_fold_signal_mse": 235289553312.32077,
+      "mean_fold_count": 235294117642.35294,
+      "mse_gain_over_conventional_db": 952.8235049002684,
+      "psnr_db": 67.89287197704424,
+      "quant_bits": 1.8823529411764708,
+      "signal_mse": 235291841124.66974,
+      "tau_max_error_samples": 276.83925737708824,
+      "time_mae_samples": 225.18585376161184,
+      "weak_tau_mae_samples": 173.50862835360638,
+      "wrapped_measurement_mae": 0.1327833077468934
+    },
+    "synthetic_lowbit_hdr_dr30": {
+      "amplitude_ratio": 235294117644.7059,
+      "dynamic_range_x": 235294117640.0,
+      "hard_fold_signal_mse": 235287688551.0433,
+      "mean_fold_count": 235294117640.0,
+      "mse_gain_over_conventional_db": 951.8939196808458,
+      "psnr_db": 69.22280889134527,
+      "quant_bits": 0.7058823529411765,
+      "signal_mse": 235290708058.24084,
+      "tau_max_error_samples": 274.62493784085973,
+      "time_mae_samples": 224.9292260000378,
+      "weak_tau_mae_samples": 175.04766748266468,
+      "wrapped_measurement_mae": 0.11437096535627561
+    }
+  },
+  "seed_spread": {
+    "audit_normalized_rank_delta": 0.0,
+    "mean_mse_gain_db": 0.0,
+    "mean_psnr_db": 0.0,
+    "mean_signal_mse": 0.0,
+    "mean_time_mae_samples": 0.0,
+    "mean_wrapped_measurement_mae": 0.0
+  }
+}

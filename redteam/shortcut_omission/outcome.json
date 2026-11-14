@@ -1,0 +1,15 @@
+{
+  "artifacts_on_disk": [
+    "checkpoints/audit_dr20.npz",
+    "checkpoints/audit_dr30.npz",
+    "checkpoints/audit_dr10.npz",
+    "checkpoints/audit_dr20_bits8.npz",
+    "checkpoints/audit_dr20_bits5.npz"
+  ],
+  "candidate": "audit",
+  "case": "shortcut_omission",
+  "score_file_written": true,
+  "seconds": 1.7740777040016837,
+  "test_exit": 0,
+  "train_exit": 0
+}
