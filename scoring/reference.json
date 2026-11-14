@@ -1,69 +1,47 @@
 {
+  "_notes": {
+    "paper_claim": "The paper reports that unlimited sensing gives at least 30 dB lower recovery MSE than a conventional ADC with the same bit budget, across DR = 10, 20, 30 lambda and 3-15 bits (Fig. 2; also Section IV: 'consistent >= 30 dB gains'). The 30.0 under results.us_sres is that lower bound, not a point estimate.",
+    "paper_fig2_gains_read_from_plot_db": {
+      "dr10_bits3": 24,
+      "dr20_bits3": 33,
+      "dr30_bits3": 37,
+      "dr30_bits5": 42,
+      "dr30_bits8": 48,
+      "note": "Approximate gaps between the conventional-ADC and USF MSE curves of Fig. 2. Fig. 2's conventional ADC spans the full signal range (no clipping) and the waveforms carry no additive sensor noise, so these are not on this gym's scale."
+    },
+    "setup_differences": "This gym compares against the equal-range clipping ADC of Section V-A1 (Fig. 5) instead of Fig. 2's full-range ADC, adds Gaussian thermal noise (std 0.03 lambda) before both ADCs (Section III, challenge C1), uses a known Gaussian pulse (sigma = 20 samples) instead of the calibrated ToF kernel, randomises spike positions, separation (60-90 samples), weak/strong ratio (7-13) and order, and scores 200 hidden scenes per setting (paper: 5000 trials of real-kernel waveforms).",
+    "paper_tables": "Tables I-II report PSNR of about 39-41 dB for 3-bit hardware-derived recoveries; hardware waveforms are not available, so these are not targets here."
+  },
   "experiments": {
     "synthetic_lowbit_hdr_dr10": {
-      "description": "Low-bit weak/strong off-grid spike recovery at 10x dynamic range, matching the Fig. 2 regime with K=2, amplitude ratio 10, N=501, and 3-bit modulo sensing. The paper reports at least 30 dB MSE gain over conventional sampling across these dynamic-range and bit-depth settings.",
+      "description": "Recover the HDR waveform and both off-grid spike times of a K=2 weak/strong pulse pair (N=501) from 3-bit modulo samples at ||g||_inf = 10 lambda. Fig. 2 signal model at 10x dynamic range with 3-bit sensing.",
       "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
+          "description": "Primary metric (Fig. 2 quantity): 10 log10 of the waveform MSE of the conventional clipping-ADC recovery, computed by the evaluator, over the method's waveform MSE, pooled over the slice's scenes."
         },
         "psnr_db": {
           "higher_is_better": true,
           "coefficient": 0.45,
-          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
+          "description": "Mean per-scene waveform PSNR (peak = ||g||_inf), the reconstruction-quality figure of Tables I and II; complements the pooled gain with typical-scene quality."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.45,
-          "description": "Localization error averaged over both recovered off-grid spike times."
+          "coefficient": 0.45,
+          "description": "Mean absolute error of both recovered spike times (time-delay estimation, Tables I-II), in samples."
         },
         "weak_tau_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.35,
-          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+          "coefficient": 0.35,
+          "description": "Spike-time error of the weak reflection only: the weak target is what coarse quantization buries (Figs. 1 and 9)."
         },
-        "tau_max_error_samples": {
+        "separation_error_samples": {
           "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
-        },
-        "signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.2,
-          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
-        },
-        "hard_fold_signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
-        },
-        "wrapped_measurement_mae": {
-          "higher_is_better": false,
-          "coefficient": -0.3,
-          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
-        },
-        "dynamic_range_x": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
-        },
-        "quant_bits": {
-          "higher_is_better": false,
-          "coefficient": -0.05,
-          "description": "Configuration check confirming the low-bit sensing budget is not increased."
-        },
-        "amplitude_ratio": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
-        },
-        "mean_fold_count": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the slice contains actual modulo folding events."
+          "coefficient": 0.25,
+          "description": "Error of the recovered inter-spike separation (the inter-object separation error reported in Section V-B and VI), in samples."
         }
       },
       "results": {
@@ -72,77 +50,39 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0,
-          "dynamic_range_x": 10.0,
-          "quant_bits": 3.0,
-          "amplitude_ratio": 10.0
+          "mse_gain_over_conventional_db": 30.0
         }
       }
     },
     "synthetic_lowbit_hdr_dr20": {
-      "description": "Low-bit weak/strong off-grid spike recovery at 20x dynamic range, matching the Fig. 2 regime with K=2, amplitude ratio 10, N=501, and 3-bit modulo sensing.",
+      "description": "Recover the HDR waveform and both off-grid spike times of a K=2 weak/strong pulse pair (N=501) from 3-bit modulo samples at ||g||_inf = 20 lambda. Fig. 2 signal model at 20x dynamic range with 3-bit sensing.",
       "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
+          "description": "Primary metric (Fig. 2 quantity): 10 log10 of the waveform MSE of the conventional clipping-ADC recovery, computed by the evaluator, over the method's waveform MSE, pooled over the slice's scenes."
         },
         "psnr_db": {
           "higher_is_better": true,
           "coefficient": 0.45,
-          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
+          "description": "Mean per-scene waveform PSNR (peak = ||g||_inf), the reconstruction-quality figure of Tables I and II; complements the pooled gain with typical-scene quality."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.45,
-          "description": "Localization error averaged over both recovered off-grid spike times."
+          "coefficient": 0.45,
+          "description": "Mean absolute error of both recovered spike times (time-delay estimation, Tables I-II), in samples."
         },
         "weak_tau_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.35,
-          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+          "coefficient": 0.35,
+          "description": "Spike-time error of the weak reflection only: the weak target is what coarse quantization buries (Figs. 1 and 9)."
         },
-        "tau_max_error_samples": {
+        "separation_error_samples": {
           "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
-        },
-        "signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.2,
-          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
-        },
-        "hard_fold_signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
-        },
-        "wrapped_measurement_mae": {
-          "higher_is_better": false,
-          "coefficient": -0.3,
-          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
-        },
-        "dynamic_range_x": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
-        },
-        "quant_bits": {
-          "higher_is_better": false,
-          "coefficient": -0.05,
-          "description": "Configuration check confirming the low-bit sensing budget is not increased."
-        },
-        "amplitude_ratio": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
-        },
-        "mean_fold_count": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the slice contains actual modulo folding events."
+          "coefficient": 0.25,
+          "description": "Error of the recovered inter-spike separation (the inter-object separation error reported in Section V-B and VI), in samples."
         }
       },
       "results": {
@@ -151,77 +91,39 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0,
-          "dynamic_range_x": 20.0,
-          "quant_bits": 3.0,
-          "amplitude_ratio": 10.0
+          "mse_gain_over_conventional_db": 30.0
         }
       }
     },
     "synthetic_lowbit_hdr_dr30": {
-      "description": "Low-bit weak/strong off-grid spike recovery at 30x dynamic range, matching the Fig. 2 regime with K=2, amplitude ratio 10, N=501, and 3-bit modulo sensing.",
+      "description": "Recover the HDR waveform and both off-grid spike times of a K=2 weak/strong pulse pair (N=501) from 3-bit modulo samples at ||g||_inf = 30 lambda. Fig. 2 signal model at 30x dynamic range with 3-bit sensing, the paper's largest HDR setting; first-difference unwrapping breaks often here under sensor noise.",
       "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
+          "description": "Primary metric (Fig. 2 quantity): 10 log10 of the waveform MSE of the conventional clipping-ADC recovery, computed by the evaluator, over the method's waveform MSE, pooled over the slice's scenes."
         },
         "psnr_db": {
           "higher_is_better": true,
           "coefficient": 0.45,
-          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
+          "description": "Mean per-scene waveform PSNR (peak = ||g||_inf), the reconstruction-quality figure of Tables I and II; complements the pooled gain with typical-scene quality."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.45,
-          "description": "Localization error averaged over both recovered off-grid spike times."
+          "coefficient": 0.45,
+          "description": "Mean absolute error of both recovered spike times (time-delay estimation, Tables I-II), in samples."
         },
         "weak_tau_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.35,
-          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+          "coefficient": 0.35,
+          "description": "Spike-time error of the weak reflection only: the weak target is what coarse quantization buries (Figs. 1 and 9)."
         },
-        "tau_max_error_samples": {
+        "separation_error_samples": {
           "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
-        },
-        "signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.2,
-          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
-        },
-        "hard_fold_signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
-        },
-        "wrapped_measurement_mae": {
-          "higher_is_better": false,
-          "coefficient": -0.3,
-          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
-        },
-        "dynamic_range_x": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
-        },
-        "quant_bits": {
-          "higher_is_better": false,
-          "coefficient": -0.05,
-          "description": "Configuration check confirming the low-bit sensing budget is not increased."
-        },
-        "amplitude_ratio": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
-        },
-        "mean_fold_count": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the slice contains actual modulo folding events."
+          "coefficient": 0.25,
+          "description": "Error of the recovered inter-spike separation (the inter-object separation error reported in Section V-B and VI), in samples."
         }
       },
       "results": {
@@ -230,77 +132,39 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0,
-          "dynamic_range_x": 30.0,
-          "quant_bits": 3.0,
-          "amplitude_ratio": 10.0
+          "mse_gain_over_conventional_db": 30.0
         }
       }
     },
-    "synthetic_lowbit_hdr_dr20_bits5": {
-      "description": "Low-bit weak/strong off-grid spike recovery at 20x dynamic range with 5-bit modulo sensing, adding bit-depth coverage from the Fig. 2 regime. The paper reports at least 30 dB MSE gain over conventional sampling across dynamic-range and bit-depth settings.",
+    "synthetic_lowbit_hdr_dr30_bits5": {
+      "description": "Recover the HDR waveform and both off-grid spike times of a K=2 weak/strong pulse pair (N=501) from 5-bit modulo samples at ||g||_inf = 30 lambda. Bit-depth axis of Fig. 2 at 30x dynamic range with 5-bit sensing.",
       "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
+          "description": "Primary metric (Fig. 2 quantity): 10 log10 of the waveform MSE of the conventional clipping-ADC recovery, computed by the evaluator, over the method's waveform MSE, pooled over the slice's scenes."
         },
         "psnr_db": {
           "higher_is_better": true,
           "coefficient": 0.45,
-          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
+          "description": "Mean per-scene waveform PSNR (peak = ||g||_inf), the reconstruction-quality figure of Tables I and II; complements the pooled gain with typical-scene quality."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.45,
-          "description": "Localization error averaged over both recovered off-grid spike times."
+          "coefficient": 0.45,
+          "description": "Mean absolute error of both recovered spike times (time-delay estimation, Tables I-II), in samples."
         },
         "weak_tau_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.35,
-          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+          "coefficient": 0.35,
+          "description": "Spike-time error of the weak reflection only: the weak target is what coarse quantization buries (Figs. 1 and 9)."
         },
-        "tau_max_error_samples": {
+        "separation_error_samples": {
           "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
-        },
-        "signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.2,
-          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
-        },
-        "hard_fold_signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
-        },
-        "wrapped_measurement_mae": {
-          "higher_is_better": false,
-          "coefficient": -0.3,
-          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
-        },
-        "dynamic_range_x": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
-        },
-        "quant_bits": {
-          "higher_is_better": false,
-          "coefficient": -0.05,
-          "description": "Configuration check confirming the low-bit sensing budget is not increased."
-        },
-        "amplitude_ratio": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
-        },
-        "mean_fold_count": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the slice contains actual modulo folding events."
+          "coefficient": 0.25,
+          "description": "Error of the recovered inter-spike separation (the inter-object separation error reported in Section V-B and VI), in samples."
         }
       },
       "results": {
@@ -309,77 +173,39 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0,
-          "dynamic_range_x": 20.0,
-          "quant_bits": 5.0,
-          "amplitude_ratio": 10.0
+          "mse_gain_over_conventional_db": 30.0
         }
       }
     },
-    "synthetic_lowbit_hdr_dr20_bits8": {
-      "description": "Low-bit weak/strong off-grid spike recovery at 20x dynamic range with 8-bit modulo sensing, adding bit-depth coverage from the Fig. 2 regime. The paper reports at least 30 dB MSE gain over conventional sampling across dynamic-range and bit-depth settings.",
+    "synthetic_lowbit_hdr_dr30_bits8": {
+      "description": "Recover the HDR waveform and both off-grid spike times of a K=2 weak/strong pulse pair (N=501) from 8-bit modulo samples at ||g||_inf = 30 lambda. Bit-depth axis of Fig. 2 at 30x dynamic range with 8-bit sensing.",
       "weight": 0.2,
       "primary_metric": "mse_gain_over_conventional_db",
       "metrics": {
         "mse_gain_over_conventional_db": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Primary benefit metric: reconstruction MSE improvement over the clipped conventional sparse-recovery baseline."
+          "description": "Primary metric (Fig. 2 quantity): 10 log10 of the waveform MSE of the conventional clipping-ADC recovery, computed by the evaluator, over the method's waveform MSE, pooled over the slice's scenes."
         },
         "psnr_db": {
           "higher_is_better": true,
           "coefficient": 0.45,
-          "description": "Signal-quality benefit metric that rewards high-fidelity waveform reconstruction."
+          "description": "Mean per-scene waveform PSNR (peak = ||g||_inf), the reconstruction-quality figure of Tables I and II; complements the pooled gain with typical-scene quality."
         },
         "time_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.45,
-          "description": "Localization error averaged over both recovered off-grid spike times."
+          "coefficient": 0.45,
+          "description": "Mean absolute error of both recovered spike times (time-delay estimation, Tables I-II), in samples."
         },
         "weak_tau_mae_samples": {
           "higher_is_better": false,
-          "coefficient": -0.35,
-          "description": "Localization error on the later weak reflection, preventing scores from hiding weak-target failures behind the strong peak."
+          "coefficient": 0.35,
+          "description": "Spike-time error of the weak reflection only: the weak target is what coarse quantization buries (Figs. 1 and 9)."
         },
-        "tau_max_error_samples": {
+        "separation_error_samples": {
           "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Average worst spike-time error per trial, catching methods that recover only one of the two reflections well."
-        },
-        "signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.2,
-          "description": "Absolute waveform reconstruction error, included to anchor gains to the underlying signal estimate."
-        },
-        "hard_fold_signal_mse": {
-          "higher_is_better": false,
-          "coefficient": -0.25,
-          "description": "Waveform MSE restricted to sample positions whose clean signal exceeds the modulo range, stressing genuinely folded high-dynamic-range regions."
-        },
-        "wrapped_measurement_mae": {
-          "higher_is_better": false,
-          "coefficient": -0.3,
-          "description": "Sensor-consistency constraint: the reconstructed waveform should wrap back to the observed modulo measurements."
-        },
-        "dynamic_range_x": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the advertised high-dynamic-range stress level is preserved."
-        },
-        "quant_bits": {
-          "higher_is_better": false,
-          "coefficient": -0.05,
-          "description": "Configuration check confirming the low-bit sensing budget is not increased."
-        },
-        "amplitude_ratio": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the weak/strong reflection amplitude disparity is preserved."
-        },
-        "mean_fold_count": {
-          "higher_is_better": true,
-          "coefficient": 0.05,
-          "description": "Configuration check confirming the slice contains actual modulo folding events."
+          "coefficient": 0.25,
+          "description": "Error of the recovered inter-spike separation (the inter-object separation error reported in Section V-B and VI), in samples."
         }
       },
       "results": {
@@ -388,10 +214,7 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0,
-          "dynamic_range_x": 20.0,
-          "quant_bits": 8.0,
-          "amplitude_ratio": 10.0
+          "mse_gain_over_conventional_db": 30.0
         }
       }
     }

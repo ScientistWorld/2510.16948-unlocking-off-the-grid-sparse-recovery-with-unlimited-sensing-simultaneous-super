@@ -1,354 +1,346 @@
-"""Modulo off-grid sparse recovery following Guo & Bhandari US-SRes.
+"""SRes-IterSiS: robust off-the-grid US-SRes recovery (Guo & Bhandari, Algorithm 1).
 
-This compact implementation covers the paper's core computation:
-1. modulo low-dynamic-range samples y = M_lambda(g),
-2. nonlinear finite-difference filtering M_lambda(Delta^h y) = Delta^h g,
-3. IterSiS-style sparse fold-residue refinement with rational P/Q fitting,
-4. anti-difference to recover g up to a constant,
-5. spectral matrix-pencil initialization for off-grid spike locations,
-6. least-squares refinement of amplitudes and continuous spike times.
+Input: low-bit modulo samples y[n] of g(t) = sum_k Gamma_k psi(t - tau_k),
+the known kernel psi and K.  Output: spike times tau_k, amplitudes Gamma_k and
+the high-dynamic-range waveform g[n] = sum_k Gamma_k psi(n - tau_k).
 
-The hardware paper uses richer calibration and multiple random initializations.
-This version keeps the same computational structure at compact synthetic scale.
+Algorithm 1 (Section III), with the difference-domain model of Eq. (32):
+
+    y_ = Delta y
+    eps_tilde^[0] = -y_              (residue seed; g_ = 0 before any fit)
+    for i = 1 .. i_max:
+        P1 (Eqs. 35-43): fit eps_tilde with a rational model P/Q, deg Q = M,
+            deg P = M - 1, by the iterative weighted least squares of Eq. (38)
+            (Q^[j-1] fixed in the weights), from several Q^[0] seeds; keep the
+            iterate whose lattice-quantized reconstruction (Eq. 43) is closest
+            to eps_tilde (Algorithm 1, lines 10-12)                -> eps^[i]
+        g_tilde = Delta^{-1}(y_ + eps^[i])                         (Eq. 45)
+        P2 (Eqs. 45-47): s[l] = DFT(g_tilde)[l] / DFT(psi)[l], |l| <= I_psi;
+            initial spectral fit on l = 1..I_psi gives s[0]; the residual
+            constant c0 is the small eigenvalue of the Toeplitz matrix G(s)
+            (Eqs. 46-47); matrix pencil -> tau_k; least squares -> Gamma_k
+        g_ = Delta( sum_k Gamma_k psi(n - tau_k) );  eps_tilde^[i] = g_ - y_   (Eq. 34)
+
+Implementation notes.
+* The weighted least squares of Eq. (38) is solved in the partial-fraction
+  (barycentric) basis relative to the previous denominator Q^[j-1]: with
+  sigma = Q / Q^[j-1] and (sigma f) = P / Q^[j-1], minimising
+  sum_n |sigma(z_n) f_n - (sigma f)(z_n)|^2 is exactly Eq. (38).  New poles are
+  the zeros of sigma.  Q is normalised to be monic, which plays the role of
+  the paper's linear normalisation <q^[0], q> = 1.  This avoids the
+  catastrophic conditioning of a degree-M monomial Q when folds cluster.
+* The fold residues c_m (Eq. 39) of on-grid folds are read on the grid at the
+  pole positions n_m (Eq. 36) and quantised onto 2 lambda Z (Eq. 43).
+* The number of folds M is not given to the method; it is estimated at each
+  outer iteration as the number of non-zero lattice residues of eps_tilde.
 """
 
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
 import numpy as np
 
-from data.spectral_utils import (
-    matrix_pencil_spikes,
-    refine_spikes_from_initial,
-    sparse_deconvolution_continuum,
-)
+DEFAULTS = {
+    "outer_iters": 6,
+    "inner_iters": 3,
+    "initializations": 2,
+    "bandwidth_rel": 0.05,
+    "toeplitz_order": 4,
+    "seed": 16948,
+}
 
 
 def modulo(x: np.ndarray, lambda_value: float) -> np.ndarray:
-    return 2.0 * lambda_value * (
-        np.mod(x / (2.0 * lambda_value) + 0.5, 1.0) - 0.5
-    )
+    return 2.0 * lambda_value * (np.mod(x / (2.0 * lambda_value) + 0.5, 1.0) - 0.5)
 
 
-def finite_difference(x: np.ndarray, order: int) -> np.ndarray:
-    out = np.asarray(x, dtype=np.float64)
-    for _ in range(order):
-        out = np.diff(out)
+def quantize_residue(x: np.ndarray, lambda_value: float) -> np.ndarray:
+    """Eq. (43): Q_lambda(x) = 2 lambda floor((x + lambda) / (2 lambda))."""
+
+    return 2.0 * lambda_value * np.floor((np.real(x) + lambda_value) / (2.0 * lambda_value))
+
+
+def anti_difference(delta: np.ndarray) -> np.ndarray:
+    return np.concatenate([[0.0], np.cumsum(delta)])
+
+
+def gaussian_atoms(n: int, taus: np.ndarray, sigma: float) -> np.ndarray:
+    t = np.arange(n, dtype=np.float64)
+    return np.exp(-0.5 * ((t[:, None] - np.asarray(taus)[None, :]) / sigma) ** 2)
+
+
+# ----------------------------------------------------------------------------
+# P1: residue recovery by rational (P/Q) sparse approximation on the continuum
+# ----------------------------------------------------------------------------
+
+
+def _clamp_poles(poles: np.ndarray) -> np.ndarray:
+    """Reflect poles into the unit disc and keep them off the sampling points."""
+
+    mag = np.abs(poles)
+    out = np.where(mag > 1.0, poles / np.maximum(mag, 1e-300) ** 2, poles)
+    mag = np.abs(out)
+    too_close = mag > 1.0 - 1e-6
+    out = np.where(too_close, out / np.maximum(mag, 1e-300) * (1.0 - 1e-6), out)
+    tiny = mag < 1e-3
+    return np.where(tiny, 1e-3 + 0j, out)
+
+
+def _candidates(
+    eps_tilde: np.ndarray,
+    zn: np.ndarray,
+    poles: np.ndarray,
+    lambda_value: float,
+) -> list[np.ndarray]:
+    """Lattice residues from the current rational model (Eqs. 35, 36, 39, 43)."""
+
+    length = eps_tilde.size
+    cauchy = 1.0 / (zn[:, None] - poles[None, :])
+    residues, *_ = np.linalg.lstsq(cauchy, eps_tilde.astype(np.complex128), rcond=None)
+    model = cauchy @ residues  # P/Q evaluated on the grid, Eq. (35)
+    out = []
+    if np.all(np.isfinite(model)):
+        out.append(quantize_residue(model.real, lambda_value))  # Eq. (43)
+    positions = np.unique(np.mod(np.rint(length * np.angle(poles) / (2.0 * np.pi)), length).astype(int))
+    sieved = np.zeros(length)
+    sieved[positions] = quantize_residue(eps_tilde[positions], lambda_value)  # Eqs. (36), (39), (43)
+    out.append(sieved)
     return out
 
 
-def anti_difference(delta: np.ndarray, order: int, length: int) -> np.ndarray:
-    """Invert an h-th finite difference with zero integration constants."""
-
-    recovered = np.asarray(delta, dtype=np.float64)
-    for _ in range(order):
-        integrated = np.empty(recovered.size + 1, dtype=np.float64)
-        integrated[0] = 0.0
-        integrated[1:] = np.cumsum(recovered)
-        recovered = integrated
-    if recovered.size != length:
-        raise ValueError(f"expected length {length}, got {recovered.size}")
-    return recovered
-
-
-def quantize_residue(epsilon: np.ndarray, lambda_value: float) -> np.ndarray:
-    """Eq. 43 residue quantizer onto the fold lattice 2 lambda Z."""
-
-    return 2.0 * lambda_value * np.floor((np.real(epsilon) + lambda_value) / (2.0 * lambda_value))
-
-
-def _fourier_vandermonde(length: int, degree: int) -> np.ndarray:
-    n = np.arange(length, dtype=np.float64)
-    powers = np.arange(degree, dtype=np.float64)
-    return np.exp(1j * 2.0 * np.pi * n[:, None] * powers[None, :] / length)
-
-
-def _seed_denominator(length: int, degree: int, positions: np.ndarray) -> np.ndarray:
-    if degree <= 0:
-        return np.ones(1, dtype=np.complex128)
-    roots = np.exp(1j * 2.0 * np.pi * positions[:degree] / length)
-    coeffs_desc = np.poly(roots)
-    coeffs = coeffs_desc[::-1].astype(np.complex128)
-    norm = np.linalg.norm(coeffs)
-    if norm == 0.0:
-        coeffs[0] = 1.0
-        norm = 1.0
-    return coeffs / norm
-
-
 def rational_residue_recovery(
-    epsilon_seed: np.ndarray,
-    fold_count: int,
+    eps_tilde: np.ndarray,
+    num_folds: int,
     lambda_value: float,
-    inner_iters: int = 4,
-    initializations: int = 3,
+    inner_iters: int,
+    initializations: int,
+    rng: np.random.Generator,
 ) -> np.ndarray:
-    """P1 residue recovery via the paper's rational P/Q weighted LS form.
-
-    This implements the algebraic loop in Eqs. 38-43 on the discrete grid:
-    fit epsilon[n] ~= P(xi^n) / Q(xi^n), then quantize the estimate onto
-    the valid fold-residue lattice 2 lambda Z.
-    """
-
-    x = np.asarray(epsilon_seed, dtype=np.float64)
-    length = x.size
-    degree = int(max(0, min(fold_count, length // 3)))
-    if degree == 0:
-        return np.zeros_like(x)
-
-    largest = np.argsort(np.abs(x))[::-1]
-    if largest.size < degree:
-        return quantize_residue(x, lambda_value)
-
-    wq = _fourier_vandermonde(length, degree + 1)
-    wp = _fourier_vandermonde(length, degree)
-    best_error = np.inf
-    best_epsilon = quantize_residue(x, lambda_value)
-    rng = np.random.default_rng(16948 + degree + length)
-
-    for init_idx in range(initializations):
-        if init_idx == 0:
-            positions = largest
-        else:
-            jitter = rng.integers(-2, 3, size=degree)
-            positions = (largest[:degree] + jitter) % length
-        q0 = _seed_denominator(length, degree, positions)
-        q = q0.copy()
-        p = np.zeros(degree, dtype=np.complex128)
-
+    eps_tilde = np.asarray(eps_tilde, dtype=np.float64)
+    length = eps_tilde.size
+    m = int(min(max(num_folds, 0), length // 4))
+    if m == 0:
+        return np.zeros(length)
+    zn = np.exp(2j * np.pi * np.arange(length) / length)
+    f = eps_tilde.astype(np.complex128)
+    anchor = np.sort(np.argsort(-np.abs(eps_tilde), kind="stable")[:m]).astype(np.float64)
+    radius = 1.0 - 1.0 / length
+    best_err, best = np.inf, None
+    for init in range(initializations):
+        positions = anchor if init == 0 else anchor + rng.uniform(-0.5, 0.5, size=m)
+        poles = radius * np.exp(2j * np.pi * positions / length)  # roots of Q^[0]
         for _ in range(inner_iters):
-            q_eval = wq @ q
-            weights = 1.0 / np.maximum(np.abs(q_eval), 1e-6)
-            a_left = (x * weights)[:, None] * wq
-            a_right = -(weights[:, None] * wp)
-            a = np.hstack([a_left, a_right])
-            b = np.concatenate([q0, np.zeros(degree, dtype=np.complex128)])
-            normal = a.conj().T @ a
-            normal += 1e-8 * np.eye(normal.shape[0], dtype=np.complex128)
+            cauchy = 1.0 / (zn[:, None] - poles[None, :])
+            system = np.hstack([cauchy, -f[:, None] * cauchy])
             try:
-                unconstrained = np.linalg.solve(normal, b)
+                sol, *_ = np.linalg.lstsq(system, f, rcond=None)
             except np.linalg.LinAlgError:
-                unconstrained = np.linalg.pinv(normal) @ b
-            denom = np.vdot(b, unconstrained)
-            if abs(denom) < 1e-12:
                 break
-            z = unconstrained / denom
-            q = z[: degree + 1]
-            p = z[degree + 1 :]
-
-        q_eval = wq @ q
-        p_eval = wp @ p
-        safe_q = np.where(np.abs(q_eval) < 1e-8, 1e-8 + 0.0j, q_eval)
-        epsilon = quantize_residue(p_eval / safe_q, lambda_value)
-        error = float(np.mean((x - epsilon) ** 2))
-        if error < best_error:
-            best_error = error
-            best_epsilon = epsilon
-
-    return best_epsilon
-
-
-def recover_signal_from_modulo(
-    y: np.ndarray, lambda_value: float, diff_order: int = 1
-) -> np.ndarray:
-    """Recover g up to polynomial integration constants by nonlinear filtering."""
-
-    if diff_order < 1:
-        raise ValueError("diff_order must be at least 1")
-    delta_y = finite_difference(y, diff_order)
-    delta_g = modulo(delta_y, lambda_value)
-    return anti_difference(delta_g, diff_order, y.size)
+            if not np.all(np.isfinite(sol)):
+                break
+            sigma_res = sol[m:]
+            # zeros of sigma(z) = 1 + sum_m sigma_res_m / (z - a_m): new roots of Q
+            new_poles = np.linalg.eigvals(np.diag(poles) - np.outer(np.ones(m), sigma_res))
+            if not np.all(np.isfinite(new_poles)):
+                break
+            poles = _clamp_poles(new_poles)
+            for cand in _candidates(eps_tilde, zn, poles, lambda_value):
+                err = float(np.mean((eps_tilde - cand) ** 2))
+                if err < best_err:
+                    best_err, best = err, cand
+    if best is None:  # every weighted solve failed numerically
+        return quantize_residue(eps_tilde, lambda_value)
+    return best
 
 
-def spectral_spike_estimation(
-    signal: np.ndarray,
+# ----------------------------------------------------------------------------
+# P2: spike estimation by spectral fitting (Eqs. 45-47) and the matrix pencil
+# ----------------------------------------------------------------------------
+
+
+def kernel_spectrum(kernel_grid: np.ndarray, kernel: np.ndarray, n: int) -> np.ndarray:
+    circ = np.zeros(n)
+    idx = np.mod(np.rint(kernel_grid).astype(np.int64), n)
+    np.add.at(circ, idx, kernel)
+    return np.fft.fft(circ)
+
+
+def spectral_bandwidth(psi_hat: np.ndarray, k: int, rel: float) -> int:
+    mag = np.abs(psi_hat[: psi_hat.size // 2])
+    above = mag >= rel * mag[0]
+    count = int(np.argmin(above)) if not np.all(above) else mag.size
+    return int(min(max(count - 1, 2 * k + 1), psi_hat.size // 2 - 1))
+
+
+def matrix_pencil(x: np.ndarray, k: int) -> np.ndarray:
+    """Hua-Sarkar matrix pencil: poles z_k of x[i] = sum_k a_k z_k^i."""
+
+    length = x.size
+    pencil = min(max(length // 2, k), length - k - 1)
+    hankel = np.lib.stride_tricks.sliding_window_view(x, pencil + 1)
+    u, _, _ = np.linalg.svd(hankel, full_matrices=False)
+    uk = u[:, :k]
+    return np.linalg.eigvals(np.linalg.pinv(uk[:-1]) @ uk[1:])
+
+
+def taus_from_poles(z: np.ndarray, n: int) -> np.ndarray:
+    return np.mod(-np.angle(z) * n / (2.0 * np.pi), n)
+
+
+def fit_real_amplitudes(s: np.ndarray, ls: np.ndarray, taus: np.ndarray, n: int) -> np.ndarray:
+    vander = np.exp(-2j * np.pi * np.outer(ls, taus) / n)
+    stacked = np.vstack([vander.real, vander.imag])
+    rhs = np.concatenate([s.real, s.imag])
+    gam, *_ = np.linalg.lstsq(stacked, rhs, rcond=None)
+    return gam
+
+
+def spectral_spike_fit(
+    g_tilde: np.ndarray,
     k: int,
-    sigma: float,
-    period: float,
-    max_freq: int,
-) -> tuple[np.ndarray, np.ndarray, float, np.ndarray, str]:
-    """P2 spectral fitting with a continuum fallback for the Gaussian benchmark."""
+    psi_hat: np.ndarray,
+    bandwidth: int,
+    toeplitz_order: int,
+) -> tuple[np.ndarray, np.ndarray]:
+    n = g_tilde.size
+    ls = np.arange(-bandwidth, bandwidth + 1)
+    s = np.fft.fft(g_tilde)[ls % n] / psi_hat[ls % n]  # Eq. (45): s[l] = g_hat / psi_hat
+    zero = bandwidth  # index of l = 0
 
-    candidates: list[tuple[float, np.ndarray, np.ndarray, float, np.ndarray, str]] = []
+    # Initial spectral fit on l = 1..I_psi provides s[0] (Section III-C).
+    positive = s[zero + 1 :]
     try:
-        pencil_taus = matrix_pencil_spikes(signal, k, sigma, period, max_freq=max_freq)
-        refined = refine_spikes_from_initial(signal, pencil_taus, sigma)
-        resid = signal - refined[3]
-        candidates.append((float(resid @ resid), *refined, "matrix_pencil"))
-    except Exception:
+        taus0 = taus_from_poles(matrix_pencil(positive, k), n)
+        gam0 = fit_real_amplitudes(positive, ls[zero + 1 :], taus0, n)
+        s0 = float(np.sum(gam0))
+    except np.linalg.LinAlgError:
+        s0 = float(np.real(s[zero]))
+    fixed = s.copy()
+    if np.isfinite(s0):
+        fixed[zero] = s0
+    # Residual constant c0: G(s~) = G(s) + c0 I with rank G(s) = K (Eqs. 46-47).
+    order = int(min(max(toeplitz_order, k), bandwidth))
+    idx = np.arange(order + 1)
+    toeplitz = fixed[zero + idx[:, None] - idx[None, :]]
+    toeplitz = 0.5 * (toeplitz + toeplitz.conj().T)
+    try:
+        eig = np.linalg.eigvalsh(toeplitz)
+        c0 = float(np.mean(eig[: order + 1 - k]))
+        if np.isfinite(c0):
+            fixed[zero] = fixed[zero] - c0
+    except np.linalg.LinAlgError:
         pass
 
-    continuum = sparse_deconvolution_continuum(signal, k, sigma)
-    resid = signal - continuum[3]
-    candidates.append((float(resid @ resid), *continuum, "continuum_fallback"))
-    _, taus, amps, offset, reconstruction, solver = min(candidates, key=lambda item: item[0])
-    return taus, amps, offset, reconstruction, solver
+    taus = taus_from_poles(matrix_pencil(fixed, k), n)
+    gam = fit_real_amplitudes(fixed, ls, taus, n)
+    order_idx = np.argsort(taus)
+    return taus[order_idx], gam[order_idx]
 
 
-def recover_trial_itersis(
+# ----------------------------------------------------------------------------
+# Algorithm 1
+# ----------------------------------------------------------------------------
+
+
+def sres_itersis(
     y: np.ndarray,
-    k: int,
     lambda_value: float,
     sigma: float,
-    period: float,
-    max_freq: int,
-    fold_count: int | None,
-    outer_iters: int = 1,
-) -> dict[str, np.ndarray | float | str]:
-    """Compact SRes-IterSiS loop for Section III P1/P2 recovery."""
-
-    dy = finite_difference(y, 1)
-    base_signal = recover_signal_from_modulo(y, lambda_value, diff_order=1)
-    taus, amps, offset, reconstruction, solver = spectral_spike_estimation(
-        base_signal, k, sigma, period, max_freq
-    )
-    best_score = float(np.mean((base_signal - reconstruction) ** 2))
-    best_result = {
-        "signal_recovered_up_to_offset": base_signal,
-        "fold_residue": finite_difference(base_signal, 1) - dy,
-        "taus": taus,
-        "amplitudes": amps,
-        "offset": offset,
-        "reconstruction": reconstruction,
-        "p2_solver": f"{solver}+finite_difference",
-    }
-
-    epsilon_seed = finite_difference(reconstruction, 1) - dy
-    if fold_count is None or fold_count <= 0:
-        # Estimate the residue model degree from the current P2 reconstruction
-        # instead of reading the private clean-signal fold count.
-        residue_seed = quantize_residue(epsilon_seed, lambda_value)
-        fold_count = int(np.count_nonzero(np.abs(residue_seed) > lambda_value))
-        fold_count = max(1, min(fold_count, y.size // 6))
-    for _ in range(outer_iters):
-        residue_candidates = {
-            "lattice_seed": quantize_residue(epsilon_seed, lambda_value),
-            "rational_pq": rational_residue_recovery(
-                epsilon_seed, fold_count, lambda_value
-            ),
-        }
-        next_seed = epsilon_seed
-        for residue_solver, epsilon in residue_candidates.items():
-            candidate_signal = anti_difference(dy + epsilon, 1, y.size)
-            taus, amps, offset, reconstruction, solver = spectral_spike_estimation(
-                candidate_signal, k, sigma, period, max_freq
-            )
-            score = float(np.mean((candidate_signal - reconstruction) ** 2))
-            if score < best_score:
-                best_score = score
-                next_seed = finite_difference(reconstruction, 1) - dy
-                best_result = {
-                    "signal_recovered_up_to_offset": candidate_signal,
-                    "fold_residue": epsilon,
-                    "taus": taus,
-                    "amplitudes": amps,
-                    "offset": offset,
-                    "reconstruction": reconstruction,
-                    "p2_solver": f"{solver}+itersis_{residue_solver}",
-                }
-        epsilon_seed = next_seed
-
-    return best_result
-
-
-def recover_trial(
-    y: np.ndarray,
     k: int,
-    lambda_value: float,
-    sigma: float,
-    period: float,
-    max_freq: int,
-    diff_order: int,
-    fold_count: int | None = None,
-) -> dict[str, np.ndarray | float]:
-    if diff_order == 1:
-        return recover_trial_itersis(
-            y=y,
-            k=k,
-            lambda_value=lambda_value,
-            sigma=sigma,
-            period=period,
-            max_freq=max_freq,
-            fold_count=fold_count,
+    psi_hat: np.ndarray,
+    params: dict | None = None,
+    rng: np.random.Generator | None = None,
+) -> dict[str, np.ndarray | int]:
+    p = dict(DEFAULTS)
+    p.update(params or {})
+    rng = rng if rng is not None else np.random.default_rng(p["seed"])
+    y = np.asarray(y, dtype=np.float64)
+    n = y.size
+    bandwidth = spectral_bandwidth(psi_hat, k, p["bandwidth_rel"])
+    dy = np.diff(y)
+    eps_tilde = -dy
+    previous = None
+    taus = np.linspace(n / 3.0, 2.0 * n / 3.0, k)
+    amps = np.zeros(k)
+    g_tilde = anti_difference(modulo(dy, lambda_value))
+    eps = np.zeros(n - 1)
+    iterations = 0
+    for _ in range(int(p["outer_iters"])):
+        num_folds = int(np.count_nonzero(quantize_residue(eps_tilde, lambda_value)))
+        eps = rational_residue_recovery(
+            eps_tilde, num_folds, lambda_value, int(p["inner_iters"]), int(p["initializations"]), rng
         )
-    g_tilde = recover_signal_from_modulo(y, lambda_value, diff_order=diff_order)
-    taus, amps, offset, reconstruction, solver = spectral_spike_estimation(
-        g_tilde, k, sigma, period, max_freq
-    )
+        if previous is not None and np.array_equal(eps, previous):
+            break  # residues stopped changing: P2 already holds the matching fit
+        iterations += 1
+        g_tilde = anti_difference(dy + eps)
+        try:
+            new_taus, new_amps = spectral_spike_fit(g_tilde, k, psi_hat, bandwidth, int(p["toeplitz_order"]))
+        except np.linalg.LinAlgError:
+            break
+        if not (np.all(np.isfinite(new_taus)) and np.all(np.isfinite(new_amps))):
+            break
+        taus, amps = new_taus, new_amps
+        model = gaussian_atoms(n, taus, sigma) @ amps
+        eps_tilde = np.diff(model) - dy  # Eq. (34)
+        previous = eps
+
+    taus = np.clip(taus, 0.0, n - 1.0)
+    recon = gaussian_atoms(n, taus, sigma) @ amps
+    # Numerical safeguard: a recovered waveform cannot exceed the unwrapped data range by much.
+    bound = 2.0 * float(np.max(np.abs(g_tilde))) + 2.0 * lambda_value
+    recon = np.clip(recon, -bound, bound)
     return {
-        "signal_recovered_up_to_offset": g_tilde,
         "taus": taus,
         "amplitudes": amps,
-        "offset": offset,
-        "reconstruction": reconstruction,
-        "p2_solver": solver,
+        "reconstruction": recon,
+        "g_tilde": g_tilde,
+        "residue": eps,
+        "iterations": iterations,
     }
 
 
-def run_method(input_path: Path, output_path: Path, max_freq: int, diff_order: int) -> None:
-    data = np.load(input_path, allow_pickle=True)
-    config = data["config"][0]
-    samples = data["modulo_samples"]
-    # Public acquisition files must not provide clean-signal fold counts.
-    # Estimate the residue degree inside the recovery loop instead of trusting
-    # any stale or private metadata that may be present in an input archive.
-    fold_counts = np.full(samples.shape[0], -1)
-    all_taus = []
-    all_recon = []
-    all_gtilde = []
-    all_residue = []
-    solvers = []
-    for y, fold_count in zip(samples, fold_counts):
-        recovered = recover_trial(
-            y=y,
-            k=2,
-            lambda_value=float(config["lambda_value"]),
-            sigma=float(config["sigma"]),
-            period=float(config["period"]),
-            max_freq=max_freq,
-            diff_order=diff_order,
-            fold_count=int(fold_count) if int(fold_count) >= 0 else None,
-        )
-        all_taus.append(recovered["taus"])
-        all_recon.append(recovered["reconstruction"])
-        all_gtilde.append(recovered["signal_recovered_up_to_offset"])
-        if "fold_residue" in recovered:
-            all_residue.append(recovered["fold_residue"])
-        solvers.append(str(recovered.get("p2_solver", "unknown")))
+def load_inputs(path: Path) -> dict[str, np.ndarray]:
+    with np.load(path, allow_pickle=False) as data:
+        return {key: data[key] for key in data.files}
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(
-        output_path,
-        method=np.array("us_sres"),
-        taus=np.asarray(all_taus),
-        reconstruction=np.asarray(all_recon),
-        g_tilde=np.asarray(all_gtilde),
-        fold_residue=np.asarray(all_residue) if all_residue else np.empty((0,)),
-        diff_order=np.array(diff_order),
-        p2_solver=np.asarray(solvers),
-        source=str(input_path),
-    )
-    metadata = {
-        "input": str(input_path),
-        "output": str(output_path),
-        "max_freq": max_freq,
-        "diff_order": diff_order,
-    }
-    output_path.with_suffix(".json").write_text(json.dumps(metadata, indent=2))
-    print(f"wrote {output_path}")
+
+def recover_all(inputs: dict[str, np.ndarray], params: dict | None = None) -> dict[str, np.ndarray]:
+    p = dict(DEFAULTS)
+    p.update(params or {})
+    samples = np.asarray(inputs["modulo_samples"], dtype=np.float64)
+    n = samples.shape[1]
+    lam = float(inputs["lambda_value"])
+    sigma = float(inputs["kernel_sigma"])
+    k = int(inputs["num_spikes"])
+    psi_hat = kernel_spectrum(inputs["kernel_grid"], inputs["kernel"], n)
+    rng = np.random.default_rng(p["seed"])
+    out = {"taus": [], "reconstruction": [], "amplitudes": [], "g_tilde": [], "iterations": []}
+    for y in samples:
+        res = sres_itersis(y, lam, sigma, k, psi_hat, p, rng)
+        for key in out:
+            out[key].append(res[key])
+    return {key: np.asarray(val) for key, val in out.items()}
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--input", default="data/synthetic/us_sres_benchmark.npz")
-    parser.add_argument("--output", default="checkpoints/us_sres_outputs.npz")
-    parser.add_argument("--max-freq", type=int, default=12)
-    parser.add_argument("--diff-order", type=int, default=1)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("input", type=Path, help="method input archive (modulo samples + sensor constants)")
+    parser.add_argument("output", type=Path, help="where to write reconstruction and taus")
+    parser.add_argument("--seed", type=int, default=DEFAULTS["seed"])
     args = parser.parse_args()
-    run_method(Path(args.input), Path(args.output), args.max_freq, args.diff_order)
+    result = recover_all(load_inputs(args.input), {"seed": args.seed})
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    np.savez(
+        args.output,
+        reconstruction=result["reconstruction"],
+        taus=result["taus"],
+        amplitudes=result["amplitudes"],
+        iterations=result["iterations"],
+    )
+    print(f"wrote {args.output} (mean outer iterations {np.mean(result['iterations']):.2f})")
 
 
 if __name__ == "__main__":

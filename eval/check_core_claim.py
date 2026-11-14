@@ -1,7 +1,9 @@
-"""Quality gate for reproduction jobs.
+"""Quality gate: does the reference reproduce the paper's core claim?
 
-This does not replace the reusable evaluator. It only makes job failures
-explicit when regenerated scores no longer support the paper's core claim.
+Checks that the registered reference method (``us_sres``) recovers the
+waveform with at least ``--min-gain-db`` lower MSE than the conventional
+clipping ADC in every experiment of a score file.  Diagnostic only; it is not
+part of any score.
 """
 
 from __future__ import annotations
@@ -13,38 +15,20 @@ from pathlib import Path
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--scores", default="scoring/scores.json")
-    parser.add_argument("--reference", default="scoring/reference.json")
-    parser.add_argument("--min-gain-db", type=float, default=20.0)
+    parser.add_argument("--scores", default="scoring/scores_test.json")
+    parser.add_argument("--method", default="us_sres")
+    parser.add_argument("--min-gain-db", type=float, default=30.0)
     args = parser.parse_args()
-
     scores = json.loads(Path(args.scores).read_text())
-    reference = json.loads(Path(args.reference).read_text())
     failures = []
-    scored_experiments = scores.get("experiments", {})
-    for name in reference.get("experiments", {}):
-        if name not in scored_experiments:
-            failures.append((name, None))
-            continue
-        result = scored_experiments[name].get("results", {}).get("us_sres", {})
-        gain = result.get("mse_gain_over_conventional_db")
+    for name, exp in scores.get("experiments", {}).items():
+        gain = exp.get("results", {}).get(args.method, {}).get("mse_gain_over_conventional_db")
+        print(f"{name}: {args.method} gain = {gain}")
         if gain is None or gain < args.min_gain_db:
-            failures.append((name, gain))
-
+            failures.append(name)
     if failures:
-        details = ", ".join(
-            f"{name}={gain if gain is not None else 'missing'} dB"
-            for name, gain in failures
-        )
-        raise SystemExit(
-            f"core-claim quality gate failed: expected US-SRes MSE gain "
-            f">= {args.min_gain_db:.1f} dB for every experiment; got {details}"
-        )
-
-    print(
-        f"core-claim quality gate passed: US-SRes gain >= "
-        f"{args.min_gain_db:.1f} dB for every experiment"
-    )
+        raise SystemExit(f"core claim NOT met (< {args.min_gain_db} dB) in: {', '.join(failures)}")
+    print(f"core claim met: gain >= {args.min_gain_db} dB in every experiment")
 
 
 if __name__ == "__main__":

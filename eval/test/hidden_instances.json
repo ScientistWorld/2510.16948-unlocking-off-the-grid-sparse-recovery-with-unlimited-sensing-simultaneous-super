@@ -1,0 +1,11 @@
+{
+  "note": "Private seeds of the hidden test scenes. Only the test evaluator reads this file; it is unreadable while submitted methods run.",
+  "trials": 200,
+  "seeds": {
+    "synthetic_lowbit_hdr_dr10": 583920117,
+    "synthetic_lowbit_hdr_dr20": 270466381,
+    "synthetic_lowbit_hdr_dr30": 914385529,
+    "synthetic_lowbit_hdr_dr30_bits5": 446107283,
+    "synthetic_lowbit_hdr_dr30_bits8": 738251964
+  }
+}

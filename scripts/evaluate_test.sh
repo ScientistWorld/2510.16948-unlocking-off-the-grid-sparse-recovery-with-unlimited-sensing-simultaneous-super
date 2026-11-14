@@ -1,37 +1,14 @@
 #!/bin/bash
-# Evaluate saved method artifacts on the held-out test slice.
+# Score every registered method on the hidden test slice.
 #
-# Mirrors scripts/evaluate.sh:
-#   ./evaluate_test.sh <data> <method_output> <baseline_output> [experiment_name]
-#   ./evaluate_test.sh
+#   bash scripts/evaluate_test.sh
 #
-# The default mode invokes eval/test/ code and scores every method entry already
-# present in scoring/scores_train.json. If that file is absent, it falls back to
-# the same checkpoint enumeration used by evaluate_train.sh. Results are written
-# only to scoring/scores_test.json.
-
-set -e
-
+# Runs eval/test/: builds the hidden test acquisitions from private seeds,
+# calls every entry point scripts/methods/<name>.sh on them, rebuilds the
+# answers in memory after the methods return, computes the conventional
+# clipping-ADC baseline itself, validates every output and recomputes every
+# metric.  Writes scoring/scores_test.json.  Needs no arguments.
+set -euo pipefail
 cd /home/user
-
 mkdir -p scoring
-mkdir -p tmp
-
-if [ "$#" -ge 3 ]; then
-  DATA_PATH="$1"
-  METHOD_OUTPUT="$2"
-  BASELINE_OUTPUT="$3"
-  EXPERIMENT_NAME="${4:-synthetic_lowbit_hdr_dr20}"
-  python -m eval.test.evaluate_us_sres_slice \
-    --data "$DATA_PATH" \
-    --method "$METHOD_OUTPUT" \
-    --baseline "$BASELINE_OUTPUT" \
-    --experiment-name "$EXPERIMENT_NAME" \
-    --scores scoring/scores_test.json
-  exit 0
-fi
-
-python -m eval.test.evaluate_us_sres_slice \
-  --checkpoint-dir checkpoints \
-  --train-scores scoring/scores_train.json \
-  --scores scoring/scores_test.json
+python -m eval.test.evaluate "$@"
