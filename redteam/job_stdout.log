@@ -1,0 +1,324 @@
+[hive] This stdout log is managed by Hive.
+[hive] job_id: d64acc24
+[hive] host: node
+[hive] node_id: 305f846073ae02922e2c6c141e0a78dc038518b60242ea90b3518fb9
+[hive] user: nexus/user (remote)
+[hive] resource: gpu-cpu-test
+[hive] gpus: 0
+[hive] cpus: 1
+[hive] workdir: /home/user
+[hive] timeout_sec: 21600
+[hive] started_at: 2026-11-14 03:46:45 EST
+[hive] command: apptainer exec --containall --cleanenv --env HF_HOME=/home/user/shared/hf_cache --env TRANSFORMERS_CACHE=/home/user/shared/hf_cache --env HF_DATASETS_CACHE=/home/user/shared/hf_cache/datasets --env TORCH_HOME=/home/user/shared/hf_cache/torch --bind /home/user/scratch/AgentWorkspaces/workspaces/2510.16948:/home/user --overlay /home/user/scratch/AgentWorkspaces/workspaces/2510.16948/environment/overlay.img:ro --bind /home/user/scratch/AgentWorkspaces/shared/datasets:/home/user/shared/datasets:ro --bind /home/user/scratch/AgentWorkspaces/shared/models:/home/user/shared/models:ro --bind /home/user/scratch/AgentWorkspaces/shared/hf_cache:/home/user/shared/hf_cache /home/user/scratch/AgentWorkspaces/workspaces/2510.16948/environment/container.sif bash -c 'cd /home/user && bash /home/user/scripts/run.sh'
+START reference_seed_16948
+wrote /home/user/checkpoints/audit_dr10.npz
+wrote /home/user/checkpoints/audit_dr20.npz
+wrote /home/user/checkpoints/audit_dr30.npz
+wrote /home/user/checkpoints/audit_dr20_bits5.npz
+wrote /home/user/checkpoints/audit_dr20_bits8.npz
+{"case": "reference_seed_16948", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 165.93594579497585}
+START reference_seed_16949
+wrote /home/user/checkpoints/audit_dr10.npz
+wrote /home/user/checkpoints/audit_dr20.npz
+wrote /home/user/checkpoints/audit_dr30.npz
+wrote /home/user/checkpoints/audit_dr20_bits5.npz
+wrote /home/user/checkpoints/audit_dr20_bits8.npz
+{"case": "reference_seed_16949", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 164.521946895984}
+START reference_seed_16950
+wrote /home/user/checkpoints/audit_dr10.npz
+wrote /home/user/checkpoints/audit_dr20.npz
+wrote /home/user/checkpoints/audit_dr30.npz
+wrote /home/user/checkpoints/audit_dr20_bits5.npz
+wrote /home/user/checkpoints/audit_dr20_bits8.npz
+{"case": "reference_seed_16950", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 166.26240905601298}
+START better_sensor_fit
+{"case": "better_sensor_fit", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.594470315030776}
+START weaker_no_unwrap
+{"case": "weaker_no_unwrap", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 53.83911865600385}
+START shortcut_bruteforce
+{"case": "shortcut_bruteforce", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 54.25945861701621}
+START shortcut_labels
+{"case": "shortcut_labels", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.028309924993664}
+START shortcut_seed_replay
+{"case": "shortcut_seed_replay", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.0421929890289903}
+START shortcut_baseline_inflation
+{"case": "shortcut_baseline_inflation", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.0428830899763852}
+START shortcut_failing_baseline_inflation
+{"case": "shortcut_failing_baseline_inflation", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.2595009810174815}
+START shortcut_relabel
+{"case": "shortcut_relabel", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.1692427610396408}
+START shortcut_config
+{"case": "shortcut_config", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.075744747009594}
+START shortcut_self_report
+{"case": "shortcut_self_report", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.1995214350172319}
+START shortcut_copy_input
+{"case": "shortcut_copy_input", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 0.9275392319541425}
+START shortcut_constant
+{"case": "shortcut_constant", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 2.0147782109561376}
+START shortcut_impossible
+{"case": "shortcut_impossible", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 1.5311939229723066}
+START shortcut_nan
+{"case": "shortcut_nan", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "seconds": 0.9708822899847291}
+START shortcut_empty
+{"case": "shortcut_empty", "candidate": "audit", "train_exit": 1, "test_exit": 1, "score_file_written": false, "seconds": 0.8158310779836029}
+START shortcut_missing
+{"case": "shortcut_missing", "candidate": "audit", "train_exit": 0, "test_exit": 1, "score_file_written": false, "seconds": 0.8960278569720685}
+START shortcut_omission
+{"case": "shortcut_omission", "candidate": "audit", "train_exit": 0, "test_exit": 0, "score_file_written": true, "artifacts_on_disk": ["checkpoints/audit_dr20.npz", "checkpoints/audit_dr30.npz", "checkpoints/audit_dr10.npz", "checkpoints/audit_dr20_bits8.npz", "checkpoints/audit_dr20_bits5.npz"], "seconds": 1.7740777040016837}
+{
+  "original_reference": {
+    "audit_normalized_rank_delta": 0.0,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.0,
+      "synthetic_lowbit_hdr_dr20": 0.0,
+      "synthetic_lowbit_hdr_dr30": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.0
+    },
+    "mean_mse_gain_db": 38.078525789852236,
+    "mean_psnr_db": 62.58381614533921,
+    "mean_time_mae_samples": 0.7560686801137149,
+    "mean_signal_mse": 0.009088752502890996,
+    "mean_wrapped_measurement_mae": 0.1544547698640315
+  },
+  "reference_seed_16948": {
+    "audit_normalized_rank_delta": 0.0,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.0,
+      "synthetic_lowbit_hdr_dr20": 0.0,
+      "synthetic_lowbit_hdr_dr30": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.0
+    },
+    "mean_mse_gain_db": 38.078525789852236,
+    "mean_psnr_db": 62.58381614533921,
+    "mean_time_mae_samples": 0.7560686801137149,
+    "mean_signal_mse": 0.009088752502890996,
+    "mean_wrapped_measurement_mae": 0.1544547698640315
+  },
+  "reference_seed_16949": {
+    "audit_normalized_rank_delta": 0.0,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.0,
+      "synthetic_lowbit_hdr_dr20": 0.0,
+      "synthetic_lowbit_hdr_dr30": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.0
+    },
+    "mean_mse_gain_db": 38.078525789852236,
+    "mean_psnr_db": 62.58381614533921,
+    "mean_time_mae_samples": 0.7560686801137149,
+    "mean_signal_mse": 0.009088752502890996,
+    "mean_wrapped_measurement_mae": 0.1544547698640315
+  },
+  "reference_seed_16950": {
+    "audit_normalized_rank_delta": 0.0,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.0,
+      "synthetic_lowbit_hdr_dr20": 0.0,
+      "synthetic_lowbit_hdr_dr30": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.0
+    },
+    "mean_mse_gain_db": 38.078525789852236,
+    "mean_psnr_db": 62.58381614533921,
+    "mean_time_mae_samples": 0.7560686801137149,
+    "mean_signal_mse": 0.009088752502890996,
+    "mean_wrapped_measurement_mae": 0.1544547698640315
+  },
+  "better_sensor_fit": {
+    "audit_normalized_rank_delta": 0.3941922720909912,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.10003733765911255,
+      "synthetic_lowbit_hdr_dr20": 0.09978478336804233,
+      "synthetic_lowbit_hdr_dr30": 0.09079956494588182,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.060734156127644975,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.042836429990309524
+    },
+    "mean_mse_gain_db": 69.46146732523826,
+    "mean_psnr_db": 78.48880535121573,
+    "mean_time_mae_samples": 0.11089615400668781,
+    "mean_signal_mse": 2.6262565448254243e-05,
+    "mean_wrapped_measurement_mae": 0.06044230111067678
+  },
+  "weaker_no_unwrap": {
+    "audit_normalized_rank_delta": -1.0446253162427417,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": -0.12158594656245283,
+      "synthetic_lowbit_hdr_dr20": -0.12929340610458245,
+      "synthetic_lowbit_hdr_dr30": -0.14995611397122915,
+      "synthetic_lowbit_hdr_dr20_bits5": -0.30290002803699845,
+      "synthetic_lowbit_hdr_dr20_bits8": -0.3408898215674788
+    },
+    "mean_mse_gain_db": -0.7317090610964505,
+    "mean_psnr_db": 9.524989398273059,
+    "mean_time_mae_samples": 60.52744723981332,
+    "mean_signal_mse": 74.27769747419401,
+    "mean_wrapped_measurement_mae": 0.30196199186549205
+  },
+  "shortcut_bruteforce": {
+    "audit_normalized_rank_delta": 3.813500109812092e-09,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 4.030500700979092e-09,
+      "synthetic_lowbit_hdr_dr20": -1.4345426885872956e-12,
+      "synthetic_lowbit_hdr_dr30": -2.1556604847841196e-10,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.0,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.0
+    },
+    "mean_mse_gain_db": 38.078525794123145,
+    "mean_psnr_db": 62.58381616285103,
+    "mean_time_mae_samples": 0.7560682498056277,
+    "mean_signal_mse": 0.009088752491153257,
+    "mean_wrapped_measurement_mae": 0.1544547697325712
+  },
+  "shortcut_labels": {
+    "audit_normalized_rank_delta": 1.3764580684982504,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.3144520606565303,
+      "synthetic_lowbit_hdr_dr20": 0.30472454952968275,
+      "synthetic_lowbit_hdr_dr30": 0.300982125617202,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.2516001678631644,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.2046991648316709
+    },
+    "mean_mse_gain_db": 197.07403728073012,
+    "mean_psnr_db": 205.5669849182961,
+    "mean_time_mae_samples": 0.0,
+    "mean_signal_mse": 0.0,
+    "mean_wrapped_measurement_mae": 0.058443213602163466
+  },
+  "shortcut_seed_replay": {
+    "audit_normalized_rank_delta": 1.3764580684982504,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.3144520606565303,
+      "synthetic_lowbit_hdr_dr20": 0.30472454952968275,
+      "synthetic_lowbit_hdr_dr30": 0.300982125617202,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.2516001678631644,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.2046991648316709
+    },
+    "mean_mse_gain_db": 197.07403728073012,
+    "mean_psnr_db": 205.5669849182961,
+    "mean_time_mae_samples": 0.0,
+    "mean_signal_mse": 0.0,
+    "mean_wrapped_measurement_mae": 0.058443213602163466
+  },
+  "shortcut_baseline_inflation": {
+    "audit_normalized_rank_delta": 3.128806714084794,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.6254496428487746,
+      "synthetic_lowbit_hdr_dr20": 0.6257369701329243,
+      "synthetic_lowbit_hdr_dr30": 0.6258276859677441,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.6257942584016087,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.6259981567337423
+    },
+    "mean_mse_gain_db": 3021.004488509122,
+    "mean_psnr_db": 62.58381614533921,
+    "mean_time_mae_samples": 0.7560686801137149,
+    "mean_signal_mse": 0.009088752502890996,
+    "mean_wrapped_measurement_mae": 0.1544547698640315
+  },
+  "shortcut_failing_baseline_inflation": {
+    "audit_normalized_rank_delta": 2.151725249060898,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.4703790526958238,
+      "synthetic_lowbit_hdr_dr20": 0.45826969159753295,
+      "synthetic_lowbit_hdr_dr30": 0.4528571960848558,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.4023863366064031,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.36783297207628235
+    },
+    "mean_mse_gain_db": 2982.227452811328,
+    "mean_psnr_db": 9.646417476544519,
+    "mean_time_mae_samples": 22.477579930680346,
+    "mean_signal_mse": 73.89982492912591,
+    "mean_wrapped_measurement_mae": 0.34374026366711774
+  },
+  "shortcut_relabel": {
+    "audit_normalized_rank_delta": 1.536262195494628,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.36853860934868543,
+      "synthetic_lowbit_hdr_dr20": 0.35350884907674995,
+      "synthetic_lowbit_hdr_dr30": 0.34746625352966376,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.2610584157756881,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.205690067763841
+    },
+    "mean_mse_gain_db": 196.9911285218649,
+    "mean_psnr_db": 205.53278155065186,
+    "mean_time_mae_samples": 0.0,
+    "mean_signal_mse": 0.0,
+    "mean_wrapped_measurement_mae": 0.0
+  },
+  "shortcut_config": {
+    "audit_normalized_rank_delta": 0.8500000000000001,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.17,
+      "synthetic_lowbit_hdr_dr20": 0.17,
+      "synthetic_lowbit_hdr_dr30": 0.17000000000000004,
+      "synthetic_lowbit_hdr_dr20_bits5": 0.17000000000000004,
+      "synthetic_lowbit_hdr_dr20_bits8": 0.17
+    },
+    "mean_mse_gain_db": 38.078525789852236,
+    "mean_psnr_db": 62.58381614533921,
+    "mean_time_mae_samples": 0.7560686801137149,
+    "mean_signal_mse": 0.009088752502890996,
+    "mean_wrapped_measurement_mae": 0.1544547698640315
+  },
+  "shortcut_self_report": {
+    "audit_normalized_rank_delta": -0.9770814650238957,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": -0.15507059015295072,
+      "synthetic_lowbit_hdr_dr20": -0.1674672785353915,
+      "synthetic_lowbit_hdr_dr30": -0.17297048988288827,
+      "synthetic_lowbit_hdr_dr20_bits5": -0.22340792179520552,
+      "synthetic_lowbit_hdr_dr20_bits8": -0.2581651846574597
+    },
+    "mean_mse_gain_db": -0.698509907941481,
+    "mean_psnr_db": 9.646417476544519,
+    "mean_time_mae_samples": 22.477579930680346,
+    "mean_signal_mse": 73.89982492912591,
+    "mean_wrapped_measurement_mae": 0.34374026366711774
+  },
+  "shortcut_copy_input": {
+    "audit_normalized_rank_delta": -0.22634110649322398,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": 0.002243759836227141,
+      "synthetic_lowbit_hdr_dr20": -0.015295423424881396,
+      "synthetic_lowbit_hdr_dr30": -0.02157438719271007,
+      "synthetic_lowbit_hdr_dr20_bits5": -0.07499117651748727,
+      "synthetic_lowbit_hdr_dr20_bits8": -0.1167238791943724
+    },
+    "mean_mse_gain_db": -0.751896377151344,
+    "mean_psnr_db": 9.494956976756685,
+    "mean_time_mae_samples": 22.477579930680346,
+    "mean_signal_mse": 74.51436586184207,
+    "mean_wrapped_measurement_mae": 0.05286926147704592
+  },
+  "shortcut_constant": {
+    "audit_normalized_rank_delta": -0.9770814650238957,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": -0.15507059015295072,
+      "synthetic_lowbit_hdr_dr20": -0.1674672785353915,
+      "synthetic_lowbit_hdr_dr30": -0.17297048988288827,
+      "synthetic_lowbit_hdr_dr20_bits5": -0.22340792179520552,
+      "synthetic_lowbit_hdr_dr20_bits8": -0.2581651846574597
+    },
+    "mean_mse_gain_db": -0.698509907941481,
+    "mean_psnr_db": 9.646417476544519,
+    "mean_time_mae_samples": 22.477579930680346,
+    "mean_signal_mse": 73.89982492912591,
+    "mean_wrapped_measurement_mae": 0.34374026366711774
+  },
+  "shortcut_impossible": {
+    "audit_normalized_rank_delta": -7.379579506740118,
+    "experiment_contributions": {
+      "synthetic_lowbit_hdr_dr10": -1.4360929696384672,
+      "synthetic_lowbit_hdr_dr20": -1.4477283770844127,
+      "synthetic_lowbit_hdr_dr30": -1.4534253581979821,
+      "synthetic_lowbit_hdr_dr20_bits5": -1.501870620546003,
+      "synthetic_lowbit_hdr_dr20_bits8": -1.5404621812732535
+    },
+    "mean_mse_gain_db": -102.92592077265063,
+    "mean_psnr_db": 9.646417476544519,
+    "mean_time_mae_samples": 962.4511640961207,
+    "mean_signal_mse": 999990341485.2955,
+    "mean_wrapped_measurement_mae": 0.34374026366711774
+  }
+}

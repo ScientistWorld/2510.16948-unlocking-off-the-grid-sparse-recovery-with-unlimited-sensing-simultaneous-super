@@ -1,0 +1,173 @@
+{
+  "baseline_mean_signal_mse": 65.10511348833857,
+  "baseline_mean_time_mae_samples": 50.747518294693236,
+  "checked_attempts": 20,
+  "checked_rank_deltas": 17,
+  "direction_comparisons": {
+    "better_sensor_fit": {
+      "all_metrics": {
+        "better": 40,
+        "same": 20,
+        "worse": 0
+      },
+      "quality_metrics": {
+        "better": 40,
+        "same": 0,
+        "worse": 0
+      }
+    },
+    "shortcut_baseline_inflation": {
+      "all_metrics": {
+        "better": 5,
+        "same": 55,
+        "worse": 0
+      },
+      "quality_metrics": {
+        "better": 5,
+        "same": 35,
+        "worse": 0
+      }
+    },
+    "shortcut_config": {
+      "all_metrics": {
+        "better": 20,
+        "same": 40,
+        "worse": 0
+      },
+      "quality_metrics": {
+        "better": 0,
+        "same": 40,
+        "worse": 0
+      }
+    },
+    "shortcut_labels": {
+      "all_metrics": {
+        "better": 40,
+        "same": 20,
+        "worse": 0
+      },
+      "quality_metrics": {
+        "better": 40,
+        "same": 0,
+        "worse": 0
+      }
+    },
+    "shortcut_relabel": {
+      "all_metrics": {
+        "better": 40,
+        "same": 20,
+        "worse": 0
+      },
+      "quality_metrics": {
+        "better": 40,
+        "same": 0,
+        "worse": 0
+      }
+    },
+    "shortcut_seed_replay": {
+      "all_metrics": {
+        "better": 40,
+        "same": 20,
+        "worse": 0
+      },
+      "quality_metrics": {
+        "better": 40,
+        "same": 0,
+        "worse": 0
+      }
+    },
+    "weaker_no_unwrap": {
+      "all_metrics": {
+        "better": 0,
+        "same": 20,
+        "worse": 40
+      },
+      "quality_metrics": {
+        "better": 0,
+        "same": 0,
+        "worse": 40
+      }
+    }
+  },
+  "nan_quality_metric_values": 40,
+  "omitted_methods": 5,
+  "per_experiment_seed_spread": {
+    "synthetic_lowbit_hdr_dr10": {
+      "amplitude_ratio": 0.0,
+      "dynamic_range_x": 0.0,
+      "hard_fold_signal_mse": 0.0,
+      "mean_fold_count": 0.0,
+      "mse_gain_over_conventional_db": 0.0,
+      "psnr_db": 0.0,
+      "quant_bits": 0.0,
+      "signal_mse": 0.0,
+      "tau_max_error_samples": 0.0,
+      "time_mae_samples": 0.0,
+      "weak_tau_mae_samples": 0.0,
+      "wrapped_measurement_mae": 0.0
+    },
+    "synthetic_lowbit_hdr_dr20": {
+      "amplitude_ratio": 0.0,
+      "dynamic_range_x": 0.0,
+      "hard_fold_signal_mse": 0.0,
+      "mean_fold_count": 0.0,
+      "mse_gain_over_conventional_db": 0.0,
+      "psnr_db": 0.0,
+      "quant_bits": 0.0,
+      "signal_mse": 0.0,
+      "tau_max_error_samples": 0.0,
+      "time_mae_samples": 0.0,
+      "weak_tau_mae_samples": 0.0,
+      "wrapped_measurement_mae": 0.0
+    },
+    "synthetic_lowbit_hdr_dr20_bits5": {
+      "amplitude_ratio": 0.0,
+      "dynamic_range_x": 0.0,
+      "hard_fold_signal_mse": 0.0,
+      "mean_fold_count": 0.0,
+      "mse_gain_over_conventional_db": 0.0,
+      "psnr_db": 0.0,
+      "quant_bits": 0.0,
+      "signal_mse": 0.0,
+      "tau_max_error_samples": 0.0,
+      "time_mae_samples": 0.0,
+      "weak_tau_mae_samples": 0.0,
+      "wrapped_measurement_mae": 0.0
+    },
+    "synthetic_lowbit_hdr_dr20_bits8": {
+      "amplitude_ratio": 0.0,
+      "dynamic_range_x": 0.0,
+      "hard_fold_signal_mse": 0.0,
+      "mean_fold_count": 0.0,
+      "mse_gain_over_conventional_db": 0.0,
+      "psnr_db": 0.0,
+      "quant_bits": 0.0,
+      "signal_mse": 0.0,
+      "tau_max_error_samples": 0.0,
+      "time_mae_samples": 0.0,
+      "weak_tau_mae_samples": 0.0,
+      "wrapped_measurement_mae": 0.0
+    },
+    "synthetic_lowbit_hdr_dr30": {
+      "amplitude_ratio": 0.0,
+      "dynamic_range_x": 0.0,
+      "hard_fold_signal_mse": 0.0,
+      "mean_fold_count": 0.0,
+      "mse_gain_over_conventional_db": 0.0,
+      "psnr_db": 0.0,
+      "quant_bits": 0.0,
+      "signal_mse": 0.0,
+      "tau_max_error_samples": 0.0,
+      "time_mae_samples": 0.0,
+      "weak_tau_mae_samples": 0.0,
+      "wrapped_measurement_mae": 0.0
+    }
+  },
+  "restoration": {
+    "checkpoints": true,
+    "data/synthetic": true,
+    "eval_and_other_scripts": true,
+    "scoring": true,
+    "scripts/run.sh": true
+  }
+}
