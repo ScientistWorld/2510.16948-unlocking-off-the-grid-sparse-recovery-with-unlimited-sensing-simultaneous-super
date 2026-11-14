@@ -1,4 +1,2 @@
-action: submit
-gpus: 0
-test: false
-notes: "Run 20 isolated scoring-audit trials, including three reference seeds, stronger/weaker variants, brute force, and major shortcuts; preserve per-trial hidden-test JSON under redteam/."
+action: done
+notes: "Completed 20-trial gym audit: genuine ordering passes; seven shortcuts win or tie; seed spread zero; report and evidence committed; original gym files restored."
