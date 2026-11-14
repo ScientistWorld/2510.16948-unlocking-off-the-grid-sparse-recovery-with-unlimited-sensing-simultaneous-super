@@ -1,6 +1,4 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
-action: submit
-gpus: 0
-test: false
+action: done
 milestone: secondary_claims
-notes: "Hardening job 1: calibration of sensor noise/pulse width, audit of better/weaker variants and shortcuts through the no-argument evaluators, official reference-only train/test scores, analysis, validate."
+notes: "Hardened gym: hidden eval/test scenes, evaluator-computed baseline, validated outputs with worst-value failures, Algorithm 1 reference with sensor noise; better variants +7.7-9.9 dB, brute force and all shortcuts now below reference. See HARDENING.md."
