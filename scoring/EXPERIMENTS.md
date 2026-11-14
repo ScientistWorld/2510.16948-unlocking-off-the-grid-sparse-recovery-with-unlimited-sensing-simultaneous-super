@@ -1,36 +1,40 @@
 # Experiments
 
+All five experiments score the same task on hidden scenes: recover a
+high-dynamic-range two-reflection waveform and both off-grid spike times
+(including the weak reflection) from low-bit modulo samples with thermal
+sensor noise.  Each is scored against recovery from a conventional ADC with
+the same input range and bit budget, which clips.  The settings follow the
+paper's Fig. 2 axes (dynamic range and bit depth).
+
 ## synthetic_lowbit_hdr_dr10
 
-This experiment checks whether a method can recover a high-dynamic-range
-two-reflection waveform and its off-grid spike times from low-bit measurements
-when the conventional ADC range is moderately exceeded. It measures benefit
-over a clipped sparse-recovery baseline while preserving low bit depth,
-weak/strong amplitude disparity, and a fixed dynamic-range stress level.
+Moderate dynamic range (signal 10x the ADC range) at 3 bits.  Establishes the
+basic claim that modulo sensing recovers both the waveform and the timing far
+better than a clipping ADC under a fixed low bit budget; the folding is mild
+enough that recovery quality is limited mainly by quantization.
 
 ## synthetic_lowbit_hdr_dr20
 
-This experiment checks the same low-bit two-reflection recovery problem under
-a stronger dynamic-range stress level. It asks whether the main claimed effect
-remains visible when the strong component is much larger than the sensing
-range available to a conventional clipped ADC.
+The same task at twice the dynamic range (20x), 3 bits.  Checks that the
+advantage persists and grows as clipping becomes more severe.
 
 ## synthetic_lowbit_hdr_dr30
 
-This experiment checks robustness at the hardest dynamic-range setting included
-in the compact reproduction. It is intended to show whether the recovery
-advantage persists as the clipping problem becomes more severe while the
-measurement bit depth and weak/strong amplitude disparity remain fixed.
+The paper's largest dynamic range (30x) at 3 bits.  Here the signal changes
+fast enough relative to the sampling grid that noise and coarse quantization
+make the folding hard to undo sample by sample; it tests whether recovery
+stays robust under these sensor distortions rather than failing on most
+scenes.
 
-## synthetic_lowbit_hdr_dr20_bits5
+## synthetic_lowbit_hdr_dr30_bits5
 
-This experiment keeps the middle dynamic-range stress level fixed and increases
-the quantization budget to 5 bits. It checks whether recovery quality remains
-high when the measurement has finer low-range quantization but still faces the
-same high-dynamic-range clipping challenge.
+30x dynamic range with 5-bit sensing.  The bit-depth axis of Fig. 2: finer
+quantization should translate into better waveform and timing accuracy, while
+thermal noise still makes the folding occasionally ambiguous.
 
-## synthetic_lowbit_hdr_dr20_bits8
+## synthetic_lowbit_hdr_dr30_bits8
 
-This experiment repeats the middle dynamic-range stress level with 8-bit
-measurements. It adds a less quantization-limited setting so the benchmark
-tests both dynamic-range stress and bit-depth variation.
+30x dynamic range with 8-bit sensing, where thermal noise rather than
+quantization dominates.  Tests the high-resolution end of the bit-depth axis
+and robustness to sporadic noise-induced folding ambiguities.

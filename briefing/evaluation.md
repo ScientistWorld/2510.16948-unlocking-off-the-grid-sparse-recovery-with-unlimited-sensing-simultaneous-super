@@ -1,32 +1,62 @@
 # Evaluation
 
-`scripts/evaluate.sh` reads private evaluation datasets and saved method
-outputs, then writes `scoring/scores.json`. Method scripts consume the matching
-public acquisition files, which omit `clean`, `taus`, and `amplitudes`. The
-compact reproduction evaluates three 3-bit HDR settings with dynamic range
-`10`, `20`, and `30` times the folding threshold, plus 5-bit and 8-bit
-settings at the middle dynamic range.
+Scoring runs every registered method (each `scripts/methods/<name>.sh`) on
+fresh acquisitions and recomputes every number from the raw output arrays.
+Nothing a method writes besides `reconstruction` and `taus` is read.
 
-Primary metric:
+* `bash scripts/evaluate_train.sh` scores the visible train slice (64 scenes
+  per experiment, public seeds) and writes `scoring/scores_train.json`.
+  `bash scripts/evaluate.sh` does the same and writes `scoring/scores.json`.
+* `bash scripts/evaluate_test.sh` scores the hidden test slice (200 scenes per
+  experiment from private seeds in `eval/test/`) and writes
+  `scoring/scores_test.json`.  Only this file is ranked.  The test inputs are
+  built at test time in a temporary directory; the answers are rebuilt in
+  memory after the methods return.
 
-- `mse_gain_over_conventional_db`: reconstruction MSE improvement over the
-  conventional clipped-ADC sparse recovery baseline. The paper reports at
-  least 30 dB gain across the comparable Fig. 2 low-bit HDR settings.
+Both slices come from the same generator, so an honest method scores alike on
+both.  The comparison row `conventional_clip_sres` is computed by the
+evaluator itself from a second, conventional ADC (same input range
+`[-lambda, lambda]`, same bit budget, so it clips) followed by a clipping-
+unaware sparse least-squares fit.  No file in the workspace can change it.
 
-Additional benefit metrics:
+## Experiments
 
-- `psnr_db`: waveform reconstruction PSNR after removing the arbitrary DC
-  offset left by anti-difference recovery.
-- `time_mae_samples`: mean absolute error of the recovered off-grid spike
-  locations, in sample units.
+| experiment | dynamic range | bits |
+|---|---|---|
+| `synthetic_lowbit_hdr_dr10` | 10 lambda | 3 |
+| `synthetic_lowbit_hdr_dr20` | 20 lambda | 3 |
+| `synthetic_lowbit_hdr_dr30` | 30 lambda | 3 |
+| `synthetic_lowbit_hdr_dr30_bits5` | 30 lambda | 5 |
+| `synthetic_lowbit_hdr_dr30_bits8` | 30 lambda | 8 |
 
-Constraint metrics:
+All use K = 2, N = 501, pulse width 20 samples and thermal noise std 0.03
+lambda.  The bit budget and dynamic range are properties of the acquisition
+the evaluator generates; a method cannot change them.
 
-- `quant_bits`: ADC bit budget fixed by each named experiment. Improvements
-  must not rely on increasing it within an experiment.
-- `dynamic_range_x`: input dynamic range in multiples of the folding threshold.
-- `amplitude_ratio`: weak/strong mixture severity.
-- `mean_fold_count`: average number of modulo folds in the generated signals.
+## Metrics (per experiment)
 
-The evaluator is method-agnostic. It imports only `eval/` and reads artifacts
-from `checkpoints/*.npz`; it does not import the proposed implementation.
+| metric | direction | coefficient | definition |
+|---|---|---|---|
+| `mse_gain_over_conventional_db` (primary) | higher | 1.0 | `10 log10(MSE_conv / MSE_method)`, waveform MSE pooled over all scenes |
+| `psnr_db` | higher | 0.45 | mean over scenes of `10 log10(max|g|^2 / MSE_scene)` |
+| `time_mae_samples` | lower | 0.45 | mean absolute error of both spike times (sorted matching) |
+| `weak_tau_mae_samples` | lower | 0.35 | spike-time error of the weaker spike only |
+| `separation_error_samples` | lower | 0.25 | error of the recovered spike separation |
+
+The waveform is compared at its absolute level; an arbitrary DC offset counts
+as error.
+
+## Failures
+
+An experiment fails for a method when its entry point exits non-zero, times
+out (2 h per experiment), writes no output, writes an unreadable or pickled
+archive, writes arrays of the wrong shape or dtype, writes non-finite values,
+spike times outside `[0, 500]`, or a waveform larger than `4 * DR * lambda`.
+A failed experiment receives the worst value of every metric: the gain and
+PSNR of a maximal-error valid output, and 500 samples for each timing error.
+
+## Ranking
+
+Each metric's improvement over the reference is taken in its better
+direction, scaled by its coefficient and by its spread across ranked
+attempts, and summed with the experiment weights (0.2 each).

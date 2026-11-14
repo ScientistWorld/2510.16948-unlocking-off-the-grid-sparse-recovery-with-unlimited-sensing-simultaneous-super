@@ -49,3 +49,8 @@ the public data path no longer exposes private fold metadata.
 - Key limitation: hardware ToF tensors from the paper are unavailable, so the
   gym uses deterministic synthetic low-bit HDR data that preserves the signal
   model and evaluation axes.
+
+## Superseded (iteration 11)
+
+The benchmark, evaluators and reference were rebuilt in the hardening
+iteration; see `HARDENING.md` for the current verification record.

@@ -1,13 +1,13 @@
 {
   "_notes": {
-    "paper_claim": "The paper reports that unlimited sensing gives at least 30 dB lower recovery MSE than a conventional ADC with the same bit budget, across DR = 10, 20, 30 lambda and 3-15 bits (Fig. 2; also Section IV: 'consistent >= 30 dB gains'). The 30.0 under results.us_sres is that lower bound, not a point estimate.",
+    "paper_claim": "The paper states that unlimited sensing gives at least 30 dB lower recovery MSE than a conventional ADC with the same bit budget across DR = 10, 20, 30 lambda and 3-15 bits (Fig. 2 caption; Section IV: 'consistent >= 30 dB gains'). results.us_sres.mse_gain_over_conventional_db holds, per experiment, the gap between the conventional-ADC and USF MSE curves of Fig. 2 at that (DR, bits), read from the plot (+/- ~2 dB).",
     "paper_fig2_gains_read_from_plot_db": {
       "dr10_bits3": 24,
       "dr20_bits3": 33,
       "dr30_bits3": 37,
       "dr30_bits5": 42,
       "dr30_bits8": 48,
-      "note": "Approximate gaps between the conventional-ADC and USF MSE curves of Fig. 2. Fig. 2's conventional ADC spans the full signal range (no clipping) and the waveforms carry no additive sensor noise, so these are not on this gym's scale."
+      "note": "Approximate gaps between the conventional-ADC and USF MSE curves of Fig. 2 (used as results.us_sres values). Fig. 2's conventional ADC spans the full signal range (no clipping) and its waveforms carry no additive sensor noise, while this gym compares against the equal-range clipping ADC of Section V-A1 and adds thermal noise, so the gym's gains are not expected to match these numbers; they are context, not targets."
     },
     "setup_differences": "This gym compares against the equal-range clipping ADC of Section V-A1 (Fig. 5) instead of Fig. 2's full-range ADC, adds Gaussian thermal noise (std 0.03 lambda) before both ADCs (Section III, challenge C1), uses a known Gaussian pulse (sigma = 20 samples) instead of the calibrated ToF kernel, randomises spike positions, separation (60-90 samples), weak/strong ratio (7-13) and order, and scores 200 hidden scenes per setting (paper: 5000 trials of real-kernel waveforms).",
     "paper_tables": "Tables I-II report PSNR of about 39-41 dB for 3-bit hardware-derived recoveries; hardware waveforms are not available, so these are not targets here."
@@ -50,7 +50,7 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0
+          "mse_gain_over_conventional_db": 24.0
         }
       }
     },
@@ -91,7 +91,7 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0
+          "mse_gain_over_conventional_db": 33.0
         }
       }
     },
@@ -132,7 +132,7 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0
+          "mse_gain_over_conventional_db": 37.0
         }
       }
     },
@@ -173,7 +173,7 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0
+          "mse_gain_over_conventional_db": 42.0
         }
       }
     },
@@ -214,7 +214,7 @@
         },
         "us_sres": {
           "type": "proposed",
-          "mse_gain_over_conventional_db": 30.0
+          "mse_gain_over_conventional_db": 48.0
         }
       }
     }

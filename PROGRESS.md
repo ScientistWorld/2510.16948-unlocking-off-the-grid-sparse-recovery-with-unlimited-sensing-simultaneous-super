@@ -112,3 +112,14 @@
   as an input. The benchmark no longer provides the true clean-signal fold
   count to the submitted method; this reproduction estimates the compact
   residue degree from the current reconstruction residual instead.
+
+## Iteration 11 (hardening)
+
+- Rebuilt evaluation around hidden test scenes generated inside `eval/test/`,
+  an evaluator-computed conventional baseline, a method registry
+  (`scripts/methods/*.sh`) and strict output validation with worst-value
+  failures.
+- Restored the reference to Algorithm 1 and added Section III sensor noise so
+  the robust residue loop is exercised (DR30 3/5/8-bit settings).
+- One CPU job (`2af8d91e-d18`) produced the official scores and the audit of
+  variants and shortcuts; see `HARDENING.md`.

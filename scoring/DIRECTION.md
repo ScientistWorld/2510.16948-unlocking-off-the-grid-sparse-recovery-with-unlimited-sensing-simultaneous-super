@@ -1,10 +1,11 @@
 # Direction
 
-Work within the problem family of sparse super-resolution for filtered
-off-grid spikes under low-bit high-dynamic-range sensing. Improvements should
-recover the waveform and spike locations from the provided acquisition arrays
-while preserving the fixed sensing budget and signal difficulty.
+Work on recovering sparse off-grid spikes and the high-dynamic-range waveform
+from low-bit modulo samples under sensor noise: better ways to undo the
+folding robustly, more accurate spike estimation from the recovered signal,
+and better use of the known sensor model, at a fixed bit budget.
 
-Out of scope: replacing the task with a learned direct regressor from samples
-to spike times, changing the benchmark to an easier signal family, or using
-higher-resolution measurements to bypass the low-bit HDR constraint.
+Out of scope: learned regressors trained on the generator's labels that do not
+model the sensing physics, exploiting the synthetic scene distribution (e.g.
+hard-coding position or ratio ranges) instead of solving the inverse problem,
+reading anything other than the method input, and changing the acquisition.

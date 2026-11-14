@@ -50,5 +50,10 @@
 - Verified public acquisition archives now contain only measurements, kernel, and config arrays; private eval archives retain labels and fold counts only for scoring.
 - `python validate.py --compare` passed, and all five experiments still clear the 20 dB MSE-gain quality gate with reproduced gains of 30.16, 36.73, 42.85, 41.14, and 39.69 dB.
 
+### [2026-11-14 10:30] - secondary_claims
+- Hardening iteration: hidden test scenes (private seeds, answers rebuilt in memory), evaluator-computed clipping-ADC baseline, output validation with worst-value failures, method registry `scripts/methods/*.sh`, config metrics removed.
+- Reference restored to the paper's Algorithm 1 (rational P/Q residue sieving + spectral P2 with Toeplitz DC correction and matrix pencil; no exhaustive-search fallback).
+- Benchmark now includes Section III thermal noise and a DR30 bit-depth sweep; reference gains 38/46/49/59/61 dB on 200 hidden scenes per setting, naive unwrapping collapses at DR30, better variants +7.7-9.9 dB. Details in HARDENING.md.
+
 ## Stop Justification
 - Completed at milestone `secondary_claims`.
