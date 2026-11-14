@@ -1,0 +1,5 @@
+_state/
+__pycache__/
+*.npz
+*.pyc
+reference_seed_*/seeded_method.py
