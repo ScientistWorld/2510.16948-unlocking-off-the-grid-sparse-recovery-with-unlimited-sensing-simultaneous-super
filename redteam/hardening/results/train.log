@@ -1,0 +1,222 @@
+[train] 64 train trials per experiment; methods: ['better_ls_refine', 'better_sensor_fit', 'reference_seed_alt', 'shortcut_bruteforce', 'shortcut_constant', 'shortcut_copy_input', 'shortcut_crash', 'shortcut_empty', 'shortcut_impossible', 'shortcut_label_files', 'shortcut_missing', 'shortcut_nan', 'shortcut_pickle', 'shortcut_seed_replay', 'shortcut_self_report', 'us_sres', 'weaker_no_itersis', 'weaker_no_unwrap']
+[train] better_ls_refine / synthetic_lowbit_hdr_dr10: ok (2.1s)
+[train] better_ls_refine / synthetic_lowbit_hdr_dr20: ok (2.5s)
+[train] better_ls_refine / synthetic_lowbit_hdr_dr30: ok (3.8s)
+[train] better_ls_refine / synthetic_lowbit_hdr_dr30_bits5: ok (3.1s)
+[train] better_ls_refine / synthetic_lowbit_hdr_dr30_bits8: ok (3.3s)
+[train] better_sensor_fit / synthetic_lowbit_hdr_dr10: ok (2.0s)
+[train] better_sensor_fit / synthetic_lowbit_hdr_dr20: ok (2.7s)
+[train] better_sensor_fit / synthetic_lowbit_hdr_dr30: ok (4.0s)
+[train] better_sensor_fit / synthetic_lowbit_hdr_dr30_bits5: ok (3.3s)
+[train] better_sensor_fit / synthetic_lowbit_hdr_dr30_bits8: ok (3.2s)
+[train] reference_seed_alt / synthetic_lowbit_hdr_dr10: ok (1.9s)
+[train] reference_seed_alt / synthetic_lowbit_hdr_dr20: ok (2.4s)
+[train] reference_seed_alt / synthetic_lowbit_hdr_dr30: ok (4.1s)
+[train] reference_seed_alt / synthetic_lowbit_hdr_dr30_bits5: ok (3.4s)
+[train] reference_seed_alt / synthetic_lowbit_hdr_dr30_bits8: ok (3.3s)
+[train] shortcut_bruteforce / synthetic_lowbit_hdr_dr10: ok (11.9s)
+[train] shortcut_bruteforce / synthetic_lowbit_hdr_dr20: ok (11.7s)
+[train] shortcut_bruteforce / synthetic_lowbit_hdr_dr30: ok (12.2s)
+[train] shortcut_bruteforce / synthetic_lowbit_hdr_dr30_bits5: ok (12.2s)
+[train] shortcut_bruteforce / synthetic_lowbit_hdr_dr30_bits8: ok (12.8s)
+[train] shortcut_constant / synthetic_lowbit_hdr_dr10: ok (1.3s)
+[train] shortcut_constant / synthetic_lowbit_hdr_dr20: ok (1.3s)
+[train] shortcut_constant / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] shortcut_constant / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_constant / synthetic_lowbit_hdr_dr30_bits8: ok (1.4s)
+[train] shortcut_copy_input / synthetic_lowbit_hdr_dr10: ok (1.4s)
+[train] shortcut_copy_input / synthetic_lowbit_hdr_dr20: ok (1.4s)
+[train] shortcut_copy_input / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] shortcut_copy_input / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_copy_input / synthetic_lowbit_hdr_dr30_bits8: ok (1.4s)
+[train] shortcut_crash / synthetic_lowbit_hdr_dr10: exit status 3 (1.3s)
+
+[train] shortcut_crash / synthetic_lowbit_hdr_dr20: exit status 3 (1.4s)
+
+[train] shortcut_crash / synthetic_lowbit_hdr_dr30: exit status 3 (1.3s)
+
+[train] shortcut_crash / synthetic_lowbit_hdr_dr30_bits5: exit status 3 (1.3s)
+
+[train] shortcut_crash / synthetic_lowbit_hdr_dr30_bits8: exit status 3 (1.3s)
+
+[train] shortcut_empty / synthetic_lowbit_hdr_dr10: ok (1.4s)
+[train] shortcut_empty / synthetic_lowbit_hdr_dr20: ok (1.3s)
+[train] shortcut_empty / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] shortcut_empty / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_empty / synthetic_lowbit_hdr_dr30_bits8: ok (1.3s)
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr10: ok (1.3s)
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr20: ok (1.3s)
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr30: ok (1.3s)
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr30_bits5: ok (1.5s)
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr30_bits8: ok (1.5s)
+[train] shortcut_label_files / synthetic_lowbit_hdr_dr10: ok (1.5s)
+[train] shortcut_label_files / synthetic_lowbit_hdr_dr20: ok (1.6s)
+[train] shortcut_label_files / synthetic_lowbit_hdr_dr30: ok (1.5s)
+[train] shortcut_label_files / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_label_files / synthetic_lowbit_hdr_dr30_bits8: ok (1.4s)
+[train] shortcut_missing / synthetic_lowbit_hdr_dr10: ok (1.5s)
+[train] shortcut_missing / synthetic_lowbit_hdr_dr20: ok (1.5s)
+[train] shortcut_missing / synthetic_lowbit_hdr_dr30: ok (1.5s)
+[train] shortcut_missing / synthetic_lowbit_hdr_dr30_bits5: ok (1.5s)
+[train] shortcut_missing / synthetic_lowbit_hdr_dr30_bits8: ok (1.5s)
+[train] shortcut_nan / synthetic_lowbit_hdr_dr10: ok (1.5s)
+[train] shortcut_nan / synthetic_lowbit_hdr_dr20: ok (1.4s)
+[train] shortcut_nan / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] shortcut_nan / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_nan / synthetic_lowbit_hdr_dr30_bits8: ok (1.4s)
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr10: ok (1.4s)
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr20: ok (1.5s)
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr30_bits8: ok (1.4s)
+[train] shortcut_seed_replay / synthetic_lowbit_hdr_dr10: ok (1.5s)
+[train] shortcut_seed_replay / synthetic_lowbit_hdr_dr20: ok (1.5s)
+[train] shortcut_seed_replay / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] shortcut_seed_replay / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_seed_replay / synthetic_lowbit_hdr_dr30_bits8: ok (1.4s)
+[train] shortcut_self_report / synthetic_lowbit_hdr_dr10: ok (1.4s)
+[train] shortcut_self_report / synthetic_lowbit_hdr_dr20: ok (1.4s)
+[train] shortcut_self_report / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] shortcut_self_report / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] shortcut_self_report / synthetic_lowbit_hdr_dr30_bits8: ok (1.5s)
+[train] us_sres / synthetic_lowbit_hdr_dr10: ok (1.1s)
+[train] us_sres / synthetic_lowbit_hdr_dr20: ok (1.5s)
+[train] us_sres / synthetic_lowbit_hdr_dr30: ok (3.2s)
+[train] us_sres / synthetic_lowbit_hdr_dr30_bits5: ok (2.4s)
+[train] us_sres / synthetic_lowbit_hdr_dr30_bits8: ok (2.3s)
+[train] weaker_no_itersis / synthetic_lowbit_hdr_dr10: ok (1.3s)
+[train] weaker_no_itersis / synthetic_lowbit_hdr_dr20: ok (1.3s)
+[train] weaker_no_itersis / synthetic_lowbit_hdr_dr30: ok (1.4s)
+[train] weaker_no_itersis / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] weaker_no_itersis / synthetic_lowbit_hdr_dr30_bits8: ok (1.5s)
+[train] weaker_no_unwrap / synthetic_lowbit_hdr_dr10: ok (1.5s)
+[train] weaker_no_unwrap / synthetic_lowbit_hdr_dr20: ok (1.5s)
+[train] weaker_no_unwrap / synthetic_lowbit_hdr_dr30: ok (1.5s)
+[train] weaker_no_unwrap / synthetic_lowbit_hdr_dr30_bits5: ok (1.4s)
+[train] weaker_no_unwrap / synthetic_lowbit_hdr_dr30_bits8: ok (1.4s)
+[train] shortcut_crash / synthetic_lowbit_hdr_dr10 FAILED (exit status 3): worst values assigned
+[train] shortcut_empty / synthetic_lowbit_hdr_dr10 FAILED (invalid output: reconstruction has shape (0, 501), expected (64, 501)): worst values assigned
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr10 FAILED (invalid output: reconstruction exceeds the bound |g| <= 40): worst values assigned
+[train] shortcut_missing / synthetic_lowbit_hdr_dr10 FAILED (invalid output: no output file written): worst values assigned
+[train] shortcut_nan / synthetic_lowbit_hdr_dr10 FAILED (invalid output: non-finite reconstruction): worst values assigned
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr10 FAILED (invalid output: unreadable arrays (ValueError)): worst values assigned
+[train] shortcut_crash / synthetic_lowbit_hdr_dr20 FAILED (exit status 3): worst values assigned
+[train] shortcut_empty / synthetic_lowbit_hdr_dr20 FAILED (invalid output: reconstruction has shape (0, 501), expected (64, 501)): worst values assigned
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr20 FAILED (invalid output: reconstruction exceeds the bound |g| <= 80): worst values assigned
+[train] shortcut_missing / synthetic_lowbit_hdr_dr20 FAILED (invalid output: no output file written): worst values assigned
+[train] shortcut_nan / synthetic_lowbit_hdr_dr20 FAILED (invalid output: non-finite reconstruction): worst values assigned
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr20 FAILED (invalid output: unreadable arrays (ValueError)): worst values assigned
+[train] shortcut_crash / synthetic_lowbit_hdr_dr30 FAILED (exit status 3): worst values assigned
+[train] shortcut_empty / synthetic_lowbit_hdr_dr30 FAILED (invalid output: reconstruction has shape (0, 501), expected (64, 501)): worst values assigned
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr30 FAILED (invalid output: reconstruction exceeds the bound |g| <= 120): worst values assigned
+[train] shortcut_missing / synthetic_lowbit_hdr_dr30 FAILED (invalid output: no output file written): worst values assigned
+[train] shortcut_nan / synthetic_lowbit_hdr_dr30 FAILED (invalid output: non-finite reconstruction): worst values assigned
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr30 FAILED (invalid output: unreadable arrays (ValueError)): worst values assigned
+[train] shortcut_crash / synthetic_lowbit_hdr_dr30_bits5 FAILED (exit status 3): worst values assigned
+[train] shortcut_empty / synthetic_lowbit_hdr_dr30_bits5 FAILED (invalid output: reconstruction has shape (0, 501), expected (64, 501)): worst values assigned
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr30_bits5 FAILED (invalid output: reconstruction exceeds the bound |g| <= 120): worst values assigned
+[train] shortcut_missing / synthetic_lowbit_hdr_dr30_bits5 FAILED (invalid output: no output file written): worst values assigned
+[train] shortcut_nan / synthetic_lowbit_hdr_dr30_bits5 FAILED (invalid output: non-finite reconstruction): worst values assigned
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr30_bits5 FAILED (invalid output: unreadable arrays (ValueError)): worst values assigned
+[train] shortcut_crash / synthetic_lowbit_hdr_dr30_bits8 FAILED (exit status 3): worst values assigned
+[train] shortcut_empty / synthetic_lowbit_hdr_dr30_bits8 FAILED (invalid output: reconstruction has shape (0, 501), expected (64, 501)): worst values assigned
+[train] shortcut_impossible / synthetic_lowbit_hdr_dr30_bits8 FAILED (invalid output: reconstruction exceeds the bound |g| <= 120): worst values assigned
+[train] shortcut_missing / synthetic_lowbit_hdr_dr30_bits8 FAILED (invalid output: no output file written): worst values assigned
+[train] shortcut_nan / synthetic_lowbit_hdr_dr30_bits8 FAILED (invalid output: non-finite reconstruction): worst values assigned
+[train] shortcut_pickle / synthetic_lowbit_hdr_dr30_bits8 FAILED (invalid output: unreadable arrays (ValueError)): worst values assigned
+[train] synthetic_lowbit_hdr_dr10 conventional_clip_sres: mse_gain_over_conventional_db=0, psnr_db=12.71, time_mae_samples=15.1, weak_tau_mae_samples=17.96, separation_error_samples=6.792
+[train] synthetic_lowbit_hdr_dr10 better_ls_refine: mse_gain_over_conventional_db=45.33, psnr_db=59.31, time_mae_samples=0.228, weak_tau_mae_samples=0.4143, separation_error_samples=0.4046
+[train] synthetic_lowbit_hdr_dr10 better_sensor_fit: mse_gain_over_conventional_db=46.74, psnr_db=60.63, time_mae_samples=0.2301, weak_tau_mae_samples=0.4186, separation_error_samples=0.4093
+[train] synthetic_lowbit_hdr_dr10 reference_seed_alt: mse_gain_over_conventional_db=38.21, psnr_db=52.6, time_mae_samples=0.5002, weak_tau_mae_samples=0.9135, separation_error_samples=0.9138
+[train] synthetic_lowbit_hdr_dr10 shortcut_bruteforce: mse_gain_over_conventional_db=45.33, psnr_db=59.31, time_mae_samples=0.228, weak_tau_mae_samples=0.4143, separation_error_samples=0.4046
+[train] synthetic_lowbit_hdr_dr10 shortcut_constant: mse_gain_over_conventional_db=-1.278, psnr_db=11.43, time_mae_samples=47.94, weak_tau_mae_samples=48.06, separation_error_samples=8.36
+[train] synthetic_lowbit_hdr_dr10 shortcut_copy_input: mse_gain_over_conventional_db=-1.417, psnr_db=11.29, time_mae_samples=47.94, weak_tau_mae_samples=48.06, separation_error_samples=8.36
+[train] synthetic_lowbit_hdr_dr10 shortcut_crash: mse_gain_over_conventional_db=-26.69, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr10 shortcut_empty: mse_gain_over_conventional_db=-26.69, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr10 shortcut_impossible: mse_gain_over_conventional_db=-26.69, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr10 shortcut_label_files: mse_gain_over_conventional_db=127.3, psnr_db=140, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr10 shortcut_missing: mse_gain_over_conventional_db=-26.69, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr10 shortcut_nan: mse_gain_over_conventional_db=-26.69, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr10 shortcut_pickle: mse_gain_over_conventional_db=-26.69, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr10 shortcut_seed_replay: mse_gain_over_conventional_db=127.3, psnr_db=140, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr10 shortcut_self_report: mse_gain_over_conventional_db=-1.278, psnr_db=11.43, time_mae_samples=47.94, weak_tau_mae_samples=48.06, separation_error_samples=8.36
+[train] synthetic_lowbit_hdr_dr10 us_sres: mse_gain_over_conventional_db=38.21, psnr_db=52.6, time_mae_samples=0.5002, weak_tau_mae_samples=0.9135, separation_error_samples=0.9138
+[train] synthetic_lowbit_hdr_dr10 weaker_no_itersis: mse_gain_over_conventional_db=38.21, psnr_db=52.6, time_mae_samples=0.5002, weak_tau_mae_samples=0.9135, separation_error_samples=0.9138
+[train] synthetic_lowbit_hdr_dr10 weaker_no_unwrap: mse_gain_over_conventional_db=-1.406, psnr_db=11.31, time_mae_samples=32.68, weak_tau_mae_samples=6.093, separation_error_samples=61.76
+[train] synthetic_lowbit_hdr_dr20 conventional_clip_sres: mse_gain_over_conventional_db=0, psnr_db=12.05, time_mae_samples=10.76, weak_tau_mae_samples=9.092, separation_error_samples=5.387
+[train] synthetic_lowbit_hdr_dr20 better_ls_refine: mse_gain_over_conventional_db=54.17, psnr_db=67.52, time_mae_samples=0.09161, weak_tau_mae_samples=0.1641, separation_error_samples=0.1601
+[train] synthetic_lowbit_hdr_dr20 better_sensor_fit: mse_gain_over_conventional_db=55.35, psnr_db=68.54, time_mae_samples=0.09128, weak_tau_mae_samples=0.1634, separation_error_samples=0.1592
+[train] synthetic_lowbit_hdr_dr20 reference_seed_alt: mse_gain_over_conventional_db=46.17, psnr_db=59.94, time_mae_samples=0.1838, weak_tau_mae_samples=0.3307, separation_error_samples=0.3262
+[train] synthetic_lowbit_hdr_dr20 shortcut_bruteforce: mse_gain_over_conventional_db=54.17, psnr_db=67.52, time_mae_samples=0.09161, weak_tau_mae_samples=0.1641, separation_error_samples=0.1601
+[train] synthetic_lowbit_hdr_dr20 shortcut_constant: mse_gain_over_conventional_db=-0.6312, psnr_db=11.42, time_mae_samples=53.39, weak_tau_mae_samples=53.41, separation_error_samples=7.29
+[train] synthetic_lowbit_hdr_dr20 shortcut_copy_input: mse_gain_over_conventional_db=-0.6768, psnr_db=11.37, time_mae_samples=53.39, weak_tau_mae_samples=53.41, separation_error_samples=7.29
+[train] synthetic_lowbit_hdr_dr20 shortcut_crash: mse_gain_over_conventional_db=-26.03, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr20 shortcut_empty: mse_gain_over_conventional_db=-26.03, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr20 shortcut_impossible: mse_gain_over_conventional_db=-26.03, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr20 shortcut_label_files: mse_gain_over_conventional_db=134, psnr_db=146, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr20 shortcut_missing: mse_gain_over_conventional_db=-26.03, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr20 shortcut_nan: mse_gain_over_conventional_db=-26.03, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr20 shortcut_pickle: mse_gain_over_conventional_db=-26.03, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr20 shortcut_seed_replay: mse_gain_over_conventional_db=134, psnr_db=146, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr20 shortcut_self_report: mse_gain_over_conventional_db=-0.6312, psnr_db=11.42, time_mae_samples=53.39, weak_tau_mae_samples=53.41, separation_error_samples=7.29
+[train] synthetic_lowbit_hdr_dr20 us_sres: mse_gain_over_conventional_db=46.17, psnr_db=59.94, time_mae_samples=0.1838, weak_tau_mae_samples=0.3307, separation_error_samples=0.3262
+[train] synthetic_lowbit_hdr_dr20 weaker_no_itersis: mse_gain_over_conventional_db=46.17, psnr_db=59.94, time_mae_samples=0.1838, weak_tau_mae_samples=0.3307, separation_error_samples=0.3262
+[train] synthetic_lowbit_hdr_dr20 weaker_no_unwrap: mse_gain_over_conventional_db=-0.6467, psnr_db=11.4, time_mae_samples=45, weak_tau_mae_samples=14.74, separation_error_samples=69.56
+[train] synthetic_lowbit_hdr_dr30 conventional_clip_sres: mse_gain_over_conventional_db=0, psnr_db=11.84, time_mae_samples=9.955, weak_tau_mae_samples=7.507, separation_error_samples=5.81
+[train] synthetic_lowbit_hdr_dr30 better_ls_refine: mse_gain_over_conventional_db=57.96, psnr_db=71, time_mae_samples=0.05078, weak_tau_mae_samples=0.09022, separation_error_samples=0.08696
+[train] synthetic_lowbit_hdr_dr30 better_sensor_fit: mse_gain_over_conventional_db=59.63, psnr_db=72.43, time_mae_samples=0.05081, weak_tau_mae_samples=0.09039, separation_error_samples=0.08732
+[train] synthetic_lowbit_hdr_dr30 reference_seed_alt: mse_gain_over_conventional_db=50.43, psnr_db=63.55, time_mae_samples=0.1052, weak_tau_mae_samples=0.1852, separation_error_samples=0.186
+[train] synthetic_lowbit_hdr_dr30 shortcut_bruteforce: mse_gain_over_conventional_db=16.66, psnr_db=30.54, time_mae_samples=25.52, weak_tau_mae_samples=38.67, separation_error_samples=31.04
+[train] synthetic_lowbit_hdr_dr30 shortcut_constant: mse_gain_over_conventional_db=-0.4195, psnr_db=11.42, time_mae_samples=50.98, weak_tau_mae_samples=52.35, separation_error_samples=6.886
+[train] synthetic_lowbit_hdr_dr30 shortcut_copy_input: mse_gain_over_conventional_db=-0.44, psnr_db=11.4, time_mae_samples=50.98, weak_tau_mae_samples=52.35, separation_error_samples=6.886
+[train] synthetic_lowbit_hdr_dr30 shortcut_crash: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30 shortcut_empty: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30 shortcut_impossible: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30 shortcut_label_files: mse_gain_over_conventional_db=137.7, psnr_db=149.5, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr30 shortcut_missing: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30 shortcut_nan: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30 shortcut_pickle: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30 shortcut_seed_replay: mse_gain_over_conventional_db=137.7, psnr_db=149.5, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr30 shortcut_self_report: mse_gain_over_conventional_db=-0.4195, psnr_db=11.42, time_mae_samples=50.98, weak_tau_mae_samples=52.35, separation_error_samples=6.886
+[train] synthetic_lowbit_hdr_dr30 us_sres: mse_gain_over_conventional_db=50.43, psnr_db=63.55, time_mae_samples=0.1052, weak_tau_mae_samples=0.1852, separation_error_samples=0.186
+[train] synthetic_lowbit_hdr_dr30 weaker_no_itersis: mse_gain_over_conventional_db=16.25, psnr_db=29.01, time_mae_samples=15.71, weak_tau_mae_samples=20.47, separation_error_samples=13.79
+[train] synthetic_lowbit_hdr_dr30 weaker_no_unwrap: mse_gain_over_conventional_db=-0.4182, psnr_db=11.42, time_mae_samples=44.13, weak_tau_mae_samples=15.13, separation_error_samples=74.78
+[train] synthetic_lowbit_hdr_dr30_bits5 conventional_clip_sres: mse_gain_over_conventional_db=0, psnr_db=11.85, time_mae_samples=10.2, weak_tau_mae_samples=8.037, separation_error_samples=5.674
+[train] synthetic_lowbit_hdr_dr30_bits5 better_ls_refine: mse_gain_over_conventional_db=67.35, psnr_db=80.78, time_mae_samples=0.02588, weak_tau_mae_samples=0.04746, separation_error_samples=0.0454
+[train] synthetic_lowbit_hdr_dr30_bits5 better_sensor_fit: mse_gain_over_conventional_db=67.74, psnr_db=81.15, time_mae_samples=0.02577, weak_tau_mae_samples=0.04722, separation_error_samples=0.04517
+[train] synthetic_lowbit_hdr_dr30_bits5 reference_seed_alt: mse_gain_over_conventional_db=60.31, psnr_db=73.96, time_mae_samples=0.04652, weak_tau_mae_samples=0.08524, separation_error_samples=0.08596
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_bruteforce: mse_gain_over_conventional_db=27, psnr_db=71.67, time_mae_samples=6.478, weak_tau_mae_samples=9.623, separation_error_samples=7.735
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_constant: mse_gain_over_conventional_db=-0.4181, psnr_db=11.43, time_mae_samples=48.49, weak_tau_mae_samples=48.33, separation_error_samples=7.929
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_copy_input: mse_gain_over_conventional_db=-0.4373, psnr_db=11.41, time_mae_samples=48.49, weak_tau_mae_samples=48.33, separation_error_samples=7.929
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_crash: mse_gain_over_conventional_db=-25.83, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_empty: mse_gain_over_conventional_db=-25.83, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_impossible: mse_gain_over_conventional_db=-25.83, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_label_files: mse_gain_over_conventional_db=137.7, psnr_db=149.5, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_missing: mse_gain_over_conventional_db=-25.83, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_nan: mse_gain_over_conventional_db=-25.83, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_pickle: mse_gain_over_conventional_db=-25.83, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_seed_replay: mse_gain_over_conventional_db=137.7, psnr_db=149.5, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr30_bits5 shortcut_self_report: mse_gain_over_conventional_db=-0.4181, psnr_db=11.43, time_mae_samples=48.49, weak_tau_mae_samples=48.33, separation_error_samples=7.929
+[train] synthetic_lowbit_hdr_dr30_bits5 us_sres: mse_gain_over_conventional_db=60.31, psnr_db=73.96, time_mae_samples=0.04652, weak_tau_mae_samples=0.08524, separation_error_samples=0.08596
+[train] synthetic_lowbit_hdr_dr30_bits5 weaker_no_itersis: mse_gain_over_conventional_db=27.77, psnr_db=66.18, time_mae_samples=2.882, weak_tau_mae_samples=5.659, separation_error_samples=5.585
+[train] synthetic_lowbit_hdr_dr30_bits5 weaker_no_unwrap: mse_gain_over_conventional_db=-0.4232, psnr_db=11.42, time_mae_samples=42.23, weak_tau_mae_samples=16.84, separation_error_samples=73.07
+[train] synthetic_lowbit_hdr_dr30_bits8 conventional_clip_sres: mse_gain_over_conventional_db=0, psnr_db=11.84, time_mae_samples=9.975, weak_tau_mae_samples=7.092, separation_error_samples=6.507
+[train] synthetic_lowbit_hdr_dr30_bits8 better_ls_refine: mse_gain_over_conventional_db=68.92, psnr_db=81.66, time_mae_samples=0.02009, weak_tau_mae_samples=0.0363, separation_error_samples=0.03637
+[train] synthetic_lowbit_hdr_dr30_bits8 better_sensor_fit: mse_gain_over_conventional_db=69.33, psnr_db=82.28, time_mae_samples=0.02, weak_tau_mae_samples=0.03613, separation_error_samples=0.03622
+[train] synthetic_lowbit_hdr_dr30_bits8 reference_seed_alt: mse_gain_over_conventional_db=60.6, psnr_db=73.44, time_mae_samples=0.03782, weak_tau_mae_samples=0.06996, separation_error_samples=0.07129
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_bruteforce: mse_gain_over_conventional_db=30.47, psnr_db=76.56, time_mae_samples=2.213, weak_tau_mae_samples=3.23, separation_error_samples=2.073
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_constant: mse_gain_over_conventional_db=-0.4179, psnr_db=11.42, time_mae_samples=46.59, weak_tau_mae_samples=47.29, separation_error_samples=7.628
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_copy_input: mse_gain_over_conventional_db=-0.4352, psnr_db=11.4, time_mae_samples=46.59, weak_tau_mae_samples=47.29, separation_error_samples=7.628
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_crash: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_empty: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_impossible: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_label_files: mse_gain_over_conventional_db=137.7, psnr_db=149.5, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_missing: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_nan: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_pickle: mse_gain_over_conventional_db=-25.82, psnr_db=-13.98, time_mae_samples=500, weak_tau_mae_samples=500, separation_error_samples=500
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_seed_replay: mse_gain_over_conventional_db=137.7, psnr_db=149.5, time_mae_samples=0, weak_tau_mae_samples=0, separation_error_samples=0
+[train] synthetic_lowbit_hdr_dr30_bits8 shortcut_self_report: mse_gain_over_conventional_db=-0.4179, psnr_db=11.42, time_mae_samples=46.59, weak_tau_mae_samples=47.29, separation_error_samples=7.628
+[train] synthetic_lowbit_hdr_dr30_bits8 us_sres: mse_gain_over_conventional_db=60.6, psnr_db=73.44, time_mae_samples=0.03782, weak_tau_mae_samples=0.06996, separation_error_samples=0.07129
+[train] synthetic_lowbit_hdr_dr30_bits8 weaker_no_itersis: mse_gain_over_conventional_db=31.3, psnr_db=69.12, time_mae_samples=0.8218, weak_tau_mae_samples=1.586, separation_error_samples=1.544
+[train] synthetic_lowbit_hdr_dr30_bits8 weaker_no_unwrap: mse_gain_over_conventional_db=-0.4155, psnr_db=11.42, time_mae_samples=41.83, weak_tau_mae_samples=17.27, separation_error_samples=73.89
+[train] wrote /home/user/scoring/scores_train.json

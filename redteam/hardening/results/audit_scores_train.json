@@ -1,0 +1,845 @@
+{
+  "experiments": {
+    "synthetic_lowbit_hdr_dr10": {
+      "config": {
+        "dynamic_range_x": 10.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 11.5625,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 3,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "better_ls_refine": {
+          "mse_gain_over_conventional_db": 45.331872298056155,
+          "psnr_db": 59.31480538875327,
+          "separation_error_samples": 0.4045851658679942,
+          "time_mae_samples": 0.22801613990487335,
+          "weak_tau_mae_samples": 0.4142848044805578
+        },
+        "better_sensor_fit": {
+          "mse_gain_over_conventional_db": 46.73889143650492,
+          "psnr_db": 60.63259373005776,
+          "separation_error_samples": 0.4093201150762684,
+          "time_mae_samples": 0.23010364731037136,
+          "weak_tau_mae_samples": 0.41861888914727174
+        },
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 12.707742174824691,
+          "separation_error_samples": 6.79247263193929,
+          "time_mae_samples": 15.10470987894412,
+          "weak_tau_mae_samples": 17.956949528863902
+        },
+        "reference_seed_alt": {
+          "mse_gain_over_conventional_db": 38.21470125566546,
+          "psnr_db": 52.60192897552061,
+          "separation_error_samples": 0.9138397502429438,
+          "time_mae_samples": 0.5002438898025342,
+          "weak_tau_mae_samples": 0.9134868478761151
+        },
+        "shortcut_bruteforce": {
+          "mse_gain_over_conventional_db": 45.331885960270846,
+          "psnr_db": 59.31481496102602,
+          "separation_error_samples": 0.4045791369144818,
+          "time_mae_samples": 0.22801296150836625,
+          "weak_tau_mae_samples": 0.4142785727604361
+        },
+        "shortcut_constant": {
+          "mse_gain_over_conventional_db": -1.278005399911367,
+          "psnr_db": 11.429548455045783,
+          "separation_error_samples": 8.36038331342074,
+          "time_mae_samples": 47.93606112044188,
+          "weak_tau_mae_samples": 48.05908639980032
+        },
+        "shortcut_copy_input": {
+          "mse_gain_over_conventional_db": -1.4168278973037784,
+          "psnr_db": 11.291216545152492,
+          "separation_error_samples": 8.36038331342074,
+          "time_mae_samples": 47.93606112044188,
+          "weak_tau_mae_samples": 48.05908639980032
+        },
+        "shortcut_crash": {
+          "mse_gain_over_conventional_db": -26.68687356603113,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_empty": {
+          "mse_gain_over_conventional_db": -26.68687356603113,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_impossible": {
+          "mse_gain_over_conventional_db": -26.68687356603113,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_label_files": {
+          "mse_gain_over_conventional_db": 127.29252652068924,
+          "psnr_db": 140.0,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_missing": {
+          "mse_gain_over_conventional_db": -26.68687356603113,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_nan": {
+          "mse_gain_over_conventional_db": -26.68687356603113,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_pickle": {
+          "mse_gain_over_conventional_db": -26.68687356603113,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_seed_replay": {
+          "mse_gain_over_conventional_db": 127.29252652068924,
+          "psnr_db": 140.0,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_self_report": {
+          "mse_gain_over_conventional_db": -1.278005399911367,
+          "psnr_db": 11.429548455045783,
+          "separation_error_samples": 8.36038331342074,
+          "time_mae_samples": 47.93606112044188,
+          "weak_tau_mae_samples": 48.05908639980032
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 38.21470125566546,
+          "psnr_db": 52.60192897552061,
+          "separation_error_samples": 0.9138397502429438,
+          "time_mae_samples": 0.5002438898025342,
+          "weak_tau_mae_samples": 0.9134868478761151
+        },
+        "weaker_no_itersis": {
+          "mse_gain_over_conventional_db": 38.214701255665545,
+          "psnr_db": 52.60192897552071,
+          "separation_error_samples": 0.9138397502429354,
+          "time_mae_samples": 0.50024388980253,
+          "weak_tau_mae_samples": 0.9134868478761098
+        },
+        "weaker_no_unwrap": {
+          "mse_gain_over_conventional_db": -1.4062745498678435,
+          "psnr_db": 11.306598463327012,
+          "separation_error_samples": 61.76058867073685,
+          "time_mae_samples": 32.682623554180964,
+          "weak_tau_mae_samples": 6.092591220567366
+        }
+      },
+      "status": {
+        "better_ls_refine": "ok",
+        "better_sensor_fit": "ok",
+        "conventional_clip_sres": "computed by the evaluator",
+        "reference_seed_alt": "ok",
+        "shortcut_bruteforce": "ok",
+        "shortcut_constant": "ok",
+        "shortcut_copy_input": "ok",
+        "shortcut_crash": "exit status 3",
+        "shortcut_empty": "invalid output: reconstruction has shape (0, 501), expected (64, 501)",
+        "shortcut_impossible": "invalid output: reconstruction exceeds the bound |g| <= 40",
+        "shortcut_label_files": "ok",
+        "shortcut_missing": "invalid output: no output file written",
+        "shortcut_nan": "invalid output: non-finite reconstruction",
+        "shortcut_pickle": "invalid output: unreadable arrays (ValueError)",
+        "shortcut_seed_replay": "ok",
+        "shortcut_self_report": "ok",
+        "us_sres": "ok",
+        "weaker_no_itersis": "ok",
+        "weaker_no_unwrap": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr20": {
+      "config": {
+        "dynamic_range_x": 20.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 20.40625,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 3,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "better_ls_refine": {
+          "mse_gain_over_conventional_db": 54.16921551869295,
+          "psnr_db": 67.51904469135984,
+          "separation_error_samples": 0.16005343162436425,
+          "time_mae_samples": 0.0916097171906165,
+          "weak_tau_mae_samples": 0.1640549339937103
+        },
+        "better_sensor_fit": {
+          "mse_gain_over_conventional_db": 55.35387039431623,
+          "psnr_db": 68.5412349743115,
+          "separation_error_samples": 0.15916713017917505,
+          "time_mae_samples": 0.0912750427791802,
+          "weak_tau_mae_samples": 0.16343980175695694
+        },
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 12.047660867120886,
+          "separation_error_samples": 5.386629096751763,
+          "time_mae_samples": 10.760454057659885,
+          "weak_tau_mae_samples": 9.09161219108121
+        },
+        "reference_seed_alt": {
+          "mse_gain_over_conventional_db": 46.168584861857845,
+          "psnr_db": 59.94430455500717,
+          "separation_error_samples": 0.3261613762171305,
+          "time_mae_samples": 0.1838041565543257,
+          "weak_tau_mae_samples": 0.3307362319611
+        },
+        "shortcut_bruteforce": {
+          "mse_gain_over_conventional_db": 54.169214689086935,
+          "psnr_db": 67.51904252368546,
+          "separation_error_samples": 0.1600536574229361,
+          "time_mae_samples": 0.09160984455307863,
+          "weak_tau_mae_samples": 0.16405518069634506
+        },
+        "shortcut_constant": {
+          "mse_gain_over_conventional_db": -0.6311722663977702,
+          "psnr_db": 11.416464288148694,
+          "separation_error_samples": 7.289915694630117,
+          "time_mae_samples": 53.38672180586096,
+          "weak_tau_mae_samples": 53.41295056056407
+        },
+        "shortcut_copy_input": {
+          "mse_gain_over_conventional_db": -0.6768339528368412,
+          "psnr_db": 11.370763726380194,
+          "separation_error_samples": 7.289915694630117,
+          "time_mae_samples": 53.38672180586096,
+          "weak_tau_mae_samples": 53.41295056056407
+        },
+        "shortcut_crash": {
+          "mse_gain_over_conventional_db": -26.026905597403733,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_empty": {
+          "mse_gain_over_conventional_db": -26.026905597403733,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_impossible": {
+          "mse_gain_over_conventional_db": -26.026905597403733,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_label_files": {
+          "mse_gain_over_conventional_db": 133.97309440259625,
+          "psnr_db": 146.02059991327963,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_missing": {
+          "mse_gain_over_conventional_db": -26.026905597403733,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_nan": {
+          "mse_gain_over_conventional_db": -26.026905597403733,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_pickle": {
+          "mse_gain_over_conventional_db": -26.026905597403733,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_seed_replay": {
+          "mse_gain_over_conventional_db": 133.97309440259625,
+          "psnr_db": 146.02059991327963,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_self_report": {
+          "mse_gain_over_conventional_db": -0.6311722663977702,
+          "psnr_db": 11.416464288148694,
+          "separation_error_samples": 7.289915694630117,
+          "time_mae_samples": 53.38672180586096,
+          "weak_tau_mae_samples": 53.41295056056407
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 46.168584861857845,
+          "psnr_db": 59.94430455500717,
+          "separation_error_samples": 0.3261613762171305,
+          "time_mae_samples": 0.1838041565543257,
+          "weak_tau_mae_samples": 0.3307362319611
+        },
+        "weaker_no_itersis": {
+          "mse_gain_over_conventional_db": 46.16858486185799,
+          "psnr_db": 59.94430455500725,
+          "separation_error_samples": 0.3261613762171278,
+          "time_mae_samples": 0.18380415655432192,
+          "weak_tau_mae_samples": 0.33073623196109714
+        },
+        "weaker_no_unwrap": {
+          "mse_gain_over_conventional_db": -0.6466895839261879,
+          "psnr_db": 11.401131752361401,
+          "separation_error_samples": 69.5554638429176,
+          "time_mae_samples": 45.001780518658975,
+          "weak_tau_mae_samples": 14.7430876570058
+        }
+      },
+      "status": {
+        "better_ls_refine": "ok",
+        "better_sensor_fit": "ok",
+        "conventional_clip_sres": "computed by the evaluator",
+        "reference_seed_alt": "ok",
+        "shortcut_bruteforce": "ok",
+        "shortcut_constant": "ok",
+        "shortcut_copy_input": "ok",
+        "shortcut_crash": "exit status 3",
+        "shortcut_empty": "invalid output: reconstruction has shape (0, 501), expected (64, 501)",
+        "shortcut_impossible": "invalid output: reconstruction exceeds the bound |g| <= 80",
+        "shortcut_label_files": "ok",
+        "shortcut_missing": "invalid output: no output file written",
+        "shortcut_nan": "invalid output: non-finite reconstruction",
+        "shortcut_pickle": "invalid output: unreadable arrays (ValueError)",
+        "shortcut_seed_replay": "ok",
+        "shortcut_self_report": "ok",
+        "us_sres": "ok",
+        "weaker_no_itersis": "ok",
+        "weaker_no_unwrap": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr30": {
+      "config": {
+        "dynamic_range_x": 30.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 30.53125,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 3,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "better_ls_refine": {
+          "mse_gain_over_conventional_db": 57.95657661638422,
+          "psnr_db": 70.9962209787194,
+          "separation_error_samples": 0.0869608127977679,
+          "time_mae_samples": 0.050784680640280855,
+          "weak_tau_mae_samples": 0.0902218635911487
+        },
+        "better_sensor_fit": {
+          "mse_gain_over_conventional_db": 59.629231786262665,
+          "psnr_db": 72.43126139314174,
+          "separation_error_samples": 0.08732339848770754,
+          "time_mae_samples": 0.050809665673905546,
+          "weak_tau_mae_samples": 0.09038871996954723
+        },
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 11.839497081201893,
+          "separation_error_samples": 5.8100582507888205,
+          "time_mae_samples": 9.955339888939047,
+          "weak_tau_mae_samples": 7.507227769601631
+        },
+        "reference_seed_alt": {
+          "mse_gain_over_conventional_db": 50.427753245962805,
+          "psnr_db": 63.54574639605414,
+          "separation_error_samples": 0.1860179577300105,
+          "time_mae_samples": 0.10515654777095351,
+          "weak_tau_mae_samples": 0.18520420406859683
+        },
+        "shortcut_bruteforce": {
+          "mse_gain_over_conventional_db": 16.66233185301668,
+          "psnr_db": 30.535307026861155,
+          "separation_error_samples": 31.041298531714872,
+          "time_mae_samples": 25.518544109750486,
+          "weak_tau_mae_samples": 38.67324724905093
+        },
+        "shortcut_constant": {
+          "mse_gain_over_conventional_db": -0.41954851436710294,
+          "psnr_db": 11.419946213005648,
+          "separation_error_samples": 6.88600331060903,
+          "time_mae_samples": 50.977840572336135,
+          "weak_tau_mae_samples": 52.350727959751865
+        },
+        "shortcut_copy_input": {
+          "mse_gain_over_conventional_db": -0.4399947851960148,
+          "psnr_db": 11.399580814848925,
+          "separation_error_samples": 6.88600331060903,
+          "time_mae_samples": 50.977840572336135,
+          "weak_tau_mae_samples": 52.350727959751865
+        },
+        "shortcut_crash": {
+          "mse_gain_over_conventional_db": -25.818722713451834,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_empty": {
+          "mse_gain_over_conventional_db": -25.818722713451834,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_impossible": {
+          "mse_gain_over_conventional_db": -25.818722713451834,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_label_files": {
+          "mse_gain_over_conventional_db": 137.70310246766178,
+          "psnr_db": 149.54242509439325,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_missing": {
+          "mse_gain_over_conventional_db": -25.818722713451834,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_nan": {
+          "mse_gain_over_conventional_db": -25.818722713451834,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_pickle": {
+          "mse_gain_over_conventional_db": -25.818722713451834,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_seed_replay": {
+          "mse_gain_over_conventional_db": 137.70310246766178,
+          "psnr_db": 149.54242509439325,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_self_report": {
+          "mse_gain_over_conventional_db": -0.41954851436710294,
+          "psnr_db": 11.419946213005648,
+          "separation_error_samples": 6.88600331060903,
+          "time_mae_samples": 50.977840572336135,
+          "weak_tau_mae_samples": 52.350727959751865
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 50.427753245962805,
+          "psnr_db": 63.54574639605414,
+          "separation_error_samples": 0.1860179577300105,
+          "time_mae_samples": 0.10515654777095351,
+          "weak_tau_mae_samples": 0.18520420406859683
+        },
+        "weaker_no_itersis": {
+          "mse_gain_over_conventional_db": 16.25321134235953,
+          "psnr_db": 29.012610739807762,
+          "separation_error_samples": 13.786170786938722,
+          "time_mae_samples": 15.710964040306695,
+          "weak_tau_mae_samples": 20.47330843942014
+        },
+        "weaker_no_unwrap": {
+          "mse_gain_over_conventional_db": -0.4181932133401812,
+          "psnr_db": 11.421417071230627,
+          "separation_error_samples": 74.77915605731394,
+          "time_mae_samples": 44.13364907030107,
+          "weak_tau_mae_samples": 15.129472011079777
+        }
+      },
+      "status": {
+        "better_ls_refine": "ok",
+        "better_sensor_fit": "ok",
+        "conventional_clip_sres": "computed by the evaluator",
+        "reference_seed_alt": "ok",
+        "shortcut_bruteforce": "ok",
+        "shortcut_constant": "ok",
+        "shortcut_copy_input": "ok",
+        "shortcut_crash": "exit status 3",
+        "shortcut_empty": "invalid output: reconstruction has shape (0, 501), expected (64, 501)",
+        "shortcut_impossible": "invalid output: reconstruction exceeds the bound |g| <= 120",
+        "shortcut_label_files": "ok",
+        "shortcut_missing": "invalid output: no output file written",
+        "shortcut_nan": "invalid output: non-finite reconstruction",
+        "shortcut_pickle": "invalid output: unreadable arrays (ValueError)",
+        "shortcut_seed_replay": "ok",
+        "shortcut_self_report": "ok",
+        "us_sres": "ok",
+        "weaker_no_itersis": "ok",
+        "weaker_no_unwrap": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr30_bits5": {
+      "config": {
+        "dynamic_range_x": 30.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 30.6875,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 5,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "better_ls_refine": {
+          "mse_gain_over_conventional_db": 67.34964703507382,
+          "psnr_db": 80.7833508910133,
+          "separation_error_samples": 0.04539655309044299,
+          "time_mae_samples": 0.025876630754570362,
+          "weak_tau_mae_samples": 0.04746146656589456
+        },
+        "better_sensor_fit": {
+          "mse_gain_over_conventional_db": 67.73606013222957,
+          "psnr_db": 81.15411180086963,
+          "separation_error_samples": 0.04516975438145998,
+          "time_mae_samples": 0.025773708559645003,
+          "weak_tau_mae_samples": 0.047223264708862844
+        },
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 11.846392707496177,
+          "separation_error_samples": 5.67443902097074,
+          "time_mae_samples": 10.202174146472954,
+          "weak_tau_mae_samples": 8.037479755621087
+        },
+        "reference_seed_alt": {
+          "mse_gain_over_conventional_db": 60.30891929070921,
+          "psnr_db": 73.95522741156623,
+          "separation_error_samples": 0.08596358949270666,
+          "time_mae_samples": 0.04651657617490179,
+          "weak_tau_mae_samples": 0.0852400245446634
+        },
+        "shortcut_bruteforce": {
+          "mse_gain_over_conventional_db": 26.999348087143154,
+          "psnr_db": 71.66640087482851,
+          "separation_error_samples": 7.7346627380580895,
+          "time_mae_samples": 6.477783473111166,
+          "weak_tau_mae_samples": 9.62307773302586
+        },
+        "shortcut_constant": {
+          "mse_gain_over_conventional_db": -0.41807175959860443,
+          "psnr_db": 11.428292452203245,
+          "separation_error_samples": 7.929192241378638,
+          "time_mae_samples": 48.485508656591136,
+          "weak_tau_mae_samples": 48.32969753671138
+        },
+        "shortcut_copy_input": {
+          "mse_gain_over_conventional_db": -0.43726409998314797,
+          "psnr_db": 11.409175922847073,
+          "separation_error_samples": 7.929192241378638,
+          "time_mae_samples": 48.485508656591136,
+          "weak_tau_mae_samples": 48.32969753671138
+        },
+        "shortcut_crash": {
+          "mse_gain_over_conventional_db": -25.825666816132088,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_empty": {
+          "mse_gain_over_conventional_db": -25.825666816132088,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_impossible": {
+          "mse_gain_over_conventional_db": -25.825666816132088,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_label_files": {
+          "mse_gain_over_conventional_db": 137.69615836498156,
+          "psnr_db": 149.54242509439325,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_missing": {
+          "mse_gain_over_conventional_db": -25.825666816132088,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_nan": {
+          "mse_gain_over_conventional_db": -25.825666816132088,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_pickle": {
+          "mse_gain_over_conventional_db": -25.825666816132088,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_seed_replay": {
+          "mse_gain_over_conventional_db": 137.69615836498156,
+          "psnr_db": 149.54242509439325,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_self_report": {
+          "mse_gain_over_conventional_db": -0.41807175959860443,
+          "psnr_db": 11.428292452203245,
+          "separation_error_samples": 7.929192241378638,
+          "time_mae_samples": 48.485508656591136,
+          "weak_tau_mae_samples": 48.32969753671138
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 60.30891929070921,
+          "psnr_db": 73.95522741156623,
+          "separation_error_samples": 0.08596358949270666,
+          "time_mae_samples": 0.04651657617490179,
+          "weak_tau_mae_samples": 0.0852400245446634
+        },
+        "weaker_no_itersis": {
+          "mse_gain_over_conventional_db": 27.76758429936024,
+          "psnr_db": 66.17673158616147,
+          "separation_error_samples": 5.585016057399189,
+          "time_mae_samples": 2.8820758448090675,
+          "weak_tau_mae_samples": 5.659151416253812
+        },
+        "weaker_no_unwrap": {
+          "mse_gain_over_conventional_db": -0.423168772006852,
+          "psnr_db": 11.423371236217637,
+          "separation_error_samples": 73.07404087702258,
+          "time_mae_samples": 42.23358143182403,
+          "weak_tau_mae_samples": 16.84170026764942
+        }
+      },
+      "status": {
+        "better_ls_refine": "ok",
+        "better_sensor_fit": "ok",
+        "conventional_clip_sres": "computed by the evaluator",
+        "reference_seed_alt": "ok",
+        "shortcut_bruteforce": "ok",
+        "shortcut_constant": "ok",
+        "shortcut_copy_input": "ok",
+        "shortcut_crash": "exit status 3",
+        "shortcut_empty": "invalid output: reconstruction has shape (0, 501), expected (64, 501)",
+        "shortcut_impossible": "invalid output: reconstruction exceeds the bound |g| <= 120",
+        "shortcut_label_files": "ok",
+        "shortcut_missing": "invalid output: no output file written",
+        "shortcut_nan": "invalid output: non-finite reconstruction",
+        "shortcut_pickle": "invalid output: unreadable arrays (ValueError)",
+        "shortcut_seed_replay": "ok",
+        "shortcut_self_report": "ok",
+        "us_sres": "ok",
+        "weaker_no_itersis": "ok",
+        "weaker_no_unwrap": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr30_bits8": {
+      "config": {
+        "dynamic_range_x": 30.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 30.625,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 8,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "better_ls_refine": {
+          "mse_gain_over_conventional_db": 68.91595485119261,
+          "psnr_db": 81.65555488255252,
+          "separation_error_samples": 0.03637227626250028,
+          "time_mae_samples": 0.02008643036553559,
+          "weak_tau_mae_samples": 0.036304954398706846
+        },
+        "better_sensor_fit": {
+          "mse_gain_over_conventional_db": 69.3296596190995,
+          "psnr_db": 82.2776079974485,
+          "separation_error_samples": 0.036215630260182596,
+          "time_mae_samples": 0.019996159688472348,
+          "weak_tau_mae_samples": 0.03613235079603494
+        },
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 11.836063944720923,
+          "separation_error_samples": 6.507365294952612,
+          "time_mae_samples": 9.975160605232361,
+          "weak_tau_mae_samples": 7.091849421302127
+        },
+        "reference_seed_alt": {
+          "mse_gain_over_conventional_db": 60.60122079028284,
+          "psnr_db": 73.43761389214117,
+          "separation_error_samples": 0.07129010507683797,
+          "time_mae_samples": 0.03781671905347339,
+          "weak_tau_mae_samples": 0.06996399323675373
+        },
+        "shortcut_bruteforce": {
+          "mse_gain_over_conventional_db": 30.46656141015896,
+          "psnr_db": 76.56026371848388,
+          "separation_error_samples": 2.072964526384828,
+          "time_mae_samples": 2.212613219140728,
+          "weak_tau_mae_samples": 3.2302702963444707
+        },
+        "shortcut_constant": {
+          "mse_gain_over_conventional_db": -0.41792678481236645,
+          "psnr_db": 11.41811742078379,
+          "separation_error_samples": 7.62839872372722,
+          "time_mae_samples": 46.586893223124775,
+          "weak_tau_mae_samples": 47.287060995509385
+        },
+        "shortcut_copy_input": {
+          "mse_gain_over_conventional_db": -0.43516067758789884,
+          "psnr_db": 11.400945188844844,
+          "separation_error_samples": 7.62839872372722,
+          "time_mae_samples": 46.586893223124775,
+          "weak_tau_mae_samples": 47.287060995509385
+        },
+        "shortcut_crash": {
+          "mse_gain_over_conventional_db": -25.815324195344687,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_empty": {
+          "mse_gain_over_conventional_db": -25.815324195344687,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_impossible": {
+          "mse_gain_over_conventional_db": -25.815324195344687,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_label_files": {
+          "mse_gain_over_conventional_db": 137.70650098576894,
+          "psnr_db": 149.54242509439325,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_missing": {
+          "mse_gain_over_conventional_db": -25.815324195344687,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_nan": {
+          "mse_gain_over_conventional_db": -25.815324195344687,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_pickle": {
+          "mse_gain_over_conventional_db": -25.815324195344687,
+          "psnr_db": -13.979400086720375,
+          "separation_error_samples": 500.0,
+          "time_mae_samples": 500.0,
+          "weak_tau_mae_samples": 500.0
+        },
+        "shortcut_seed_replay": {
+          "mse_gain_over_conventional_db": 137.70650098576894,
+          "psnr_db": 149.54242509439325,
+          "separation_error_samples": 0.0,
+          "time_mae_samples": 0.0,
+          "weak_tau_mae_samples": 0.0
+        },
+        "shortcut_self_report": {
+          "mse_gain_over_conventional_db": -0.41792678481236645,
+          "psnr_db": 11.41811742078379,
+          "separation_error_samples": 7.62839872372722,
+          "time_mae_samples": 46.586893223124775,
+          "weak_tau_mae_samples": 47.287060995509385
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 60.60122079028284,
+          "psnr_db": 73.43761389214117,
+          "separation_error_samples": 0.07129010507683797,
+          "time_mae_samples": 0.03781671905347339,
+          "weak_tau_mae_samples": 0.06996399323675373
+        },
+        "weaker_no_itersis": {
+          "mse_gain_over_conventional_db": 31.302827888465025,
+          "psnr_db": 69.12460567435308,
+          "separation_error_samples": 1.544358040743298,
+          "time_mae_samples": 0.8218225276794922,
+          "weak_tau_mae_samples": 1.5860264984740542
+        },
+        "weaker_no_unwrap": {
+          "mse_gain_over_conventional_db": -0.41549038348372513,
+          "psnr_db": 11.42067950416861,
+          "separation_error_samples": 73.88517931789147,
+          "time_mae_samples": 41.83356806737106,
+          "weak_tau_mae_samples": 17.265641613157722
+        }
+      },
+      "status": {
+        "better_ls_refine": "ok",
+        "better_sensor_fit": "ok",
+        "conventional_clip_sres": "computed by the evaluator",
+        "reference_seed_alt": "ok",
+        "shortcut_bruteforce": "ok",
+        "shortcut_constant": "ok",
+        "shortcut_copy_input": "ok",
+        "shortcut_crash": "exit status 3",
+        "shortcut_empty": "invalid output: reconstruction has shape (0, 501), expected (64, 501)",
+        "shortcut_impossible": "invalid output: reconstruction exceeds the bound |g| <= 120",
+        "shortcut_label_files": "ok",
+        "shortcut_missing": "invalid output: no output file written",
+        "shortcut_nan": "invalid output: non-finite reconstruction",
+        "shortcut_pickle": "invalid output: unreadable arrays (ValueError)",
+        "shortcut_seed_replay": "ok",
+        "shortcut_self_report": "ok",
+        "us_sres": "ok",
+        "weaker_no_itersis": "ok",
+        "weaker_no_unwrap": "ok"
+      }
+    }
+  },
+  "slice": "train"
+}

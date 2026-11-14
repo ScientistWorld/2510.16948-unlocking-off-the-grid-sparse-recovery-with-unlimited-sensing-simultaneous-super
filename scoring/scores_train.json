@@ -1,0 +1,165 @@
+{
+  "experiments": {
+    "synthetic_lowbit_hdr_dr10": {
+      "config": {
+        "dynamic_range_x": 10.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 11.5625,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 3,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 12.707742174824691,
+          "separation_error_samples": 6.79247263193929,
+          "time_mae_samples": 15.10470987894412,
+          "weak_tau_mae_samples": 17.956949528863902
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 38.21470125566546,
+          "psnr_db": 52.60192897552061,
+          "separation_error_samples": 0.9138397502429438,
+          "time_mae_samples": 0.5002438898025342,
+          "weak_tau_mae_samples": 0.9134868478761151
+        }
+      },
+      "status": {
+        "conventional_clip_sres": "computed by the evaluator",
+        "us_sres": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr20": {
+      "config": {
+        "dynamic_range_x": 20.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 20.40625,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 3,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 12.047660867120886,
+          "separation_error_samples": 5.386629096751763,
+          "time_mae_samples": 10.760454057659885,
+          "weak_tau_mae_samples": 9.09161219108121
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 46.168584861857845,
+          "psnr_db": 59.94430455500717,
+          "separation_error_samples": 0.3261613762171305,
+          "time_mae_samples": 0.1838041565543257,
+          "weak_tau_mae_samples": 0.3307362319611
+        }
+      },
+      "status": {
+        "conventional_clip_sres": "computed by the evaluator",
+        "us_sres": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr30": {
+      "config": {
+        "dynamic_range_x": 30.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 30.53125,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 3,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 11.839497081201893,
+          "separation_error_samples": 5.8100582507888205,
+          "time_mae_samples": 9.955339888939047,
+          "weak_tau_mae_samples": 7.507227769601631
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 50.427753245962805,
+          "psnr_db": 63.54574639605414,
+          "separation_error_samples": 0.1860179577300105,
+          "time_mae_samples": 0.10515654777095351,
+          "weak_tau_mae_samples": 0.18520420406859683
+        }
+      },
+      "status": {
+        "conventional_clip_sres": "computed by the evaluator",
+        "us_sres": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr30_bits5": {
+      "config": {
+        "dynamic_range_x": 30.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 30.6875,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 5,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 11.846392707496177,
+          "separation_error_samples": 5.67443902097074,
+          "time_mae_samples": 10.202174146472954,
+          "weak_tau_mae_samples": 8.037479755621087
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 60.30891929070921,
+          "psnr_db": 73.95522741156623,
+          "separation_error_samples": 0.08596358949270666,
+          "time_mae_samples": 0.04651657617490179,
+          "weak_tau_mae_samples": 0.0852400245446634
+        }
+      },
+      "status": {
+        "conventional_clip_sres": "computed by the evaluator",
+        "us_sres": "ok"
+      }
+    },
+    "synthetic_lowbit_hdr_dr30_bits8": {
+      "config": {
+        "dynamic_range_x": 30.0,
+        "kernel_sigma": 20.0,
+        "mean_fold_count": 30.625,
+        "n_samples": 501,
+        "num_spikes": 2,
+        "quant_bits": 8,
+        "thermal_noise_std": 0.03,
+        "trials": 64
+      },
+      "results": {
+        "conventional_clip_sres": {
+          "mse_gain_over_conventional_db": 0.0,
+          "psnr_db": 11.836063944720923,
+          "separation_error_samples": 6.507365294952612,
+          "time_mae_samples": 9.975160605232361,
+          "weak_tau_mae_samples": 7.091849421302127
+        },
+        "us_sres": {
+          "mse_gain_over_conventional_db": 60.60122079028284,
+          "psnr_db": 73.43761389214117,
+          "separation_error_samples": 0.07129010507683797,
+          "time_mae_samples": 0.03781671905347339,
+          "weak_tau_mae_samples": 0.06996399323675373
+        }
+      },
+      "status": {
+        "conventional_clip_sres": "computed by the evaluator",
+        "us_sres": "ok"
+      }
+    }
+  },
+  "slice": "train"
+}
